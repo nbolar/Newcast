@@ -8,19 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		4EE3C9B922F176BB006054D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE3C9B822F176BB006054D3 /* AppDelegate.swift */; };
-		4EE3C9BB22F176BB006054D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE3C9BA22F176BB006054D3 /* ViewController.swift */; };
 		4EE3C9BD22F176BC006054D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EE3C9BC22F176BC006054D3 /* Assets.xcassets */; };
 		4EE3C9C022F176BC006054D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EE3C9BE22F176BC006054D3 /* Main.storyboard */; };
+		4EE3C9C922F176F8006054D3 /* PodcastVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE3C9C822F176F8006054D3 /* PodcastVC.swift */; };
+		E8B6C1C593759AF836D82DC0 /* Pods_Newcast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D5694FA4D5705ABD0C354BF /* Pods_Newcast.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D5694FA4D5705ABD0C354BF /* Pods_Newcast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Newcast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE3C9B522F176BB006054D3 /* Newcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Newcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE3C9B822F176BB006054D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4EE3C9BA22F176BB006054D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4EE3C9BC22F176BC006054D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EE3C9BF22F176BC006054D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4EE3C9C122F176BC006054D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EE3C9C222F176BC006054D3 /* Newcast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Newcast.entitlements; sourceTree = "<group>"; };
+		4EE3C9C822F176F8006054D3 /* PodcastVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastVC.swift; sourceTree = "<group>"; };
+		5DB70BF2232DF968E8438DAB /* Pods-Newcast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Newcast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Newcast/Pods-Newcast.debug.xcconfig"; sourceTree = "<group>"; };
+		E91777302E7C157B050945F3 /* Pods-Newcast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Newcast.release.xcconfig"; path = "Pods/Target Support Files/Pods-Newcast/Pods-Newcast.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,17 +32,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8B6C1C593759AF836D82DC0 /* Pods_Newcast.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E85347419CE8865B9CACF45 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D5694FA4D5705ABD0C354BF /* Pods_Newcast.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		423CCDE58938859C51A1DA86 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5DB70BF2232DF968E8438DAB /* Pods-Newcast.debug.xcconfig */,
+				E91777302E7C157B050945F3 /* Pods-Newcast.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		4EE3C9AC22F176BB006054D3 = {
 			isa = PBXGroup;
 			children = (
 				4EE3C9B722F176BB006054D3 /* Newcast */,
 				4EE3C9B622F176BB006054D3 /* Products */,
+				423CCDE58938859C51A1DA86 /* Pods */,
+				3E85347419CE8865B9CACF45 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,7 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				4EE3C9B822F176BB006054D3 /* AppDelegate.swift */,
-				4EE3C9BA22F176BB006054D3 /* ViewController.swift */,
+				4EE3C9C822F176F8006054D3 /* PodcastVC.swift */,
 				4EE3C9BC22F176BC006054D3 /* Assets.xcassets */,
 				4EE3C9BE22F176BC006054D3 /* Main.storyboard */,
 				4EE3C9C122F176BC006054D3 /* Info.plist */,
@@ -70,9 +94,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4EE3C9C522F176BC006054D3 /* Build configuration list for PBXNativeTarget "Newcast" */;
 			buildPhases = (
+				41F16357803165BC043B845A /* [CP] Check Pods Manifest.lock */,
 				4EE3C9B122F176BB006054D3 /* Sources */,
 				4EE3C9B222F176BB006054D3 /* Frameworks */,
 				4EE3C9B322F176BB006054D3 /* Resources */,
+				9EF7AB02714BC1B0CA9DCA49 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -95,6 +121,11 @@
 				TargetAttributes = {
 					4EE3C9B422F176BB006054D3 = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -128,13 +159,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		41F16357803165BC043B845A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Newcast-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9EF7AB02714BC1B0CA9DCA49 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Newcast/Pods-Newcast-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/FeedKit/FeedKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SWXMLHash/SWXMLHash.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FeedKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWXMLHash.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Newcast/Pods-Newcast-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4EE3C9B122F176BB006054D3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EE3C9BB22F176BB006054D3 /* ViewController.swift in Sources */,
 				4EE3C9B922F176BB006054D3 /* AppDelegate.swift in Sources */,
+				4EE3C9C922F176F8006054D3 /* PodcastVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,9 +343,10 @@
 		};
 		4EE3C9C622F176BC006054D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DB70BF2232DF968E8438DAB /* Pods-Newcast.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Newcast/Newcast.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KALT4PNG4U;
@@ -282,15 +357,17 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bolar.Newcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		4EE3C9C722F176BC006054D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E91777302E7C157B050945F3 /* Pods-Newcast.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Newcast/Newcast.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = KALT4PNG4U;
@@ -301,6 +378,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.bolar.Newcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
