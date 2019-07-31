@@ -13,10 +13,14 @@ import FeedKit
 
 class PodcastVC: NSViewController {
 
+    @IBOutlet weak var backgroundImage: NSImageView!
+    @IBOutlet weak var addPodcastButton: NSButton!
     @IBOutlet weak var podcastTextField: NSTextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        backgroundImage.alphaValue = 0.6
+        addPodcastButton.alphaValue = 0.8
     }
     
     @IBAction func addPodcastClicked(_ sender: Any) {

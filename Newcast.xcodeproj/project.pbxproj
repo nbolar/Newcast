@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4EB800EC22F18EBA00402C9D /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB800EB22F18EBA00402C9D /* DetailVC.swift */; };
 		4EE3C9B922F176BB006054D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE3C9B822F176BB006054D3 /* AppDelegate.swift */; };
 		4EE3C9BD22F176BC006054D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EE3C9BC22F176BC006054D3 /* Assets.xcassets */; };
 		4EE3C9C022F176BC006054D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EE3C9BE22F176BC006054D3 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		0D5694FA4D5705ABD0C354BF /* Pods_Newcast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Newcast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4EB800EB22F18EBA00402C9D /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		4EE3C9B522F176BB006054D3 /* Newcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Newcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE3C9B822F176BB006054D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EE3C9BC22F176BC006054D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 			children = (
 				4EE3C9B822F176BB006054D3 /* AppDelegate.swift */,
 				4EE3C9C822F176F8006054D3 /* PodcastVC.swift */,
+				4EB800EB22F18EBA00402C9D /* DetailVC.swift */,
 				4EE3C9BC22F176BC006054D3 /* Assets.xcassets */,
 				4EE3C9BE22F176BC006054D3 /* Main.storyboard */,
 				4EE3C9C122F176BC006054D3 /* Info.plist */,
@@ -209,6 +212,7 @@
 			files = (
 				4EE3C9B922F176BB006054D3 /* AppDelegate.swift in Sources */,
 				4EE3C9C922F176F8006054D3 /* PodcastVC.swift in Sources */,
+				4EB800EC22F18EBA00402C9D /* DetailVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
