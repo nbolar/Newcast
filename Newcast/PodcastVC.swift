@@ -25,15 +25,23 @@ class PodcastVC: NSViewController {
     
     @IBAction func addPodcastClicked(_ sender: Any) {
         let url = URL(string: "https://atp.fm/episodes?format=rss")
-        let parser = FeedParser(URL: url!)
-        let result = parser.parse()
-        let feed = result.rssFeed
+//        let url = URL(string: "https://itunes.apple.com/search?term=\(podcastTextField.stringValue)&media=podcast&limit=1")
         
-        for i in 0..<feed!.items!.count{
-            let item = feed!.items?[i]
-            print("\(item!.title!) --  \(item!.pubDate!)")
-            
+        AF.request(url!).responseData { (response) in
+            let parser = Parser()
+            parser.getPodcastMetaData(response.data!)
         }
+//        let parser = FeedParser(URL: url!)
+//        let result = parser.parse()
+//        let feed = result.jsonFeed
+        
+//        let feed = result.rssFeed
+//
+//        for i in 0..<feed!.items!.count{
+//            let item = feed!.items?[i]
+//            print("\(item!.title!) --  \(item!.pubDate!)")
+//
+//        }
         
 //        guard let feed = result.rssFeed, result.isSuccess else {
 //            print(feed.title)
