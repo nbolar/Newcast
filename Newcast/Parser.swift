@@ -8,10 +8,25 @@
 
 import Foundation
 import SWXMLHash
+import SwiftyJSON
 
 
 class Parser {
     
+    func parsePodcastMetaData(_ APIData: Data) -> String{
+        let json = try! JSON(data: APIData)
+//        print(json)
+//        if let list = json["results"].array{
+//            for podcast in list
+//            {
+//                print(podcast["trackCensoredName"])
+//            }
+//        }
+        
+        let feedURL = json["results"][0]["feedUrl"].stringValue
+        return feedURL
+
+    }
     func getPodcastMetaData(_ APIData: Data){
         let xml = SWXMLHash.parse(APIData)
         if let title = (xml["rss"]["channel"]["itunes:image"].element?.attribute(by: "href")?.text){

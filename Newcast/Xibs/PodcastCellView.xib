@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fdI-lJ-9oM">
+                    <rect key="frame" x="5" y="5" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="90" id="0dO-So-53q"/>
+                        <constraint firstAttribute="width" constant="90" id="Jew-NZ-AHE"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="ATP" id="b4i-Bo-FXb"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="fdI-lJ-9oM" secondAttribute="bottom" constant="5" id="DU8-m9-GQT"/>
+                <constraint firstItem="fdI-lJ-9oM" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="5" id="Roc-Rf-yrX"/>
+                <constraint firstItem="fdI-lJ-9oM" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="5" id="jmt-wa-hGr"/>
+                <constraint firstAttribute="trailing" secondItem="fdI-lJ-9oM" secondAttribute="trailing" constant="5" id="maW-Hz-f5D"/>
+            </constraints>
+        </customView>
+        <collectionViewItem id="la9-xf-f6i" customClass="PodcastCellView" customModule="Newcast" customModuleProvider="target">
+            <connections>
+                <outlet property="podcastImage" destination="fdI-lJ-9oM" id="kLF-kV-Y98"/>
+                <outlet property="view" destination="c22-O7-iKe" id="gNS-KZ-xJQ"/>
+            </connections>
+        </collectionViewItem>
+    </objects>
+    <resources>
+        <image name="ATP" width="1400" height="1400"/>
+    </resources>
+</document>
