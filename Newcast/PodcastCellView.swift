@@ -21,10 +21,12 @@ class PodcastCellView: NSCollectionViewItem {
         self.view.layer?.borderWidth = 0.0
         podcastImage.wantsLayer = true
         podcastImage.layer?.cornerRadius = 8
+        
     }
     
     func setHighlight(selected: Bool) {
         view.layer?.borderWidth = selected ? 2.0 : 0.0
     }
+
     
 }

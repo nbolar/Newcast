@@ -9,13 +9,14 @@
 import Cocoa
 import Alamofire
 
-var feedURL : String!
+var feedURL : [String]!
 
 class PodcastSearchVC: NSViewController {
     
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var collectionView: NSCollectionView!
     @IBOutlet weak var podcastSearchField: NSSearchField!
+    var selectedIndex : Int!
     
 
     override func viewDidLoad() {
@@ -35,12 +36,12 @@ class PodcastSearchVC: NSViewController {
     @IBAction func searchPodcast(_ sender: Any){
         //        let url = URL(string: "https://atp.fm/episodes?format=rss")
         
-        let editedURL = podcastSearchField.stringValue.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+        let editedURL = podcastSearchField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         let url = URL(string: "https://itunes.apple.com/search?term=\(editedURL)&media=podcast&limit=50")
         //
         AF.request(url!).responseData { (response) in
             let parser = Parser()
-            feedURL = parser.parsePodcastMetaData(response.data!)
+            parser.parsePodcastMetaData(response.data!)
             
             
 
@@ -51,24 +52,25 @@ class PodcastSearchVC: NSViewController {
     @IBAction func addButtonClicked(_ sender: Any) {
         podcasts.append("Hello")
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
-        podcastListing()
     }
-    func podcastListing(){
-        let url = URL(string: feedURL)
+    func podcastListing(podcastFeedURL : String){
+        let url = URL(string: podcastFeedURL)
         AF.request(url!).responseData(completionHandler: { (response) in
             let parser = Parser()
             if response.data != nil{
                 parser.getPodcastMetaData(response.data!)
-            }
-            
+            }            
         })
     }
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
         for indexPath in atIndexPaths {
+            selectedIndex = indexPath.item
+            podcastListing(podcastFeedURL: feedsURL[selectedIndex])
             guard let item = collectionView.item(at: indexPath as IndexPath) else {continue}
             (item as! PodcastCellView).setHighlight(selected: selected)
             
         }
+        
     }
 
 }

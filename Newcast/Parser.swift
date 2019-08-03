@@ -10,24 +10,26 @@ import Foundation
 import SWXMLHash
 import SwiftyJSON
 var podcastsNumber : Int!
-
+var feedsURL = [String]()
 class Parser {
     
-    func parsePodcastMetaData(_ APIData: Data) -> String{
+    
+    func parsePodcastMetaData(_ APIData: Data){
+        feedsURL.removeAll()
         let json = try! JSON(data: APIData)
         print(json)
         
-//        if let list = json["results"].array{
-//            for podcast in list
-//            {
-//                print(podcast["trackCensoredName"])
-//            }
-//        }
+        if let list = json["results"].array{
+            for podcast in list
+            {
+//                print(podcast["feedUrl"].stringValue)
+                feedsURL.append(podcast["feedUrl"].stringValue)
+            }
+        }
         
-        let feedURL = json["results"][0]["feedUrl"].stringValue
+//        let feedURL = json["results"][0]["feedUrl"].stringValue
         podcastsNumber = json["resultCount"].intValue
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateSearchUI"), object: nil)
-        return feedURL
 
     }
     func getPodcastMetaData(_ APIData: Data){
