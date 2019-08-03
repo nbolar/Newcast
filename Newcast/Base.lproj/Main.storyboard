@@ -730,7 +730,7 @@
         <scene sceneID="nGg-XI-diN">
             <objects>
                 <viewController id="UAx-cJ-4Oq" customClass="PodcastVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="d1b-bf-kXE">
+                    <view key="view" id="d1b-bf-kXE">
                         <rect key="frame" x="0.0" y="0.0" width="399" height="700"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
@@ -739,14 +739,14 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28" id="lJw-hc-9D3"/>
                             </imageView>
-                            <scrollView wantsLayer="YES" misplaced="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="5" horizontalPageScroll="5" verticalLineScroll="5" verticalPageScroll="5" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpB-dp-GU4">
-                                <rect key="frame" x="0.0" y="0.0" width="389" height="655"/>
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="5" horizontalPageScroll="5" verticalLineScroll="5" verticalPageScroll="5" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpB-dp-GU4">
+                                <rect key="frame" x="0.0" y="0.0" width="399" height="655"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="5CJ-Os-k9e">
-                                    <rect key="frame" x="0.0" y="0.0" width="389" height="655"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="399" height="655"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView selectable="YES" id="Flf-gR-hAF">
-                                            <rect key="frame" x="0.0" y="0.0" width="389" height="655"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="399" height="655"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="Rdo-Dt-Tcc">
                                                 <size key="itemSize" width="90" height="90"/>
@@ -768,7 +768,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xPr-pO-j9x">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xPr-pO-j9x">
                                 <rect key="frame" x="18" y="656" width="88" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="84" id="bwy-9g-fs0"/>
@@ -780,7 +780,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N2Y-Sv-0Kf">
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N2Y-Sv-0Kf">
                                 <rect key="frame" x="362" y="655" width="27" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="9uk-dO-hgC"/>
@@ -802,8 +802,8 @@
                             <constraint firstAttribute="trailing" secondItem="N2Y-Sv-0Kf" secondAttribute="trailing" constant="10" id="IKG-Nj-wUG"/>
                             <constraint firstItem="CpB-dp-GU4" firstAttribute="leading" secondItem="d1b-bf-kXE" secondAttribute="leading" id="SUx-Ra-hXF"/>
                             <constraint firstItem="CpB-dp-GU4" firstAttribute="top" secondItem="N2Y-Sv-0Kf" secondAttribute="bottom" constant="1" id="TZk-tX-gPS"/>
-                            <constraint firstItem="xPr-pO-j9x" firstAttribute="leading" secondItem="d1b-bf-kXE" secondAttribute="leading" constant="10" id="gO6-3x-lly"/>
-                            <constraint firstAttribute="trailing" secondItem="CpB-dp-GU4" secondAttribute="trailing" constant="10" id="hIs-kd-nDW"/>
+                            <constraint firstItem="xPr-pO-j9x" firstAttribute="leading" secondItem="d1b-bf-kXE" secondAttribute="leading" constant="20" id="gO6-3x-lly"/>
+                            <constraint firstAttribute="trailing" secondItem="CpB-dp-GU4" secondAttribute="trailing" id="hIs-kd-nDW"/>
                             <constraint firstItem="CpB-dp-GU4" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="45" id="hPQ-hQ-us6"/>
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="leading" secondItem="xPr-pO-j9x" secondAttribute="trailing" constant="258" id="ktP-4s-ntm"/>
                             <constraint firstAttribute="bottom" secondItem="CpB-dp-GU4" secondAttribute="bottom" id="pKt-Ye-q4U"/>
@@ -839,39 +839,34 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="backButtonClicked:" target="bfv-0S-z8C" id="w2D-kc-CY9"/>
+                                    <action selector="addButtonClicked:" target="bfv-0S-z8C" id="6xD-pv-AFR"/>
                                 </connections>
                             </button>
-                            <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="szq-lo-DkH">
-                                <rect key="frame" x="20" y="558" width="560" height="22"/>
-                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Search for Podcast" usesSingleLineMode="YES" bezelStyle="round" sendsSearchStringImmediately="YES" id="XCv-T7-f5o">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </searchFieldCell>
-                            </searchField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3gi-gy-qgx">
-                                <rect key="frame" x="474" y="7" width="45" height="32"/>
+                                <rect key="frame" x="437" y="7" width="82" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="33" id="YIW-v6-oni"/>
+                                    <constraint firstAttribute="width" constant="70" id="YIW-v6-oni"/>
                                     <constraint firstAttribute="height" constant="21" id="bsr-6P-tRH"/>
                                 </constraints>
-                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoBackTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1aH-KL-ISv">
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" image="NSGoBackTemplate" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1aH-KL-ISv">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
                                 </buttonCell>
                                 <connections>
                                     <action selector="dismissController:" target="bfv-0S-z8C" id="bbm-xM-hOP"/>
                                 </connections>
                             </button>
-                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="allowed" translatesAutoresizingMaskIntoConstraints="NO" id="Ee5-PG-gGu">
-                                <rect key="frame" x="20" y="44" width="560" height="506"/>
+                            <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ee5-PG-gGu">
+                                <rect key="frame" x="20" y="44" width="560" height="454"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="1tu-0V-SYT">
-                                    <rect key="frame" x="0.0" y="0.0" width="560" height="506"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="560" height="454"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView selectable="YES" id="6bz-BZ-B8i">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="158"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="454"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="CZN-Ba-op3">
                                                 <size key="itemSize" width="100" height="100"/>
@@ -882,33 +877,59 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="PuR-va-Wsx">
-                                    <rect key="frame" x="2" y="488" width="556" height="16"/>
+                                    <rect key="frame" x="-100" y="-100" width="556" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="h94-yy-vPv">
-                                    <rect key="frame" x="234" y="1" width="15" height="143"/>
+                                    <rect key="frame" x="544" y="0.0" width="16" height="435"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YAM-gE-umR">
+                                <rect key="frame" x="20" y="547" width="67" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="63" id="wJo-lR-lXJ"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Search" id="GVu-MM-ZA9">
+                                    <font key="font" metaFont="systemMedium" size="20"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="szq-lo-DkH">
+                                <rect key="frame" x="20" y="517" width="560" height="22"/>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Search for Podcast" usesSingleLineMode="YES" bezelStyle="round" id="XCv-T7-f5o">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </searchFieldCell>
+                                <connections>
+                                    <action selector="searchPodcast" target="bfv-0S-z8C" id="gBc-0H-2du"/>
+                                </connections>
+                            </searchField>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="szq-lo-DkH" secondAttribute="trailing" constant="20" id="0ZQ-SM-3DD"/>
-                            <constraint firstItem="Ee5-PG-gGu" firstAttribute="leading" secondItem="szq-lo-DkH" secondAttribute="leading" id="7oU-JO-QOm"/>
+                            <constraint firstItem="YAM-gE-umR" firstAttribute="top" secondItem="lbB-A7-fyR" secondAttribute="top" constant="29" id="1Zp-hb-gIt"/>
+                            <constraint firstItem="Ee5-PG-gGu" firstAttribute="top" secondItem="szq-lo-DkH" secondAttribute="bottom" constant="19" id="8SJ-t1-4Fg"/>
                             <constraint firstAttribute="bottom" secondItem="tg0-W9-vGy" secondAttribute="bottom" constant="14" id="Q9z-cT-qrc"/>
                             <constraint firstItem="tg0-W9-vGy" firstAttribute="leading" secondItem="3gi-gy-qgx" secondAttribute="trailing" constant="8" id="QU6-Oz-cYN"/>
                             <constraint firstItem="tg0-W9-vGy" firstAttribute="leading" secondItem="3gi-gy-qgx" secondAttribute="trailing" constant="8" id="QnW-Ak-lm0"/>
                             <constraint firstAttribute="trailing" secondItem="tg0-W9-vGy" secondAttribute="trailing" constant="14" id="UeQ-PK-4RH"/>
-                            <constraint firstItem="Ee5-PG-gGu" firstAttribute="top" secondItem="szq-lo-DkH" secondAttribute="bottom" constant="8" symbolic="YES" id="X7g-n5-pCX"/>
-                            <constraint firstItem="szq-lo-DkH" firstAttribute="top" secondItem="lbB-A7-fyR" secondAttribute="top" constant="20" id="e6J-7m-1Bp"/>
-                            <constraint firstItem="Ee5-PG-gGu" firstAttribute="trailing" secondItem="szq-lo-DkH" secondAttribute="trailing" id="ffJ-hr-Cix"/>
+                            <constraint firstItem="Ee5-PG-gGu" firstAttribute="trailing" secondItem="szq-lo-DkH" secondAttribute="trailing" id="Vhp-Fz-PCh"/>
+                            <constraint firstItem="YAM-gE-umR" firstAttribute="leading" secondItem="lbB-A7-fyR" secondAttribute="leading" constant="22" id="bkP-8V-myP"/>
+                            <constraint firstItem="szq-lo-DkH" firstAttribute="top" secondItem="lbB-A7-fyR" secondAttribute="top" constant="61" id="e6J-7m-1Bp"/>
+                            <constraint firstItem="tg0-W9-vGy" firstAttribute="top" secondItem="Ee5-PG-gGu" secondAttribute="bottom" constant="8" symbolic="YES" id="eew-h0-3eB"/>
+                            <constraint firstItem="Ee5-PG-gGu" firstAttribute="leading" secondItem="szq-lo-DkH" secondAttribute="leading" id="hdt-n9-QDe"/>
+                            <constraint firstItem="szq-lo-DkH" firstAttribute="top" secondItem="YAM-gE-umR" secondAttribute="bottom" constant="8" id="ob9-aY-h12"/>
                             <constraint firstAttribute="bottom" secondItem="3gi-gy-qgx" secondAttribute="bottom" constant="14" id="sSs-S3-FOt"/>
-                            <constraint firstItem="tg0-W9-vGy" firstAttribute="top" secondItem="Ee5-PG-gGu" secondAttribute="bottom" constant="8" symbolic="YES" id="uio-U5-ENL"/>
                             <constraint firstItem="szq-lo-DkH" firstAttribute="leading" secondItem="lbB-A7-fyR" secondAttribute="leading" constant="20" id="vMX-IB-crh"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="6bz-BZ-B8i" id="xQi-JQ-OTD"/>
                         <outlet property="podcastSearchField" destination="szq-lo-DkH" id="R5N-JF-yhI"/>
+                        <outlet property="scrollView" destination="Ee5-PG-gGu" id="3EK-Mu-Z8k"/>
                     </connections>
                 </viewController>
                 <customObject id="k3d-3f-BlG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
