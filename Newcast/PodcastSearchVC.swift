@@ -50,7 +50,10 @@ class PodcastSearchVC: NSViewController {
     }
     
     @IBAction func addButtonClicked(_ sender: Any) {
-        podcasts.append("Hello")
+        if !podcasts.contains(feedsURL[selectedIndex]){
+            podcasts.append(feedsURL[selectedIndex])
+        }
+        
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
     }
     func podcastListing(podcastFeedURL : String){
@@ -102,7 +105,6 @@ extension PodcastSearchVC: NSCollectionViewDelegate, NSCollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-        addButtonClicked(self)
         highlightItems(selected: true, atIndexPaths: indexPaths as Set<NSIndexPath>)
     }
     func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
