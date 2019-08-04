@@ -11,6 +11,7 @@ import Alamofire
 import Network
 
 var feedURL : [String]!
+var customPodcastURL : String!
 
 class PodcastSearchVC: NSViewController {
     
@@ -73,19 +74,11 @@ class PodcastSearchVC: NSViewController {
 
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
     }
-    func podcastListing(podcastFeedURL : String){
-        let url = URL(string: podcastFeedURL)
-        AF.request(url!).responseData(completionHandler: { (response) in
-            let parser = Parser()
-            if response.data != nil{
-                parser.getPodcastMetaData(response.data!)
-            }            
-        })
-    }
+
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
         for indexPath in atIndexPaths {
             selectedIndex = indexPath.item
-            podcastListing(podcastFeedURL: feedsURL[selectedIndex])
+//            podcastListing(podcastFeedURL: feedsURL[selectedIndex])
             guard let item = collectionView.item(at: indexPath as IndexPath) else {continue}
             (item as! PodcastCellView).setHighlight(selected: selected)
             
@@ -106,11 +99,12 @@ class PodcastSearchVC: NSViewController {
                 print("Animation completed")
             })
         }else{
-            let editedURL = customURLField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-            podcastListing(podcastFeedURL: editedURL)
+            customPodcastURL = customURLField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+//            podcastListing(podcastFeedURL: editedURL)
             customURLField.stringValue = ""
             customURLField.placeholderString = "Podcast Added!"
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "customURL"), object: nil)
         }
 
     }
