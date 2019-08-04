@@ -14,6 +14,7 @@ var feedURL : [String]!
 
 class PodcastSearchVC: NSViewController {
     
+    @IBOutlet weak var customURLField: NSTextField!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var collectionView: NSCollectionView!
     @IBOutlet weak var podcastSearchField: NSSearchField!
@@ -28,6 +29,7 @@ class PodcastSearchVC: NSViewController {
         collectionView.delegate = self
         podcastsNumber = 0
         networkIndicator.style = .spinning
+        customURLField.alphaValue = 0
         
         let labelXPostion:CGFloat = view.bounds.midX
         let labelYPostion:CGFloat = view.bounds.midY
@@ -53,7 +55,7 @@ class PodcastSearchVC: NSViewController {
         //        let url = URL(string: "https://atp.fm/episodes?format=rss")
         
         let editedURL = podcastSearchField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-        let url = URL(string: "https://itunes.apple.com/search?term=\(editedURL)&media=podcast&limit=100")
+        let url = URL(string: "https://itunes.apple.com/search?term=\(editedURL)&entity=podcast&limit=50")
         //
         AF.request(url!).responseData { (response) in
             let parser = Parser()
@@ -90,7 +92,30 @@ class PodcastSearchVC: NSViewController {
         }
         
     }
+    @IBAction func addURLButtonClicked(_ sender: Any) {
+        
+        if customURLField.stringValue.count == 0{
+            customURLField.alphaValue = 0.0
+            NSAnimationContext.runAnimationGroup({_ in
+                //Indicate the duration of the animation
+                NSAnimationContext.current.duration = 0.5
+                //            customURLField.layer?.transform = rotationTransform
+                //            customURLField.animator().layer?.transform = CATransform3DIdentity
+                customURLField.animator().alphaValue = 1.0
+            }, completionHandler:{
+                print("Animation completed")
+            })
+        }else{
+            let editedURL = customURLField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+            podcastListing(podcastFeedURL: editedURL)
+            customURLField.stringValue = ""
+            customURLField.placeholderString = "Podcast Added!"
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
+        }
 
+    }
+
+    
 }
 
 

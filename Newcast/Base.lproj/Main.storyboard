@@ -908,11 +908,45 @@ Gw
                                     <action selector="searchPodcast" target="bfv-0S-z8C" id="gBc-0H-2du"/>
                                 </connections>
                             </searchField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AL7-1R-7hb">
+                                <rect key="frame" x="28" y="7" width="82" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="ZtP-pm-MtB"/>
+                                    <constraint firstAttribute="width" constant="70" id="zgr-QS-kH8"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Add URL" bezelStyle="rounded" image="NSGoBackTemplate" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aAL-m3-LE7">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addURLButtonClicked:" target="bfv-0S-z8C" id="aha-UQ-QfA"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iPM-Gt-K0u">
+                                <rect key="frame" x="112" y="14" width="323" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="2cU-uM-g5k"/>
+                                    <constraint firstAttribute="width" constant="323" id="kEa-Gu-J0e"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" placeholderString="https:// ...." bezelStyle="round" id="ehH-Go-JSF">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="addURLButtonClicked:" target="bfv-0S-z8C" id="sMc-lF-y8p"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="3gi-gy-qgx" firstAttribute="leading" secondItem="iPM-Gt-K0u" secondAttribute="trailing" constant="8" id="038-Ei-V1f"/>
                             <constraint firstAttribute="trailing" secondItem="szq-lo-DkH" secondAttribute="trailing" constant="20" id="0ZQ-SM-3DD"/>
                             <constraint firstItem="YAM-gE-umR" firstAttribute="top" secondItem="lbB-A7-fyR" secondAttribute="top" constant="29" id="1Zp-hb-gIt"/>
                             <constraint firstItem="Ee5-PG-gGu" firstAttribute="top" secondItem="szq-lo-DkH" secondAttribute="bottom" constant="19" id="8SJ-t1-4Fg"/>
+                            <constraint firstItem="AL7-1R-7hb" firstAttribute="baseline" secondItem="3gi-gy-qgx" secondAttribute="baseline" id="MqL-ts-sTw"/>
                             <constraint firstAttribute="bottom" secondItem="tg0-W9-vGy" secondAttribute="bottom" constant="14" id="Q9z-cT-qrc"/>
                             <constraint firstItem="tg0-W9-vGy" firstAttribute="leading" secondItem="3gi-gy-qgx" secondAttribute="trailing" constant="8" id="QU6-Oz-cYN"/>
                             <constraint firstItem="tg0-W9-vGy" firstAttribute="leading" secondItem="3gi-gy-qgx" secondAttribute="trailing" constant="8" id="QnW-Ak-lm0"/>
@@ -924,14 +958,18 @@ Gw
                             <constraint firstItem="szq-lo-DkH" firstAttribute="top" secondItem="lbB-A7-fyR" secondAttribute="top" constant="61" id="e6J-7m-1Bp"/>
                             <constraint firstItem="tg0-W9-vGy" firstAttribute="top" secondItem="Ee5-PG-gGu" secondAttribute="bottom" constant="8" symbolic="YES" id="eew-h0-3eB"/>
                             <constraint firstItem="Ee5-PG-gGu" firstAttribute="leading" secondItem="szq-lo-DkH" secondAttribute="leading" id="hdt-n9-QDe"/>
+                            <constraint firstItem="AL7-1R-7hb" firstAttribute="leading" secondItem="lbB-A7-fyR" secondAttribute="leading" constant="34" id="maO-ay-B58"/>
                             <constraint firstItem="szq-lo-DkH" firstAttribute="top" secondItem="YAM-gE-umR" secondAttribute="bottom" constant="8" id="ob9-aY-h12"/>
+                            <constraint firstItem="iPM-Gt-K0u" firstAttribute="leading" secondItem="AL7-1R-7hb" secondAttribute="trailing" constant="8" id="qoR-k9-07z"/>
                             <constraint firstAttribute="bottom" secondItem="3gi-gy-qgx" secondAttribute="bottom" constant="14" id="sSs-S3-FOt"/>
                             <constraint firstItem="Ee5-PG-gGu" firstAttribute="leading" secondItem="lbB-A7-fyR" secondAttribute="leading" constant="20" id="siy-xD-HHM"/>
                             <constraint firstItem="szq-lo-DkH" firstAttribute="leading" secondItem="lbB-A7-fyR" secondAttribute="leading" constant="20" id="vMX-IB-crh"/>
+                            <constraint firstAttribute="bottom" secondItem="iPM-Gt-K0u" secondAttribute="bottom" constant="14" id="z9t-Ab-7Nw"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="6bz-BZ-B8i" id="xQi-JQ-OTD"/>
+                        <outlet property="customURLField" destination="iPM-Gt-K0u" id="nHL-nz-hLj"/>
                         <outlet property="podcastSearchField" destination="szq-lo-DkH" id="R5N-JF-yhI"/>
                         <outlet property="scrollView" destination="Ee5-PG-gGu" id="3EK-Mu-Z8k"/>
                     </connections>
