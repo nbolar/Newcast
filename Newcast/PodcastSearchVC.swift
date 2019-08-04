@@ -58,9 +58,6 @@ class PodcastSearchVC: NSViewController {
         AF.request(url!).responseData { (response) in
             let parser = Parser()
             parser.parsePodcastMetaData(response.data!)
-            
-            
-
         }
         collectionView.reloadData()
     }

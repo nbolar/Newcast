@@ -732,7 +732,7 @@
                 <viewController id="UAx-cJ-4Oq" customClass="PodcastVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="d1b-bf-kXE">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="700"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9z-kX-uw6">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="700"/>
@@ -823,7 +823,7 @@
                 <viewController id="bfv-0S-z8C" customClass="PodcastSearchVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="lbB-A7-fyR">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tg0-W9-vGy">
                                 <rect key="frame" x="521" y="13" width="65" height="23"/>
@@ -873,6 +873,10 @@ Gw
                                         </collectionView>
                                     </subviews>
                                 </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="454" id="OJy-Nq-NAL"/>
+                                    <constraint firstAttribute="width" constant="560" id="Pu5-3i-pLT"/>
+                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="PuR-va-Wsx">
                                     <rect key="frame" x="-100" y="-100" width="556" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -912,14 +916,17 @@ Gw
                             <constraint firstAttribute="bottom" secondItem="tg0-W9-vGy" secondAttribute="bottom" constant="14" id="Q9z-cT-qrc"/>
                             <constraint firstItem="tg0-W9-vGy" firstAttribute="leading" secondItem="3gi-gy-qgx" secondAttribute="trailing" constant="8" id="QU6-Oz-cYN"/>
                             <constraint firstItem="tg0-W9-vGy" firstAttribute="leading" secondItem="3gi-gy-qgx" secondAttribute="trailing" constant="8" id="QnW-Ak-lm0"/>
+                            <constraint firstAttribute="trailing" secondItem="Ee5-PG-gGu" secondAttribute="trailing" constant="20" id="Uaa-5g-L5j"/>
                             <constraint firstAttribute="trailing" secondItem="tg0-W9-vGy" secondAttribute="trailing" constant="14" id="UeQ-PK-4RH"/>
                             <constraint firstItem="Ee5-PG-gGu" firstAttribute="trailing" secondItem="szq-lo-DkH" secondAttribute="trailing" id="Vhp-Fz-PCh"/>
+                            <constraint firstItem="tg0-W9-vGy" firstAttribute="top" secondItem="Ee5-PG-gGu" secondAttribute="bottom" constant="8" id="ZIc-MR-sF1"/>
                             <constraint firstItem="YAM-gE-umR" firstAttribute="leading" secondItem="lbB-A7-fyR" secondAttribute="leading" constant="22" id="bkP-8V-myP"/>
                             <constraint firstItem="szq-lo-DkH" firstAttribute="top" secondItem="lbB-A7-fyR" secondAttribute="top" constant="61" id="e6J-7m-1Bp"/>
                             <constraint firstItem="tg0-W9-vGy" firstAttribute="top" secondItem="Ee5-PG-gGu" secondAttribute="bottom" constant="8" symbolic="YES" id="eew-h0-3eB"/>
                             <constraint firstItem="Ee5-PG-gGu" firstAttribute="leading" secondItem="szq-lo-DkH" secondAttribute="leading" id="hdt-n9-QDe"/>
                             <constraint firstItem="szq-lo-DkH" firstAttribute="top" secondItem="YAM-gE-umR" secondAttribute="bottom" constant="8" id="ob9-aY-h12"/>
                             <constraint firstAttribute="bottom" secondItem="3gi-gy-qgx" secondAttribute="bottom" constant="14" id="sSs-S3-FOt"/>
+                            <constraint firstItem="Ee5-PG-gGu" firstAttribute="leading" secondItem="lbB-A7-fyR" secondAttribute="leading" constant="20" id="siy-xD-HHM"/>
                             <constraint firstItem="szq-lo-DkH" firstAttribute="leading" secondItem="lbB-A7-fyR" secondAttribute="leading" constant="20" id="vMX-IB-crh"/>
                         </constraints>
                     </view>
