@@ -8,6 +8,7 @@
 
 import Cocoa
 import Alamofire
+import Network
 
 var feedURL : [String]!
 
@@ -17,6 +18,7 @@ class PodcastSearchVC: NSViewController {
     @IBOutlet weak var collectionView: NSCollectionView!
     @IBOutlet weak var podcastSearchField: NSSearchField!
     var selectedIndex : Int!
+    let networkIndicator = NSProgressIndicator()
     
 
     override func viewDidLoad() {
@@ -25,19 +27,33 @@ class PodcastSearchVC: NSViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         podcastsNumber = 0
+        networkIndicator.style = .spinning
+        
+        let labelXPostion:CGFloat = view.bounds.midX
+        let labelYPostion:CGFloat = view.bounds.midY
+        let labelWidth:CGFloat = 30
+        let labelHeight:CGFloat = 30
+        
+        
+        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: "updateSearchUI"), object: nil)
         
     }
     
     @objc func updateUI(){
         collectionView.reloadData()
+        networkIndicator.removeFromSuperview()
     }
     
     @IBAction func searchPodcast(_ sender: Any){
+        podcastsNumber = 0
+        networkIndicator.startAnimation(Any?.self)
+        view.addSubview(networkIndicator)
         //        let url = URL(string: "https://atp.fm/episodes?format=rss")
         
         let editedURL = podcastSearchField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-        let url = URL(string: "https://itunes.apple.com/search?term=\(editedURL)&media=podcast&limit=50")
+        let url = URL(string: "https://itunes.apple.com/search?term=\(editedURL)&media=podcast&limit=100")
         //
         AF.request(url!).responseData { (response) in
             let parser = Parser()
@@ -50,10 +66,12 @@ class PodcastSearchVC: NSViewController {
     }
     
     @IBAction func addButtonClicked(_ sender: Any) {
-        if !podcasts.contains(feedsURL[selectedIndex]){
-            podcasts.append(feedsURL[selectedIndex])
+        if feedsURL.count != 0{
+            if !podcasts.contains(feedsURL[selectedIndex]){
+                podcasts.append(feedsURL[selectedIndex])
+            }
         }
-        
+
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
     }
     func podcastListing(podcastFeedURL : String){
