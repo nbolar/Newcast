@@ -121,11 +121,15 @@ extension PodcastVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSCol
         
         let forecastItem = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "PodcastCellView"), for: indexPath)
         
-        guard let forecastCell = forecastItem as? PodcastCellView else { return forecastItem}
-        forecastCell.configurePodcastAddedCell(podcastCell: podcastsImageURL[indexPath.item])
+        if podcastsImageURL.count != 0{
+            guard let forecastCell = forecastItem as? PodcastCellView else { return forecastItem}
+            forecastCell.configurePodcastAddedCell(podcastCell: podcastsImageURL[indexPath.item])
+            return forecastCell
+        }
+
+        return forecastItem
         
         
-        return forecastCell
     }
     
     func numberOfSections(in collectionView: NSCollectionView) -> Int {

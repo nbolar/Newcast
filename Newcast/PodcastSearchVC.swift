@@ -16,6 +16,7 @@ var customPodcastURL : String!
 class PodcastSearchVC: NSViewController {
     
     
+    @IBOutlet weak var addPodcastButton: NSButton!
     @IBOutlet weak var customURLField: NSTextField!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var collectionView: NSCollectionView!
@@ -46,7 +47,7 @@ class PodcastSearchVC: NSViewController {
         let labelYPostion:CGFloat = view.bounds.midY
         let labelWidth:CGFloat = 30
         let labelHeight:CGFloat = 30
-        
+        addPodcastButton.isHidden = false
         
         networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
         
@@ -60,6 +61,7 @@ class PodcastSearchVC: NSViewController {
     }
     
     @IBAction func searchPodcast(_ sender: Any){
+        addPodcastButton.isHidden = false
         podcastsNumber = 0
         networkIndicator.startAnimation(Any?.self)
         view.addSubview(networkIndicator)
@@ -96,7 +98,6 @@ class PodcastSearchVC: NSViewController {
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
         for indexPath in atIndexPaths {
             selectedIndex = indexPath.item
-//            podcastListing(podcastFeedURL: feedsURL[selectedIndex])
             guard let item = collectionView.item(at: indexPath as IndexPath) else {continue}
             (item as! PodcastCellView).setHighlight(selected: selected)
             
@@ -105,22 +106,19 @@ class PodcastSearchVC: NSViewController {
     }
     @IBAction func addURLButtonClicked(_ sender: Any) {
         
+        addPodcastButton.isHidden = true
         if customURLField.stringValue.count == 0{
             customURLField.alphaValue = 0.0
             NSAnimationContext.runAnimationGroup({_ in
-                //Indicate the duration of the animation
                 NSAnimationContext.current.duration = 0.5
-                //            customURLField.layer?.transform = rotationTransform
-                //            customURLField.animator().layer?.transform = CATransform3DIdentity
                 customURLField.animator().alphaValue = 1.0
             }, completionHandler:{
             })
         }else{
             customPodcastURL = customURLField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-//            podcastListing(podcastFeedURL: editedURL)
             customURLField.stringValue = ""
             customURLField.placeholderString = "Podcast Added!"
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "customURL"), object: nil)
         }
 

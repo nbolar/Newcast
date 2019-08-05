@@ -27,6 +27,7 @@ class DetailVC: NSViewController {
         playerCustomView.wantsLayer = true
         playerCustomView.layer?.backgroundColor = CGColor.init(gray: 0.9, alpha: 0.2)
         playerCustomView.layer?.cornerRadius = 8
+        podcastTitleField.stringValue = ""
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
     }
     
