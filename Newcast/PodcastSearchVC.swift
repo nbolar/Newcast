@@ -15,13 +15,23 @@ var customPodcastURL : String!
 
 class PodcastSearchVC: NSViewController {
     
+    
     @IBOutlet weak var customURLField: NSTextField!
     @IBOutlet weak var scrollView: NSScrollView!
     @IBOutlet weak var collectionView: NSCollectionView!
     @IBOutlet weak var podcastSearchField: NSSearchField!
     var selectedIndex : Int!
     let networkIndicator = NSProgressIndicator()
+    static let instance = PodcastSearchVC()
+    fileprivate var _podcastSearch = [Parser]()
     
+    var podcastSearch: [Parser]{
+        get{
+            return _podcastSearch
+        } set {
+            _podcastSearch = newValue
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +69,11 @@ class PodcastSearchVC: NSViewController {
         let url = URL(string: "https://itunes.apple.com/search?term=\(editedURL)&entity=podcast&limit=50")
         //
         AF.request(url!).responseData { (response) in
-            let parser = Parser()
-            parser.parsePodcastMetaData(response.data!)
+            if response.data != nil{
+                let parser = Parser()
+                self.podcastSearch = parser.parsePodcastMetaData(response.data!)
+            }
+            
         }
         collectionView.reloadData()
     }
@@ -119,11 +132,11 @@ extension PodcastSearchVC: NSCollectionViewDelegate, NSCollectionViewDataSource,
         
         let forecastItem = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "PodcastCellView"), for: indexPath)
         
-        //        guard let forecastCell = forecastItem as? PodcastCellView else { return forecastItem}
-        //        forecastCell.configureCell(weatherCell: WeatherService.instance.forecast[indexPath.item])
+        guard let forecastCell = forecastItem as? PodcastCellView else { return forecastItem}
+        forecastCell.configurePodcastSearchCell(podcastCell: self.podcastSearch[indexPath.item] )
         
         
-        return forecastItem
+        return forecastCell
     }
     
     func numberOfSections(in collectionView: NSCollectionView) -> Int {

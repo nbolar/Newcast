@@ -60,7 +60,6 @@ class PodcastVC: NSViewController {
     func selectedPodcast(atIndexPaths: Set<NSIndexPath>){
         for indexPath in atIndexPaths{
             podcastListing(podcastFeedURL: podcasts![indexPath.item])
-            
         }
     }
     

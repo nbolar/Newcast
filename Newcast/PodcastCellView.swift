@@ -7,13 +7,15 @@
 //
 
 import Cocoa
+import SDWebImage
 
 class PodcastCellView: NSCollectionViewItem {
 
-    @IBOutlet weak var podcastImage: NSImageView!
+    @IBOutlet weak var podcastImage: SDAnimatedImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        
         self.view.wantsLayer = true
         self.view.layer?.backgroundColor = CGColor.init(gray: 0.9, alpha: 0.2)
         self.view.layer?.cornerRadius = 8
@@ -27,6 +29,10 @@ class PodcastCellView: NSCollectionViewItem {
     func setHighlight(selected: Bool) {
         view.layer?.borderWidth = selected ? 2.0 : 0.0
     }
-
+    func configurePodcastSearchCell(podcastCell: Parser)
+    {
+//        podcastImage.image = NSImage(contentsOf: URL(string: podcastCell.imageURL)!)
+        podcastImage.sd_setImage(with: URL(string: podcastCell.imageURL), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
+    }
     
 }

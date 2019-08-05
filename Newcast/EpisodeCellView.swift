@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SDWebImage
 
 class EpisodeCellView: NSCollectionViewItem {
 
