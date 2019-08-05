@@ -62,7 +62,7 @@ class Parser {
             for podcast in list
             {
                 let podcastsearchItem = Parser()
-                podcastsearchItem.imageURL = podcast["artworkUrl100"].stringValue
+                podcastsearchItem.imageURL = podcast["artworkUrl600"].stringValue
                 podcastSearch.append(podcastsearchItem)
                 feedsURL.append(podcast["feedUrl"].stringValue)
             }

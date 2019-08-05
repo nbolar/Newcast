@@ -31,7 +31,7 @@ class PodcastCellView: NSCollectionViewItem {
     }
     func configurePodcastSearchCell(podcastCell: Parser)
     {
-//        podcastImage.image = NSImage(contentsOf: URL(string: podcastCell.imageURL)!)
+//        let editedURL = podcastCell.imageURL.replacingOccurrences(of: "100x100bb.jpg", with: "600x600bb.jpg", options: .literal, range: nil)
         podcastImage.sd_setImage(with: URL(string: podcastCell.imageURL), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
     }
     

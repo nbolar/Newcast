@@ -66,7 +66,7 @@ class PodcastSearchVC: NSViewController {
         //        let url = URL(string: "https://atp.fm/episodes?format=rss")
         
         let editedURL = podcastSearchField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
-        let url = URL(string: "https://itunes.apple.com/search?term=\(editedURL)&entity=podcast&limit=50")
+        let url = URL(string: "https://itunes.apple.com/search?term=\(editedURL)&entity=podcast&limit=100")
         //
         AF.request(url!).responseData { (response) in
             if response.data != nil{
