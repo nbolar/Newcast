@@ -19,7 +19,7 @@ class PodcastVC: NSViewController {
     @IBOutlet weak var backgroundImage: NSImageView!
     @IBOutlet weak var addPodcastButton: NSButton!
     @IBOutlet weak var collectionView: NSCollectionView!
-    
+    @IBOutlet weak var removePodcastButton: NSButton!
     
     
     override func viewDidLoad() {
@@ -77,12 +77,30 @@ class PodcastVC: NSViewController {
     }
     
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
+        
+        removePodcastButton.isEnabled = !collectionView.selectionIndexPaths.isEmpty
         for indexPath in atIndexPaths {
             guard let item = collectionView.item(at: indexPath as IndexPath) else {continue}
             (item as! PodcastCellView).setHighlight(selected: selected)
         }
     }
     
+    @IBAction func removePodcastButtonClicked(_ sender: Any) {
+        let selectionIndexPaths = collectionView.selectionIndexPaths
+        var selectionArray = Array(selectionIndexPaths)
+        selectionArray.sort(by: {path1, path2 in return path1.compare(path2) == .orderedDescending})
+        for itemIndexPath in selectionArray {
+            // 2
+            podcasts.remove(at: itemIndexPath.item)
+            podcastsImageURL.remove(at: itemIndexPath.item)
+            UserDefaults.standard.set(podcasts, forKey: "podcasts")
+            UserDefaults.standard.set(podcastsImageURL, forKey: "podcastImagesURL")
+        }
+        collectionView.deleteItems(at: selectionIndexPaths)
+        updateUI()
+    }
+    
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }

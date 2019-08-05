@@ -785,7 +785,7 @@
                                 </constraints>
                                 <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gvf-yI-9IS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="systemBold"/>
                                 </buttonCell>
                                 <color key="contentTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
@@ -793,10 +793,25 @@
                                     <segue destination="bfv-0S-z8C" kind="sheet" id="gXF-BS-Ta6"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8c-5w-XB3">
+                                <rect key="frame" x="320" y="649" width="40" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="r46-9G-96a"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSRemoveTemplate" imagePosition="only" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HwI-u4-NZh">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="removePodcastButtonClicked:" target="UAx-cJ-4Oq" id="wty-IQ-k2v"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="xPr-pO-j9x" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="20" id="5X9-WY-zZv"/>
+                            <constraint firstItem="A8c-5w-XB3" firstAttribute="bottom" secondItem="N2Y-Sv-0Kf" secondAttribute="bottom" id="6ye-MQ-yBV"/>
                             <constraint firstAttribute="trailing" secondItem="N2Y-Sv-0Kf" secondAttribute="trailing" constant="11" id="IKG-Nj-wUG"/>
+                            <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="leading" secondItem="A8c-5w-XB3" secondAttribute="trailing" constant="8" symbolic="YES" id="KvA-rE-q8t"/>
                             <constraint firstItem="CpB-dp-GU4" firstAttribute="leading" secondItem="d1b-bf-kXE" secondAttribute="leading" id="SUx-Ra-hXF"/>
                             <constraint firstItem="CpB-dp-GU4" firstAttribute="top" secondItem="N2Y-Sv-0Kf" secondAttribute="bottom" constant="1" id="TZk-tX-gPS"/>
                             <constraint firstItem="xPr-pO-j9x" firstAttribute="leading" secondItem="d1b-bf-kXE" secondAttribute="leading" constant="20" id="gO6-3x-lly"/>
@@ -805,12 +820,14 @@
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="leading" secondItem="xPr-pO-j9x" secondAttribute="trailing" constant="258" id="ktP-4s-ntm"/>
                             <constraint firstAttribute="bottom" secondItem="CpB-dp-GU4" secondAttribute="bottom" id="pKt-Ye-q4U"/>
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="22" id="qbD-Vn-Drh"/>
+                            <constraint firstItem="A8c-5w-XB3" firstAttribute="centerY" secondItem="N2Y-Sv-0Kf" secondAttribute="centerY" id="zaC-2v-vOv"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addPodcastButton" destination="N2Y-Sv-0Kf" id="368-ue-dlC"/>
                         <outlet property="backgroundImage" destination="j9z-kX-uw6" id="oUA-b6-6VC"/>
                         <outlet property="collectionView" destination="Flf-gR-hAF" id="jWI-Nx-zVG"/>
+                        <outlet property="removePodcastButton" destination="A8c-5w-XB3" id="2C3-md-i7i"/>
                     </connections>
                 </viewController>
                 <customObject id="rNd-za-qVj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1075,6 +1092,7 @@ Gw
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSGoBackTemplate" width="9" height="12"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="wallpaper28" width="1700" height="3500"/>
         <image name="wallpaper28-1" width="1700" height="3500"/>
     </resources>
