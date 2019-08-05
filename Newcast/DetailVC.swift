@@ -7,11 +7,13 @@
 //
 
 import Cocoa
+import SDWebImage
 
 var podcastSelecetedIndex : Int!
 
 class DetailVC: NSViewController {
 
+    @IBOutlet weak var podcastImageView: SDAnimatedImageView!
     @IBOutlet weak var podcastTitleField: NSTextField!
     @IBOutlet weak var collectionView: NSCollectionView!
     @IBOutlet weak var playerCustomView: NSView!
@@ -27,6 +29,10 @@ class DetailVC: NSViewController {
         playerCustomView.wantsLayer = true
         playerCustomView.layer?.backgroundColor = CGColor.init(gray: 0.9, alpha: 0.2)
         playerCustomView.layer?.cornerRadius = 8
+        podcastImageView.isHidden = true
+        podcastImageView.wantsLayer = true
+        podcastImageView.layer?.cornerRadius = 8
+        podcastImageView.alphaValue = 0.9
         podcastTitleField.stringValue = ""
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
     }
@@ -39,7 +45,9 @@ class DetailVC: NSViewController {
         }
     }
     @objc func updateTitle(){
+        podcastImageView.isHidden = false
         podcastTitleField.stringValue = "\(podcastsTitle[podcastSelecetedIndex])"
+        podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), context: nil)
     }
     
 }

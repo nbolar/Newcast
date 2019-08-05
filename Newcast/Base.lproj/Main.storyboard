@@ -1010,7 +1010,22 @@ Gw
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28-1" id="RaY-hN-XEv"/>
                             </imageView>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="RoI-9c-hw7">
-                                <rect key="frame" x="0.0" y="558" width="700" height="142"/>
+                                <rect key="frame" x="0.0" y="560" width="700" height="140"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="91P-1M-4OD">
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="140" id="VIX-Px-iMa"/>
+                                            <constraint firstAttribute="width" constant="140" id="grL-es-5pb"/>
+                                        </constraints>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="ATP" id="Q72-ey-iPf"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="91P-1M-4OD" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" id="OLT-DH-TtW"/>
+                                    <constraint firstAttribute="bottom" secondItem="91P-1M-4OD" secondAttribute="bottom" id="cH0-Xz-DVQ"/>
+                                    <constraint firstItem="91P-1M-4OD" firstAttribute="leading" secondItem="RoI-9c-hw7" secondAttribute="leading" id="fOc-rF-5QR"/>
+                                </constraints>
                             </customView>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VxF-Fu-MBl">
                                 <rect key="frame" x="0.0" y="0.0" width="700" height="506"/>
@@ -1048,7 +1063,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VJF-6L-bib">
-                                <rect key="frame" x="18" y="526" width="664" height="24"/>
+                                <rect key="frame" x="18" y="526" width="664" height="26"/>
                                 <textFieldCell key="cell" selectable="YES" title="Podcast Title" id="dg7-FV-t9P">
                                     <font key="font" metaFont="systemSemibold" size="20"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1076,6 +1091,7 @@ Gw
                         <outlet property="backgroundImageView" destination="pNY-Aa-nSm" id="hlg-Rv-FJz"/>
                         <outlet property="collectionView" destination="36R-Mb-SPr" id="CoM-A8-Sf3"/>
                         <outlet property="playerCustomView" destination="RoI-9c-hw7" id="WgD-Ua-wV6"/>
+                        <outlet property="podcastImageView" destination="91P-1M-4OD" id="MKe-Mg-SPT"/>
                         <outlet property="podcastTitleField" destination="VJF-6L-bib" id="7jo-rJ-1DH"/>
                     </connections>
                 </viewController>
@@ -1085,6 +1101,7 @@ Gw
         </scene>
     </scenes>
     <resources>
+        <image name="ATP" width="1400" height="1400"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSGoBackTemplate" width="9" height="12"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
