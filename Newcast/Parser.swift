@@ -12,6 +12,7 @@ import SwiftyJSON
 var podcastsNumber : Int!
 var feedsURL = [String]()
 var imagesURL = [String]()
+var titles = [String]()
 class Parser {
     
     
@@ -56,6 +57,7 @@ class Parser {
     func parsePodcastMetaData(_ APIData: Data) -> [Parser]{
         feedsURL.removeAll()
         imagesURL.removeAll()
+        titles.removeAll()
         var podcastSearch = [Parser]()
         let json = try! JSON(data: APIData)
         print(json)
@@ -68,6 +70,7 @@ class Parser {
                 podcastSearch.append(podcastsearchItem)
                 imagesURL.append(podcast["artworkUrl600"].stringValue)
                 feedsURL.append(podcast["feedUrl"].stringValue)
+                titles.append(podcast["trackName"].stringValue)
                 
             }
             

@@ -1082,6 +1082,7 @@ Gw
                         <outlet property="backgroundImageView" destination="pNY-Aa-nSm" id="hlg-Rv-FJz"/>
                         <outlet property="collectionView" destination="36R-Mb-SPr" id="CoM-A8-Sf3"/>
                         <outlet property="playerCustomView" destination="RoI-9c-hw7" id="WgD-Ua-wV6"/>
+                        <outlet property="podcastTitleField" destination="VJF-6L-bib" id="7jo-rJ-1DH"/>
                     </connections>
                 </viewController>
                 <customObject id="G9E-H6-DMk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

@@ -8,8 +8,11 @@
 
 import Cocoa
 
+var podcastSelecetedIndex : Int!
+
 class DetailVC: NSViewController {
 
+    @IBOutlet weak var podcastTitleField: NSTextField!
     @IBOutlet weak var collectionView: NSCollectionView!
     @IBOutlet weak var playerCustomView: NSView!
     @IBOutlet weak var backgroundImageView: NSImageView!
@@ -19,13 +22,12 @@ class DetailVC: NSViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.wantsLayer = true
-//        collectionView.layer?.borderColor = CGColor.init(gray: 0.9, alpha: 0.2)
-//        collectionView.layer?.borderWidth = 2
         collectionView.layer?.cornerRadius = 8
         backgroundImageView.alphaValue = 0.6
         playerCustomView.wantsLayer = true
         playerCustomView.layer?.backgroundColor = CGColor.init(gray: 0.9, alpha: 0.2)
         playerCustomView.layer?.cornerRadius = 8
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
     }
     
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
@@ -34,6 +36,9 @@ class DetailVC: NSViewController {
             (item as! EpisodeCellView).setHighlight(selected: selected)
             
         }
+    }
+    @objc func updateTitle(){
+        podcastTitleField.stringValue = "\(podcastsTitle[podcastSelecetedIndex])"
     }
     
 }

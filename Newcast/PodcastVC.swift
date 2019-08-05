@@ -13,6 +13,7 @@ import FeedKit
 
 var podcasts : [String]! = []
 var podcastsImageURL : [String]! = []
+var podcastsTitle : [String]! = []
 
 class PodcastVC: NSViewController {
 
@@ -28,15 +29,18 @@ class PodcastVC: NSViewController {
         
 //        UserDefaults.standard.removeObject(forKey: "podcasts")
 //        UserDefaults.standard.removeObject(forKey: "podcastImagesURL")
+//        UserDefaults.standard.removeObject(forKey: "podcastsTitle")
         
         if UserDefaults.standard.array(forKey: "podcasts") == nil{
             podcasts = []
             podcastsImageURL = []
+            podcastsTitle = []
         }else{
             podcasts = UserDefaults.standard.array(forKey: "podcasts") as! [String]
             podcastsImageURL = UserDefaults.standard.array(forKey: "podcastImagesURL") as! [String]
+            podcastsTitle = UserDefaults.standard.array(forKey: "podcastsTitle") as! [String]
         }
-//        podcasts = UserDefaults.standard.array(forKey: "podcasts") as! [String]
+        
         backgroundImage.alphaValue = 0.6
         addPodcastButton.alphaValue = 0.8
         collectionView.dataSource = self
@@ -73,6 +77,8 @@ class PodcastVC: NSViewController {
     func selectedPodcast(atIndexPaths: Set<NSIndexPath>){
         for indexPath in atIndexPaths{
             podcastListing(podcastFeedURL: podcasts![indexPath.item])
+            podcastSelecetedIndex = indexPath.item
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
         }
     }
     
@@ -93,8 +99,10 @@ class PodcastVC: NSViewController {
             // 2
             podcasts.remove(at: itemIndexPath.item)
             podcastsImageURL.remove(at: itemIndexPath.item)
+            podcastsTitle.remove(at: itemIndexPath.item)
             UserDefaults.standard.set(podcasts, forKey: "podcasts")
             UserDefaults.standard.set(podcastsImageURL, forKey: "podcastImagesURL")
+            UserDefaults.standard.set(podcastsTitle, forKey: "podcastsTitle")
         }
         collectionView.deleteItems(at: selectionIndexPaths)
         updateUI()
@@ -117,7 +125,7 @@ extension PodcastVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSCol
         forecastCell.configurePodcastAddedCell(podcastCell: podcastsImageURL[indexPath.item])
         
         
-        return forecastItem
+        return forecastCell
     }
     
     func numberOfSections(in collectionView: NSCollectionView) -> Int {

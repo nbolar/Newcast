@@ -83,7 +83,9 @@ class PodcastSearchVC: NSViewController {
             if !podcasts.contains(feedsURL[selectedIndex]){
                 podcasts.append(feedsURL[selectedIndex])
                 podcastsImageURL.append(imagesURL[selectedIndex])
+                podcastsTitle.append(titles[selectedIndex])
                 UserDefaults.standard.set(podcasts, forKey: "podcasts")
+                UserDefaults.standard.set(podcastsTitle, forKey: "podcastsTitle")
                 UserDefaults.standard.set(podcastsImageURL, forKey: "podcastImagesURL")
             }
         }
@@ -112,7 +114,6 @@ class PodcastSearchVC: NSViewController {
                 //            customURLField.animator().layer?.transform = CATransform3DIdentity
                 customURLField.animator().alphaValue = 1.0
             }, completionHandler:{
-                print("Animation completed")
             })
         }else{
             customPodcastURL = customURLField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
