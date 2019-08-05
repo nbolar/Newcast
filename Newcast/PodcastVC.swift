@@ -12,6 +12,7 @@ import SWXMLHash
 import FeedKit
 
 var podcasts : [String]! = []
+var podcastsImageURL : [String]! = []
 
 class PodcastVC: NSViewController {
 
@@ -24,6 +25,18 @@ class PodcastVC: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        
+//        UserDefaults.standard.removeObject(forKey: "podcasts")
+//        UserDefaults.standard.removeObject(forKey: "podcastImagesURL")
+        
+        if UserDefaults.standard.array(forKey: "podcasts") == nil{
+            podcasts = []
+            podcastsImageURL = []
+        }else{
+            podcasts = UserDefaults.standard.array(forKey: "podcasts") as! [String]
+            podcastsImageURL = UserDefaults.standard.array(forKey: "podcastImagesURL") as! [String]
+        }
+//        podcasts = UserDefaults.standard.array(forKey: "podcasts") as! [String]
         backgroundImage.alphaValue = 0.6
         addPodcastButton.alphaValue = 0.8
         collectionView.dataSource = self
@@ -82,8 +95,8 @@ extension PodcastVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSCol
         
         let forecastItem = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "PodcastCellView"), for: indexPath)
         
-//        guard let forecastCell = forecastItem as? PodcastCellView else { return forecastItem}
-//        forecastCell.configureCell(weatherCell: WeatherService.instance.forecast[indexPath.item])
+        guard let forecastCell = forecastItem as? PodcastCellView else { return forecastItem}
+        forecastCell.configurePodcastAddedCell(podcastCell: podcastsImageURL[indexPath.item])
         
         
         return forecastItem

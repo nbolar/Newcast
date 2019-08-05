@@ -82,6 +82,9 @@ class PodcastSearchVC: NSViewController {
         if feedsURL.count != 0{
             if !podcasts.contains(feedsURL[selectedIndex]){
                 podcasts.append(feedsURL[selectedIndex])
+                podcastsImageURL.append(imagesURL[selectedIndex])
+                UserDefaults.standard.set(podcasts, forKey: "podcasts")
+                UserDefaults.standard.set(podcastsImageURL, forKey: "podcastImagesURL")
             }
         }
 
