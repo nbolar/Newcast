@@ -54,6 +54,12 @@ class DetailVC: NSViewController {
         for indexPath in atIndexPaths {
             guard let item = collectionView.item(at: indexPath as IndexPath) else {continue}
             (item as! EpisodeCellView).setHighlight(selected: selected)
+            if selected == true{
+                (item as! EpisodeCellView).showButton(atIndexPaths: indexPath.item)
+            }
+            if selected == false{
+                (item as! EpisodeCellView).hideButton()
+            }
             
         }
     }
@@ -72,6 +78,7 @@ class DetailVC: NSViewController {
     }
     
     @objc func deletedPodcast(){
+        collectionView.deselectAll(Any?.self)
         podcastImageView.image = nil
         podcastTitleField.stringValue = ""
         episodes.removeAll()
@@ -88,7 +95,6 @@ extension DetailVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSColl
         
         guard let forecastCell = forecastItem as? EpisodeCellView else { return forecastItem}
         forecastCell.configureEpisodeCell(episodeCell: episodes[indexPath.item])
-        
         
         return forecastCell
     }
@@ -107,8 +113,10 @@ extension DetailVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSColl
         highlightItems(selected: true, atIndexPaths: indexPaths as Set<NSIndexPath>)
     }
     func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
+        collectionView.deselectAll(Any?.self)
         highlightItems(selected: false, atIndexPaths: indexPaths as Set<NSIndexPath>)
     }
+
     
     
 }

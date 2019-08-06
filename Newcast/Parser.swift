@@ -9,10 +9,12 @@
 import Foundation
 import SWXMLHash
 import SwiftyJSON
+import FeedKit
 var podcastsNumber : Int!
 var feedsURL = [String]()
 var imagesURL = [String]()
 var titles = [String]()
+var episodeDescriptions = [String]()
 
 class Parser {
     
@@ -33,7 +35,7 @@ class Parser {
         titles.removeAll()
         var podcastSearch = [Parser]()
         let json = try! JSON(data: APIData)
-        print(json)
+//        print(json)
         
         if let list = json["results"].array{
             for podcast in list
@@ -55,17 +57,23 @@ class Parser {
         return podcastSearch
     }
     func getPodcastMetaData(_ APIData: Data) -> [Episodes]{
+        episodeDescriptions.removeAll()
         
         let xml = SWXMLHash.parse(APIData)
         var episodes : [Episodes] = []
         for item in xml["rss"]["channel"]["item"].all{
             let episode = Episodes()
             episode.title = item["title"].element?.text ?? ""
-            episode.podcastDescription = item["description"].element?.text ?? ""
+            episode.podcastDescription = item["itunes:subtitle"].element?.text ?? ""
+            if item["itunes:subtitle"].element == nil{
+                episode.podcastDescription = item["description"].element?.text ?? ""
+            }
+
             episode.audioURL = item["link"].element?.text ?? ""
+            episode.episodeDuration = item["itunes:duration"].element?.text ?? ""
             let date = Episodes.formatter.date(from: item["pubDate"].element?.text ?? "")
-            episode.pubDate = date!
-            
+            episode.pubDate = date ?? Date()
+            episodeDescriptions.append(item["description"].element?.text ?? "")
             episodes.append(episode)
         }
         return episodes

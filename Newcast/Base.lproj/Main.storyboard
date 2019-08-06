@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -994,6 +995,46 @@ Gw
                 <customObject id="k3d-3f-BlG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1227" y="315"/>
+        </scene>
+        <!--Episode InfoVC-->
+        <scene sceneID="ou7-e5-ufS">
+            <objects>
+                <viewController storyboardIdentifier="EpisodeInfoVC" id="8kv-iq-eo9" customClass="EpisodeInfoVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="3Hs-kL-ozG">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zc1-U5-IfG">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="0Bw-yC-TTD"/>
+                                    <constraint firstAttribute="width" constant="450" id="A5s-ne-54q"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28-1" id="iXJ-oA-uDl"/>
+                            </imageView>
+                            <wkWebView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G3t-HO-HA0">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zc1-U5-IfG" secondAttribute="trailing" id="EwZ-Sg-FUt"/>
+                            <constraint firstAttribute="bottom" secondItem="zc1-U5-IfG" secondAttribute="bottom" id="Sfr-0i-tKF"/>
+                            <constraint firstItem="zc1-U5-IfG" firstAttribute="top" secondItem="3Hs-kL-ozG" secondAttribute="top" id="ue7-dz-Lp5"/>
+                            <constraint firstItem="zc1-U5-IfG" firstAttribute="leading" secondItem="3Hs-kL-ozG" secondAttribute="leading" id="wiJ-aM-JUZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="episodeInfoWebView" destination="G3t-HO-HA0" id="h9j-A6-rjE"/>
+                    </connections>
+                </viewController>
+                <customObject id="XSJ-xX-ate" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700" y="908"/>
         </scene>
         <!--DetailVC-->
         <scene sceneID="L0i-n2-T8u">
