@@ -34,10 +34,12 @@ class DetailVC: NSViewController {
         playerCustomView.wantsLayer = true
         playerCustomView.layer?.backgroundColor = CGColor.init(gray: 0.9, alpha: 0.2)
         playerCustomView.layer?.cornerRadius = 8
+        playerCustomView.layer?.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         podcastImageView.image = nil
         podcastImageView.wantsLayer = true
         podcastImageView.layer?.cornerRadius = 8
         podcastImageView.alphaValue = 0.9
+        podcastImageView.layer?.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         podcastTitleField.stringValue = ""
         episodesPlaceholderField.alphaValue = 0
         

@@ -35,8 +35,11 @@ class EpisodeCellView: NSCollectionViewItem {
         self.view.layer?.borderColor = NSColor.white.cgColor
         self.view.layer?.borderWidth = 0.0
         infoButton.alphaValue = 0
+        infoButton.isEnabled = false
         playButton.alphaValue = 0
+        playButton.isEnabled = false
         pauseButton.alphaValue = 0
+        pauseButton.isEnabled = false
     }
     
     func setHighlight(selected: Bool) {
@@ -65,6 +68,9 @@ class EpisodeCellView: NSCollectionViewItem {
 //        }
     }
     func showButton(atIndexPaths: Int!){
+        playButton.isEnabled = true
+        pauseButton.isEnabled = true
+        infoButton.isEnabled = true
         episodeSelectedIndex = atIndexPaths  
         NSAnimationContext.runAnimationGroup({_ in
             NSAnimationContext.current.duration = 0.5
@@ -83,6 +89,9 @@ class EpisodeCellView: NSCollectionViewItem {
         
     }
     func hideButton(){
+        playButton.isEnabled = false
+        pauseButton.isEnabled = false
+        infoButton.isEnabled = false
         infoButton.alphaValue = 0
         playButton.alphaValue = 0
         pauseButton.alphaValue = 0
@@ -107,7 +116,7 @@ class EpisodeCellView: NSCollectionViewItem {
         guard let vc =  storyboard.instantiateController(withIdentifier: "EpisodeInfoVC") as? NSViewController else { return }
         popoverView.contentViewController = vc
         popoverView.behavior = .transient
-        popoverView.show(relativeTo: infoButton.bounds, of: infoButton, preferredEdge: .minY)
+        popoverView.show(relativeTo: infoButton.bounds, of: infoButton, preferredEdge: .maxX)
     }
     
 }
