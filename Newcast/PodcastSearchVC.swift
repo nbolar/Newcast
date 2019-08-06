@@ -91,7 +91,8 @@ class PodcastSearchVC: NSViewController {
                 UserDefaults.standard.set(podcastsImageURL, forKey: "podcastImagesURL")
             }
         }
-
+        podcastSearchField.stringValue = ""
+        podcastSearchField.placeholderString = "Podcast Added!"
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
     }
 

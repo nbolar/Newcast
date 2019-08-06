@@ -44,7 +44,7 @@ class DetailVC: NSViewController {
         let labelWidth:CGFloat = 30
         let labelHeight:CGFloat = 30
         networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
-        
+        collectionView.deselectAll(Any?.self)
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateEpisodes), name: NSNotification.Name(rawValue: "updateEpisodes"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
@@ -65,8 +65,11 @@ class DetailVC: NSViewController {
     }
     
     @objc func updateEpisodes(){
+        
         collectionView.reloadData()
         networkIndicator.removeFromSuperview()
+        collectionView.deselectAll(Any?.self)
+        collectionView.reloadData()
     }
     @objc func updateTitle(){
 //        podcastImageView.isHidden = false

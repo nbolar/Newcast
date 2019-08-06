@@ -78,7 +78,7 @@ class EpisodeCellView: NSCollectionViewItem {
         guard let vc =  storyboard.instantiateController(withIdentifier: "EpisodeInfoVC") as? NSViewController else { return }
         popoverView.contentViewController = vc
         popoverView.behavior = .transient
-        popoverView.show(relativeTo: infoButton.bounds, of: infoButton, preferredEdge: .maxX)
+        popoverView.show(relativeTo: infoButton.bounds, of: infoButton, preferredEdge: .minY)
     }
     
 }

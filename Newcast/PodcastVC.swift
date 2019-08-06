@@ -115,6 +115,7 @@ class PodcastVC: NSViewController {
             UserDefaults.standard.set(podcastsImageURL, forKey: "podcastImagesURL")
             UserDefaults.standard.set(podcastsTitle, forKey: "podcastsTitle")
         }
+        collectionView.deselectAll(Any?.self)
         collectionView.deleteItems(at: selectionIndexPaths)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
         updateUI()
