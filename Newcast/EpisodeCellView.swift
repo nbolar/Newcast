@@ -14,6 +14,9 @@ var episodeSelectedIndex: Int!
 class EpisodeCellView: NSCollectionViewItem {
 
     
+    
+    @IBOutlet weak var pauseButton: NSButton!
+    @IBOutlet weak var playButton: NSButton!
     @IBOutlet weak var infoButton: NSButton!
     @IBOutlet weak var episodeDescriptionField: NSTextField!
     @IBOutlet weak var episodePubDateField: NSTextField!
@@ -31,7 +34,9 @@ class EpisodeCellView: NSCollectionViewItem {
         self.view.layer?.cornerRadius = 8
         self.view.layer?.borderColor = NSColor.white.cgColor
         self.view.layer?.borderWidth = 0.0
-        infoButton.isHidden = true
+        infoButton.alphaValue = 0
+        playButton.alphaValue = 0
+        pauseButton.alphaValue = 0
     }
     
     func setHighlight(selected: Bool) {
@@ -60,16 +65,40 @@ class EpisodeCellView: NSCollectionViewItem {
 //        }
     }
     func showButton(atIndexPaths: Int!){
-        episodeSelectedIndex = atIndexPaths
-        infoButton.isHidden = false
+        episodeSelectedIndex = atIndexPaths  
+        NSAnimationContext.runAnimationGroup({_ in
+            NSAnimationContext.current.duration = 0.5
+            infoButton.animator().alphaValue = 1.0
+            if playButton.alphaValue == 1{
+                playButton.alphaValue = 0
+                pauseButton.alphaValue = 1
+            }else{
+                playButton.alphaValue = 1
+                pauseButton.alphaValue = 0
+            }
+        }, completionHandler:{
+        })
+        
 //        infoButtonClicked((Any).self)
         
     }
     func hideButton(){
-        infoButton.isHidden = true
+        infoButton.alphaValue = 0
+        playButton.alphaValue = 0
+        pauseButton.alphaValue = 0
         
     }
 
+    @IBAction func playPauseButtonClicked(_ sender: Any) {
+        if playButton.alphaValue == 1{
+            playButton.alphaValue = 0
+            pauseButton.alphaValue = 1
+        }else{
+            playButton.alphaValue = 1
+            pauseButton.alphaValue = 0
+        }
+        
+    }
     
     @IBAction func infoButtonClicked(_ sender: Any) {
 //        print(episodeDescriptions[episodeSelectedIndex])

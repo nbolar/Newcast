@@ -13,6 +13,7 @@ var podcastSelecetedIndex : Int!
 
 class DetailVC: NSViewController {
 
+    @IBOutlet weak var episodesPlaceholderField: NSTextField!
     @IBOutlet weak var podcastImageView: SDAnimatedImageView!
     @IBOutlet weak var podcastTitleField: NSTextField!
     @IBOutlet weak var collectionView: NSCollectionView!
@@ -38,6 +39,7 @@ class DetailVC: NSViewController {
         podcastImageView.layer?.cornerRadius = 8
         podcastImageView.alphaValue = 0.9
         podcastTitleField.stringValue = ""
+        episodesPlaceholderField.alphaValue = 0
         
         let labelXPostion:CGFloat = view.bounds.midX
         let labelYPostion:CGFloat = view.bounds.midY
@@ -68,6 +70,7 @@ class DetailVC: NSViewController {
         
         collectionView.reloadData()
         networkIndicator.removeFromSuperview()
+        episodesPlaceholderField.alphaValue = 1.0
         collectionView.deselectAll(Any?.self)
         collectionView.reloadData()
     }
@@ -84,6 +87,7 @@ class DetailVC: NSViewController {
         collectionView.deselectAll(Any?.self)
         podcastImageView.image = nil
         podcastTitleField.stringValue = ""
+        episodesPlaceholderField.alphaValue = 0
         episodes.removeAll()
         collectionView.reloadData()
     }
