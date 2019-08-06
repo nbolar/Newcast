@@ -13,38 +13,11 @@ var podcastsNumber : Int!
 var feedsURL = [String]()
 var imagesURL = [String]()
 var titles = [String]()
+
 class Parser {
     
-    
-    fileprivate var _date: String!
-    fileprivate var _title: String!
-    fileprivate var _rssURL: String!
     fileprivate var _imageURL: String!
     
-    
-    var date: String {
-        get{
-            return _date
-        } set {
-            _date = newValue
-        }
-    }
-    
-    var title: String {
-        get{
-            return _title
-        } set {
-            _title = newValue
-        }
-    }
-    
-    var rssURL: String {
-        get{
-            return _rssURL
-        } set {
-            _rssURL = newValue
-        }
-    }
     var imageURL: String {
         get{
             return _imageURL
@@ -81,10 +54,20 @@ class Parser {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateSearchUI"), object: nil)
         return podcastSearch
     }
-    func getPodcastMetaData(_ APIData: Data){
+    func getPodcastMetaData(_ APIData: Data) -> [Episodes]{
+        
         let xml = SWXMLHash.parse(APIData)
-        if let title = (xml["rss"]["channel"]["itunes:image"].element?.attribute(by: "href")?.text){
-            print(title)
+        var episodes : [Episodes] = []
+        for item in xml["rss"]["channel"]["item"].all{
+            let episode = Episodes()
+            episode.title = item["title"].element?.text ?? ""
+            episode.podcastDescription = item["description"].element?.text ?? ""
+            episode.audioURL = item["link"].element?.text ?? ""
+            let date = Episodes.formatter.date(from: item["pubDate"].element?.text ?? "")
+            episode.pubDate = date!
+            
+            episodes.append(episode)
         }
+        return episodes
     }
 }

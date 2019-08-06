@@ -11,6 +11,7 @@ import SDWebImage
 
 class EpisodeCellView: NSCollectionViewItem {
 
+    @IBOutlet weak var episodeTitleField: NSTextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -23,6 +24,9 @@ class EpisodeCellView: NSCollectionViewItem {
     
     func setHighlight(selected: Bool) {
         view.layer?.borderWidth = selected ? 2.0 : 0.0
+    }
+    func configureEpisodeCell(episodeCell: Episodes){
+        episodeTitleField.stringValue = episodeCell.title
     }
     
 }

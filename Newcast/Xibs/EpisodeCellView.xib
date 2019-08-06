@@ -11,9 +11,28 @@
         <customView id="c22-O7-iKe">
             <rect key="frame" x="0.0" y="0.0" width="680" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="doc-es-z34">
+                    <rect key="frame" x="18" y="113" width="644" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="Y4K-5r-6kB"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="mOO-0k-wYF">
+                        <font key="font" metaFont="systemMedium" size="15"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="doc-es-z34" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="20" id="AVY-Z8-9Q6"/>
+                <constraint firstItem="doc-es-z34" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="20" id="hRY-C0-Edi"/>
+                <constraint firstAttribute="trailing" secondItem="doc-es-z34" secondAttribute="trailing" constant="20" id="m0m-yN-BaE"/>
+            </constraints>
         </customView>
         <collectionViewItem id="7gN-Pj-Sn8" customClass="EpisodeCellView" customModule="Newcast" customModuleProvider="target">
             <connections>
+                <outlet property="episodeTitleField" destination="doc-es-z34" id="oZZ-xc-2fg"/>
                 <outlet property="view" destination="c22-O7-iKe" id="HXK-0k-VQ6"/>
             </connections>
         </collectionViewItem>

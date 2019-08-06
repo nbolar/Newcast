@@ -14,6 +14,7 @@ import FeedKit
 var podcasts : [String]! = []
 var podcastsImageURL : [String]! = []
 var podcastsTitle : [String]! = []
+var episodes : [Episodes] = []
 
 class PodcastVC: NSViewController {
 
@@ -23,6 +24,7 @@ class PodcastVC: NSViewController {
     @IBOutlet weak var removePodcastButton: NSButton!
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -30,7 +32,7 @@ class PodcastVC: NSViewController {
 //        UserDefaults.standard.removeObject(forKey: "podcasts")
 //        UserDefaults.standard.removeObject(forKey: "podcastImagesURL")
 //        UserDefaults.standard.removeObject(forKey: "podcastsTitle")
-        
+        episodes.removeAll()
         if UserDefaults.standard.array(forKey: "podcasts") == nil{
             podcasts = []
             podcastsImageURL = []
@@ -59,7 +61,7 @@ class PodcastVC: NSViewController {
         AF.request(url!).responseData(completionHandler: { (response) in
             let parser = Parser()
             if response.data != nil{
-                parser.getPodcastMetaData(response.data!)
+                episodes = parser.getPodcastMetaData(response.data!)
             }
         })
         collectionView.reloadData()
@@ -70,7 +72,8 @@ class PodcastVC: NSViewController {
         AF.request(url!).responseData(completionHandler: { (response) in
             let parser = Parser()
             if response.data != nil{
-                parser.getPodcastMetaData(response.data!)
+               episodes = parser.getPodcastMetaData(response.data!)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateEpisodes"), object: nil)
             }
         })
     }

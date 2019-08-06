@@ -18,9 +18,13 @@ class DetailVC: NSViewController {
     @IBOutlet weak var collectionView: NSCollectionView!
     @IBOutlet weak var playerCustomView: NSView!
     @IBOutlet weak var backgroundImageView: NSImageView!
+    let networkIndicator = NSProgressIndicator()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        networkIndicator.style = .spinning
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.wantsLayer = true
@@ -29,12 +33,20 @@ class DetailVC: NSViewController {
         playerCustomView.wantsLayer = true
         playerCustomView.layer?.backgroundColor = CGColor.init(gray: 0.9, alpha: 0.2)
         playerCustomView.layer?.cornerRadius = 8
-        podcastImageView.isHidden = true
+        podcastImageView.image = nil
         podcastImageView.wantsLayer = true
         podcastImageView.layer?.cornerRadius = 8
         podcastImageView.alphaValue = 0.9
         podcastTitleField.stringValue = ""
+        
+        let labelXPostion:CGFloat = view.bounds.midX
+        let labelYPostion:CGFloat = view.bounds.midY
+        let labelWidth:CGFloat = 30
+        let labelHeight:CGFloat = 30
+        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateEpisodes), name: NSNotification.Name(rawValue: "updateEpisodes"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
     }
     
@@ -45,15 +57,25 @@ class DetailVC: NSViewController {
             
         }
     }
+    
+    @objc func updateEpisodes(){
+        collectionView.reloadData()
+        networkIndicator.removeFromSuperview()
+    }
     @objc func updateTitle(){
-        podcastImageView.isHidden = false
+//        podcastImageView.isHidden = false
         podcastTitleField.stringValue = "\(podcastsTitle[podcastSelecetedIndex])"
         podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), context: nil)
+        collectionView.reloadData()
+        networkIndicator.startAnimation(Any?.self)
+        view.addSubview(networkIndicator)
     }
     
     @objc func deletedPodcast(){
-        podcastImageView.isHidden = true
+        podcastImageView.image = nil
         podcastTitleField.stringValue = ""
+        episodes.removeAll()
+        collectionView.reloadData()
     }
     
 }
@@ -64,18 +86,18 @@ extension DetailVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSColl
         
         let forecastItem = collectionView.makeItem(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "EpisodeCellView"), for: indexPath)
         
-        //        guard let forecastCell = forecastItem as? PodcastCellView else { return forecastItem}
-        //        forecastCell.configureCell(weatherCell: WeatherService.instance.forecast[indexPath.item])
+        guard let forecastCell = forecastItem as? EpisodeCellView else { return forecastItem}
+        forecastCell.configureEpisodeCell(episodeCell: episodes[indexPath.item])
         
         
-        return forecastItem
+        return forecastCell
     }
     
     func numberOfSections(in collectionView: NSCollectionView) -> Int {
         return 1
     }
     func collectionView(_ collectionView: NSCollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return episodes.count
     }
     
     func collectionView(_ collectionView: NSCollectionView, layout collectionViewLayout: NSCollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> NSSize {
