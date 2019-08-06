@@ -789,8 +789,7 @@
                                 </buttonCell>
                                 <color key="contentTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <action selector="addPodcastClicked:" target="UAx-cJ-4Oq" id="9kk-8w-JF5"/>
-                                    <segue destination="bfv-0S-z8C" kind="sheet" id="gXF-BS-Ta6"/>
+                                    <action selector="addPodcastButtonClicked:" target="UAx-cJ-4Oq" id="RKg-2W-lmD"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8c-5w-XB3">
@@ -837,7 +836,7 @@
         <!--Podcast SearchVC-->
         <scene sceneID="LHc-dr-cCd">
             <objects>
-                <viewController id="bfv-0S-z8C" customClass="PodcastSearchVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PodcastSearchVC" id="bfv-0S-z8C" customClass="PodcastSearchVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="lbB-A7-fyR">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1023,6 +1022,7 @@ Gw
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="91P-1M-4OD" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" id="OLT-DH-TtW"/>
+                                    <constraint firstAttribute="trailing" secondItem="91P-1M-4OD" secondAttribute="trailing" constant="560" id="SO1-mB-avK"/>
                                     <constraint firstAttribute="bottom" secondItem="91P-1M-4OD" secondAttribute="bottom" id="cH0-Xz-DVQ"/>
                                     <constraint firstItem="91P-1M-4OD" firstAttribute="leading" secondItem="RoI-9c-hw7" secondAttribute="leading" id="fOc-rF-5QR"/>
                                 </constraints>
@@ -1037,7 +1037,7 @@ Gw
                                             <rect key="frame" x="0.0" y="0.0" width="700" height="506"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="fbV-9g-cmS">
-                                                <size key="itemSize" width="50" height="50"/>
+                                                <size key="itemSize" width="680" height="150"/>
                                                 <edgeInsets key="sectionInset" left="0.0" right="0.0" top="5" bottom="5"/>
                                             </collectionViewFlowLayout>
                                             <color key="primaryBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1073,17 +1073,17 @@ Gw
                         </subviews>
                         <constraints>
                             <constraint firstItem="RoI-9c-hw7" firstAttribute="leading" secondItem="HiG-Zd-ZTe" secondAttribute="leading" id="1Ly-WF-oco"/>
-                            <constraint firstItem="VxF-Fu-MBl" firstAttribute="leading" secondItem="HiG-Zd-ZTe" secondAttribute="leading" id="Dof-sc-P2f"/>
+                            <constraint firstItem="VxF-Fu-MBl" firstAttribute="top" secondItem="7Iw-aQ-0xk" secondAttribute="bottom" constant="1" id="EIn-41-RPt"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="leading" secondItem="HiG-Zd-ZTe" secondAttribute="leading" constant="20" symbolic="YES" id="Iyj-Y9-yk5"/>
                             <constraint firstItem="RoI-9c-hw7" firstAttribute="top" secondItem="HiG-Zd-ZTe" secondAttribute="top" id="J9O-41-vaC"/>
-                            <constraint firstItem="VxF-Fu-MBl" firstAttribute="top" secondItem="7Iw-aQ-0xk" secondAttribute="bottom" constant="1" id="Mbl-CK-4wy"/>
                             <constraint firstAttribute="trailing" secondItem="RoI-9c-hw7" secondAttribute="trailing" id="T9N-st-w9v"/>
-                            <constraint firstAttribute="trailing" secondItem="VxF-Fu-MBl" secondAttribute="trailing" id="TOj-ul-XwL"/>
+                            <constraint firstItem="VxF-Fu-MBl" firstAttribute="leading" secondItem="HiG-Zd-ZTe" secondAttribute="leading" id="ecx-q1-PfF"/>
                             <constraint firstItem="VJF-6L-bib" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="bottom" constant="8" id="gWO-IR-L7k"/>
                             <constraint firstAttribute="trailing" secondItem="VJF-6L-bib" secondAttribute="trailing" constant="20" id="iWf-UY-DUq"/>
-                            <constraint firstAttribute="bottom" secondItem="VxF-Fu-MBl" secondAttribute="bottom" id="nlD-kq-YgZ"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="top" secondItem="HiG-Zd-ZTe" secondAttribute="top" constant="175" id="o2t-Kp-rhb"/>
+                            <constraint firstAttribute="trailing" secondItem="VxF-Fu-MBl" secondAttribute="trailing" id="qYT-kV-Cv5"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="leading" secondItem="VJF-6L-bib" secondAttribute="leading" id="uis-9j-Psq"/>
+                            <constraint firstAttribute="bottom" secondItem="VxF-Fu-MBl" secondAttribute="bottom" id="vQv-nZ-kjn"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="top" secondItem="VJF-6L-bib" secondAttribute="bottom" constant="1" id="zjm-La-Al6"/>
                         </constraints>
                     </view>

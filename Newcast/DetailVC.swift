@@ -35,6 +35,7 @@ class DetailVC: NSViewController {
         podcastImageView.alphaValue = 0.9
         podcastTitleField.stringValue = ""
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
     }
     
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
@@ -48,6 +49,11 @@ class DetailVC: NSViewController {
         podcastImageView.isHidden = false
         podcastTitleField.stringValue = "\(podcastsTitle[podcastSelecetedIndex])"
         podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), context: nil)
+    }
+    
+    @objc func deletedPodcast(){
+        podcastImageView.isHidden = true
+        podcastTitleField.stringValue = ""
     }
     
 }
@@ -81,5 +87,6 @@ extension DetailVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSColl
     func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
         highlightItems(selected: false, atIndexPaths: indexPaths as Set<NSIndexPath>)
     }
+    
     
 }

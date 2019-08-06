@@ -10,7 +10,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
             <rect key="frame" x="0.0" y="0.0" width="680" height="150"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
         </customView>
         <collectionViewItem id="7gN-Pj-Sn8" customClass="EpisodeCellView" customModule="Newcast" customModuleProvider="target">
             <connections>

@@ -36,9 +36,9 @@ class PodcastVC: NSViewController {
             podcastsImageURL = []
             podcastsTitle = []
         }else{
-            podcasts = UserDefaults.standard.array(forKey: "podcasts") as! [String]
-            podcastsImageURL = UserDefaults.standard.array(forKey: "podcastImagesURL") as! [String]
-            podcastsTitle = UserDefaults.standard.array(forKey: "podcastsTitle") as! [String]
+            podcasts = UserDefaults.standard.array(forKey: "podcasts") as? [String]
+            podcastsImageURL = UserDefaults.standard.array(forKey: "podcastImagesURL") as? [String]
+            podcastsTitle = UserDefaults.standard.array(forKey: "podcastsTitle") as? [String]
         }
         
         backgroundImage.alphaValue = 0.6
@@ -50,6 +50,7 @@ class PodcastVC: NSViewController {
     }
     
     @objc func updateUI(){
+        collectionView.deselectAll(Any?.self)
         collectionView.reloadData()
     }
     @objc func customURL(){
@@ -82,8 +83,15 @@ class PodcastVC: NSViewController {
         }
     }
     
+    @IBAction func addPodcastButtonClicked(_ sender: Any) {
+        collectionView.deselectAll(Any?.self)
+        let podcastsearch = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "PodcastSearchVC") as? NSViewController
+        presentAsSheet(podcastsearch!)
+    }
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
-        
+        if selected == false{
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
+        }
         removePodcastButton.isEnabled = !collectionView.selectionIndexPaths.isEmpty
         for indexPath in atIndexPaths {
             guard let item = collectionView.item(at: indexPath as IndexPath) else {continue}
@@ -105,6 +113,7 @@ class PodcastVC: NSViewController {
             UserDefaults.standard.set(podcastsTitle, forKey: "podcastsTitle")
         }
         collectionView.deleteItems(at: selectionIndexPaths)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
         updateUI()
     }
     
