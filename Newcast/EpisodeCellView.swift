@@ -123,7 +123,6 @@ class EpisodeCellView: NSCollectionViewItem {
     }
 
     @IBAction func playPauseButtonClicked(_ sender: Any) {
-        print(pausedTimes)
         if playingIndex != nil
         {
             if playingIndex == episodeSelectedIndex{
@@ -134,7 +133,6 @@ class EpisodeCellView: NSCollectionViewItem {
                             player?.play()
                             playingIndex = episodeSelectedIndex
                         }else{
-                            print("Seeking") //THERE'S AN ISSUE HERE AND ABOVE
                             player?.seek(to: pausedTimes[episodeSelectedIndex]!)
                             player?.play()
                             playingIndex = episodeSelectedIndex
@@ -151,7 +149,6 @@ class EpisodeCellView: NSCollectionViewItem {
                     pauseButton.alphaValue = 0
                 }
             }else{
-                print("NONSENSE")
                 player.pause()
                 playingIndex = nil
                 pausedTimes.remove(at: playingIndex)
