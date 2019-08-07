@@ -20,6 +20,7 @@ class DetailVC: NSViewController {
     @IBOutlet weak var playerCustomView: NSView!
     @IBOutlet weak var backgroundImageView: NSImageView!
     let networkIndicator = NSProgressIndicator()
+    let popoverView = NSPopover()
     
     
     override func viewDidLoad() {
@@ -43,11 +44,14 @@ class DetailVC: NSViewController {
         podcastTitleField.stringValue = ""
         episodesPlaceholderField.alphaValue = 0
         
+        
+        
         let labelXPostion:CGFloat = view.bounds.midX
         let labelYPostion:CGFloat = view.bounds.midY
         let labelWidth:CGFloat = 30
         let labelHeight:CGFloat = 30
         networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+        
         collectionView.deselectAll(Any?.self)
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateEpisodes), name: NSNotification.Name(rawValue: "updateEpisodes"), object: nil)
@@ -69,7 +73,8 @@ class DetailVC: NSViewController {
     }
     
     @objc func updateEpisodes(){
-        
+        let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
+        podcastImageView.addTrackingArea(area)
         collectionView.reloadData()
         networkIndicator.removeFromSuperview()
         episodesPlaceholderField.alphaValue = 1.0
@@ -77,7 +82,8 @@ class DetailVC: NSViewController {
         collectionView.reloadData()
     }
     @objc func updateTitle(){
-//        podcastImageView.isHidden = false
+        let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
+        podcastImageView.addTrackingArea(area)
         podcastTitleField.stringValue = "\(podcastsTitle[podcastSelecetedIndex])"
         podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), context: nil)
         collectionView.reloadData()
@@ -86,6 +92,8 @@ class DetailVC: NSViewController {
     }
     
     @objc func deletedPodcast(){
+        let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
+        podcastImageView.removeTrackingArea(area)
         collectionView.deselectAll(Any?.self)
         podcastImageView.image = nil
         podcastTitleField.stringValue = ""
@@ -93,6 +101,31 @@ class DetailVC: NSViewController {
         episodes.removeAll()
         collectionView.reloadData()
     }
+    
+    override func mouseEntered(with event: NSEvent) {
+        displayPopUp()
+//        print("Entered")
+        
+    }
+    
+    override func mouseExited(with event: NSEvent) {
+//        print("Exited")
+        if popoverView.isShown{
+            popoverView.close()
+
+        }
+    }
+    
+    func displayPopUp(){
+//        print(podcastDescription)
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        guard let vc =  storyboard.instantiateController(withIdentifier: "PodcastDescriptionVC") as? NSViewController else { return }
+        popoverView.contentViewController = vc
+        popoverView.behavior = .transient
+        popoverView.show(relativeTo: podcastImageView.bounds, of: podcastImageView, preferredEdge: .maxX)
+    }
+    
+    
     
 }
 

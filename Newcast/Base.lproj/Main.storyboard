@@ -1066,6 +1066,48 @@ Gw
             </objects>
             <point key="canvasLocation" x="1700" y="908"/>
         </scene>
+        <!--Podcast DescriptionVC-->
+        <scene sceneID="f6r-lC-El0">
+            <objects>
+                <viewController storyboardIdentifier="PodcastDescriptionVC" id="h5F-16-huJ" customClass="PodcastDescriptionVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Zme-3f-5Ju">
+                        <rect key="frame" x="0.0" y="0.0" width="547" height="140"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q2T-Ej-VFO">
+                                <rect key="frame" x="0.0" y="0.0" width="547" height="140"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28" id="MHq-Dd-TlT"/>
+                            </imageView>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="p5y-SX-g1m">
+                                <rect key="frame" x="10" y="10" width="527" height="119"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="119" id="10w-0f-dms"/>
+                                    <constraint firstAttribute="width" constant="527" id="n7e-Rh-z6L"/>
+                                </constraints>
+                                <textFieldCell key="cell" selectable="YES" title="Multiline Label" drawsBackground="YES" id="Fj3-MJ-KsU">
+                                    <font key="font" metaFont="systemMedium" size="13"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="p5y-SX-g1m" firstAttribute="top" secondItem="Zme-3f-5Ju" secondAttribute="top" constant="11" id="DBR-uV-AyI"/>
+                            <constraint firstAttribute="bottom" secondItem="p5y-SX-g1m" secondAttribute="bottom" constant="10" id="I2S-6i-sOX"/>
+                            <constraint firstAttribute="trailing" secondItem="p5y-SX-g1m" secondAttribute="trailing" constant="10" id="tOO-5l-Axb"/>
+                            <constraint firstItem="p5y-SX-g1m" firstAttribute="leading" secondItem="Zme-3f-5Ju" secondAttribute="leading" constant="10" id="vea-JZ-gfl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="q2T-Ej-VFO" id="3fg-bQ-d9a"/>
+                        <outlet property="descriptionLabelField" destination="p5y-SX-g1m" id="0xw-Vr-cQl"/>
+                    </connections>
+                </viewController>
+                <customObject id="dWO-gm-Nkz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1639.5" y="1288"/>
+        </scene>
         <!--DetailVC-->
         <scene sceneID="L0i-n2-T8u">
             <objects>

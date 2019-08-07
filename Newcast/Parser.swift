@@ -16,7 +16,7 @@ var imagesURL = [String]()
 var titles = [String]()
 var episodeDescriptions = [String]()
 var episodeTitles = [String]()
-
+var podcastDescription = String()
 class Parser {
     
     fileprivate var _imageURL: String!
@@ -34,6 +34,7 @@ class Parser {
         feedsURL.removeAll()
         imagesURL.removeAll()
         titles.removeAll()
+        
         var podcastSearch = [Parser]()
         let json = try! JSON(data: APIData)
 //        print(json)
@@ -60,7 +61,9 @@ class Parser {
     func getPodcastMetaData(_ APIData: Data) -> [Episodes]{
         episodeDescriptions.removeAll()
         episodeTitles.removeAll()
+        podcastDescription.removeAll()
         let xml = SWXMLHash.parse(APIData)
+        podcastDescription = xml["rss"]["channel"]["itunes:summary"].element?.text ?? ""
         var episodes : [Episodes] = []
         for item in xml["rss"]["channel"]["item"].all{
             let episode = Episodes()
@@ -76,6 +79,7 @@ class Parser {
             episode.pubDate = date ?? Date()
             episodeDescriptions.append(item["description"].element?.text ?? "")
             episodeTitles.append(item["title"].element?.text ?? "")
+
             episodes.append(episode)
         }
         return episodes

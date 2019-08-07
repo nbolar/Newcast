@@ -40,6 +40,7 @@ class EpisodeCellView: NSCollectionViewItem {
         playButton.isEnabled = false
         pauseButton.alphaValue = 0
         pauseButton.isEnabled = false
+        episodePubDateField.textColor = .lightGray
     }
     
     func setHighlight(selected: Bool) {
@@ -59,7 +60,7 @@ class EpisodeCellView: NSCollectionViewItem {
         } catch {
             print("error")
         }
-        tag += 1
+        
 
 //        episodeDescriptionField.stringValue = episodeCell.podcastDescription
 //        podcastDescriptionView.loadHTMLString(episodeCell.podcastDescription, baseURL: nil)
@@ -76,11 +77,11 @@ class EpisodeCellView: NSCollectionViewItem {
             NSAnimationContext.current.duration = 0.5
             infoButton.animator().alphaValue = 1.0
             if playButton.alphaValue == 1{
-                playButton.alphaValue = 0
-                pauseButton.alphaValue = 1
+                playButton.animator().alphaValue = 0
+                pauseButton.animator().alphaValue = 1
             }else{
-                playButton.alphaValue = 1
-                pauseButton.alphaValue = 0
+                playButton.animator().alphaValue = 1
+                pauseButton.animator().alphaValue = 0
             }
         }, completionHandler:{
         })

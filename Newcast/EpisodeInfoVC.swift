@@ -35,10 +35,13 @@ class EpisodeInfoVC: NSViewController {
     }
     
     @objc func showInfo(){
-        podcastTitleField.stringValue = episodeTitles[episodeSelectedIndex]
-        podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
-        episodeInfoWebView.setValue(false, forKey: "drawsBackground")
-        episodeInfoWebView.loadHTMLString(episodeDescriptions[episodeSelectedIndex], baseURL: nil)
+        if episodeSelectedIndex != nil{
+            podcastTitleField.stringValue = episodeTitles[episodeSelectedIndex]
+            podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
+            episodeInfoWebView.setValue(false, forKey: "drawsBackground")
+            episodeInfoWebView.loadHTMLString(episodeDescriptions[episodeSelectedIndex], baseURL: nil)
+        }
+
         
     }
     
