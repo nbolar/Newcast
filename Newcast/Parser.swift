@@ -16,6 +16,7 @@ var imagesURL = [String]()
 var titles = [String]()
 var episodeDescriptions = [String]()
 var episodeTitles = [String]()
+var episodesURL = [String]()
 var podcastDescription = String()
 class Parser {
     
@@ -62,6 +63,7 @@ class Parser {
         episodeDescriptions.removeAll()
         episodeTitles.removeAll()
         podcastDescription.removeAll()
+        episodesURL.removeAll()
         let xml = SWXMLHash.parse(APIData)
         podcastDescription = xml["rss"]["channel"]["itunes:summary"].element?.text ?? ""
         var episodes : [Episodes] = []
@@ -73,13 +75,13 @@ class Parser {
                 episode.podcastDescription = item["description"].element?.text ?? ""
             }
 
-            episode.audioURL = item["link"].element?.text ?? ""
+            episode.audioURL = item["enclosure"].element?.attribute(by: "url")?.text ?? ""
             episode.episodeDuration = item["itunes:duration"].element?.text ?? ""
             let date = Episodes.formatter.date(from: item["pubDate"].element?.text ?? "")
             episode.pubDate = date ?? Date()
             episodeDescriptions.append(item["description"].element?.text ?? "")
             episodeTitles.append(item["title"].element?.text ?? "")
-
+            episodesURL.append(item["enclosure"].element?.attribute(by: "url")?.text ?? "")
             episodes.append(episode)
         }
         return episodes

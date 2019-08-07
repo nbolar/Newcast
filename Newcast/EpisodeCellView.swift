@@ -9,8 +9,11 @@
 import Cocoa
 import SDWebImage
 import SwiftSoup
+import AVFoundation
 
 var episodeSelectedIndex: Int!
+var playingIndex: Int!
+var player: AVPlayer! = nil
 class EpisodeCellView: NSCollectionViewItem {
 
     
@@ -21,14 +24,16 @@ class EpisodeCellView: NSCollectionViewItem {
     @IBOutlet weak var episodeDescriptionField: NSTextField!
     @IBOutlet weak var episodePubDateField: NSTextField!
     @IBOutlet weak var episodeTitleField: NSTextField!
-    var tag = 0
+    
+    var previousPlayer: AVPlayer? = nil
+    var pausedTime: CMTime? = nil
+    
     
     let popoverView = NSPopover()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        tag = 0
         self.view.wantsLayer = true
         self.view.layer?.backgroundColor = CGColor.init(gray: 0.9, alpha: 0.2)
         self.view.layer?.cornerRadius = 8
@@ -69,22 +74,40 @@ class EpisodeCellView: NSCollectionViewItem {
 //        }
     }
     func showButton(atIndexPaths: Int!){
+        pausedTime = nil
         playButton.isEnabled = true
         pauseButton.isEnabled = true
         infoButton.isEnabled = true
-        episodeSelectedIndex = atIndexPaths  
-        NSAnimationContext.runAnimationGroup({_ in
-            NSAnimationContext.current.duration = 0.5
-            infoButton.animator().alphaValue = 1.0
-            if playButton.alphaValue == 1{
-                playButton.animator().alphaValue = 0
-                pauseButton.animator().alphaValue = 1
-            }else{
-                playButton.animator().alphaValue = 1
-                pauseButton.animator().alphaValue = 0
-            }
-        }, completionHandler:{
-        })
+        episodeSelectedIndex = atIndexPaths
+        if playingIndex == episodeSelectedIndex{
+            playButton.alphaValue = 0
+            NSAnimationContext.runAnimationGroup({_ in
+                NSAnimationContext.current.duration = 0.5
+                infoButton.animator().alphaValue = 1.0
+                if playButton.alphaValue == 1{
+                    playButton.animator().alphaValue = 1
+                    pauseButton.animator().alphaValue = 0
+                }else{
+                    playButton.animator().alphaValue = 0
+                    pauseButton.animator().alphaValue = 1
+                }
+            }, completionHandler:{
+            })
+        }else{
+            NSAnimationContext.runAnimationGroup({_ in
+                NSAnimationContext.current.duration = 0.5
+                infoButton.animator().alphaValue = 1.0
+                if playButton.alphaValue == 1{
+                    playButton.animator().alphaValue = 0
+                    pauseButton.animator().alphaValue = 1
+                }else{
+                    playButton.animator().alphaValue = 1
+                    pauseButton.animator().alphaValue = 0
+                }
+            }, completionHandler:{
+            })
+        }
+
         
 //        infoButtonClicked((Any).self)
         
@@ -100,14 +123,59 @@ class EpisodeCellView: NSCollectionViewItem {
     }
 
     @IBAction func playPauseButtonClicked(_ sender: Any) {
-        if playButton.alphaValue == 1{
-            playButton.alphaValue = 0
-            pauseButton.alphaValue = 1
+        if playingIndex != nil
+        {
+            if playingIndex == episodeSelectedIndex{
+                if playButton.alphaValue == 1{
+                    if episodeSelectedIndex != nil{
+                        player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
+                        if pausedTime == nil{
+                            player?.play()
+                            playingIndex = episodeSelectedIndex
+                        }else{
+                            player?.seek(to: pausedTime!)
+                            player?.play()
+                        }
+                    }
+                    playButton.alphaValue = 0
+                    pauseButton.alphaValue = 1
+                }else{
+                    player?.pause()
+                    pausedTime = player?.currentTime()
+                    playButton.alphaValue = 1
+                    pauseButton.alphaValue = 0
+                }
+            }else{
+                player.pause()
+                
+                playButton.alphaValue = 0
+                pauseButton.alphaValue = 1
+                player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
+                playingIndex = episodeSelectedIndex
+                player.play()
+            }
+ 
         }else{
-            playButton.alphaValue = 1
-            pauseButton.alphaValue = 0
-        }
-        
+            if playButton.alphaValue == 1{
+                if episodeSelectedIndex != nil{
+                    player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
+                    if pausedTime == nil{
+                        player?.play()
+                        playingIndex = episodeSelectedIndex
+                    }else{
+                        player?.seek(to: pausedTime!)
+                        player?.play()
+                    }
+                }
+                playButton.alphaValue = 0
+                pauseButton.alphaValue = 1
+            }else{
+                player?.pause()
+                pausedTime = player?.currentTime()
+                playButton.alphaValue = 1
+                pauseButton.alphaValue = 0
+            }
+        }  
     }
     
     @IBAction func infoButtonClicked(_ sender: Any) {

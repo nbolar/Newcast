@@ -8,6 +8,7 @@
 
 import Cocoa
 import SDWebImage
+import AVFoundation
 
 var podcastSelecetedIndex : Int!
 
@@ -23,9 +24,19 @@ class DetailVC: NSViewController {
     let popoverView = NSPopover()
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        
+        collectionView.deselectAll(Any?.self)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateEpisodes), name: NSNotification.Name(rawValue: "updateEpisodes"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
+        setupUI()
+    }
+    
+    func setupUI(){
         networkIndicator.style = .spinning
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -51,11 +62,6 @@ class DetailVC: NSViewController {
         let labelWidth:CGFloat = 30
         let labelHeight:CGFloat = 30
         networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
-        
-        collectionView.deselectAll(Any?.self)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateEpisodes), name: NSNotification.Name(rawValue: "updateEpisodes"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
     }
     
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
@@ -152,6 +158,7 @@ extension DetailVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSColl
         return NSSize(width: 680, height: 150)
     }
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+//        player = AVPlayer
         highlightItems(selected: true, atIndexPaths: indexPaths as Set<NSIndexPath>)
     }
     func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {
