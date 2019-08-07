@@ -14,6 +14,7 @@ import AVFoundation
 var episodeSelectedIndex: Int!
 var playingIndex: Int!
 var player: AVPlayer! = nil
+var pausedTimes = [CMTime?](repeating: nil, count: episodes.count)
 class EpisodeCellView: NSCollectionViewItem {
 
     
@@ -74,7 +75,6 @@ class EpisodeCellView: NSCollectionViewItem {
 //        }
     }
     func showButton(atIndexPaths: Int!){
-        pausedTime = nil
         playButton.isEnabled = true
         pauseButton.isEnabled = true
         infoButton.isEnabled = true
@@ -123,31 +123,39 @@ class EpisodeCellView: NSCollectionViewItem {
     }
 
     @IBAction func playPauseButtonClicked(_ sender: Any) {
+        print(pausedTimes)
         if playingIndex != nil
         {
             if playingIndex == episodeSelectedIndex{
                 if playButton.alphaValue == 1{
                     if episodeSelectedIndex != nil{
                         player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
-                        if pausedTime == nil{
+                        if pausedTimes[episodeSelectedIndex] == nil{
                             player?.play()
                             playingIndex = episodeSelectedIndex
                         }else{
-                            player?.seek(to: pausedTime!)
+                            print("Seeking") //THERE'S AN ISSUE HERE AND ABOVE
+                            player?.seek(to: pausedTimes[episodeSelectedIndex]!)
                             player?.play()
+                            playingIndex = episodeSelectedIndex
                         }
                     }
                     playButton.alphaValue = 0
                     pauseButton.alphaValue = 1
                 }else{
                     player?.pause()
-                    pausedTime = player?.currentTime()
+                    pausedTimes.remove(at: playingIndex)
+                    pausedTimes.insert(player?.currentTime(), at: playingIndex)
+                    playingIndex = nil
                     playButton.alphaValue = 1
                     pauseButton.alphaValue = 0
                 }
             }else{
+                print("NONSENSE")
                 player.pause()
-                
+                playingIndex = nil
+                pausedTimes.remove(at: playingIndex)
+                pausedTimes.insert(player?.currentTime(), at: playingIndex)
                 playButton.alphaValue = 0
                 pauseButton.alphaValue = 1
                 player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
@@ -159,11 +167,12 @@ class EpisodeCellView: NSCollectionViewItem {
             if playButton.alphaValue == 1{
                 if episodeSelectedIndex != nil{
                     player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
-                    if pausedTime == nil{
+                    if pausedTimes[episodeSelectedIndex] == nil{
                         player?.play()
                         playingIndex = episodeSelectedIndex
                     }else{
-                        player?.seek(to: pausedTime!)
+                        playingIndex = episodeSelectedIndex
+                        player?.seek(to: pausedTimes[playingIndex]!)
                         player?.play()
                     }
                 }
@@ -171,11 +180,13 @@ class EpisodeCellView: NSCollectionViewItem {
                 pauseButton.alphaValue = 1
             }else{
                 player?.pause()
-                pausedTime = player?.currentTime()
+                pausedTimes.remove(at: playingIndex)
+                pausedTimes.insert(player?.currentTime(), at: playingIndex)
+                playingIndex = nil
                 playButton.alphaValue = 1
                 pauseButton.alphaValue = 0
             }
-        }  
+        }
     }
     
     @IBAction func infoButtonClicked(_ sender: Any) {
