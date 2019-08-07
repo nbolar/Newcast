@@ -124,7 +124,10 @@ class PodcastSearchVC: NSViewController {
         }
 
     }
-
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
 }
 

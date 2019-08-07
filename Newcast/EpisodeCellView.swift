@@ -158,6 +158,7 @@ class EpisodeCellView: NSCollectionViewItem {
                 player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
                 playingIndex = episodeSelectedIndex
                 player.play()
+
             }
  
         }else{

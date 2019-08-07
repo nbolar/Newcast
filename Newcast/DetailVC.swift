@@ -131,7 +131,9 @@ class DetailVC: NSViewController {
         popoverView.show(relativeTo: podcastImageView.bounds, of: podcastImageView, preferredEdge: .maxX)
     }
     
-    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
 }
 
