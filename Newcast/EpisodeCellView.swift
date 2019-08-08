@@ -142,41 +142,14 @@ class EpisodeCellView: NSCollectionViewItem {
                         player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
                         if pausedTimesDictionary[podcastSelecetedIndex]?[episodeSelectedIndex] == nil{
                             player?.play()
-                            let interval = CMTime(value: 1, timescale: 2)
-                            player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { (progressTime) in
-                                let seconds = CMTimeGetSeconds(progressTime)
-                                playerSeconds = Float(seconds)
-                                
-                                if let duration = player.currentItem?.duration{
-                                    let durationSeconds = CMTimeGetSeconds(duration)
-                                    playerDuration = Float(durationSeconds)
-                                    
-                                }
-//                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
-                            }
-                            player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-                            networkIndicator.startAnimation(Any?.self)
-                            networkIndicator.isHidden = false
+                            updateSlider()
+                            observePlayPause()
                             playingIndex = episodeSelectedIndex
                         }else{
                             player?.seek(to: pausedTimesDictionary[podcastSelecetedIndex]![playingIndex]!)
                             player?.play()
-                            let interval = CMTime(value: 1, timescale: 2)
-                            player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { (progressTime) in
-                                let seconds = CMTimeGetSeconds(progressTime)
-                                playerSeconds = Float(seconds)
-                                
-                                if let duration = player.currentItem?.duration{
-                                    let durationSeconds = CMTimeGetSeconds(duration)
-                                    playerDuration = Float(durationSeconds)
-                                    
-                                }
-//                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
-                            }
-                            player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-                            networkIndicator.startAnimation(Any?.self)
-                            view.addSubview(networkIndicator)
-                            networkIndicator.isHidden = false
+                            updateSlider()
+                            observePlayPause()
                             playingIndex = episodeSelectedIndex
                         }
                     }
@@ -201,22 +174,8 @@ class EpisodeCellView: NSCollectionViewItem {
                 player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
                 playingIndex = episodeSelectedIndex
                 player.play()
-                let interval = CMTime(value: 1, timescale: 2)
-                player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { (progressTime) in
-                    let seconds = CMTimeGetSeconds(progressTime)
-                    playerSeconds = Float(seconds)
-                    
-                    if let duration = player.currentItem?.duration{
-                        let durationSeconds = CMTimeGetSeconds(duration)
-                        playerDuration = Float(durationSeconds)
-                        
-                    }
-//                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
-                }
-                player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-                networkIndicator.startAnimation(Any?.self)
-                view.addSubview(networkIndicator)
-                networkIndicator.isHidden = false
+                updateSlider()
+                observePlayPause()
 
             }
  
@@ -226,43 +185,15 @@ class EpisodeCellView: NSCollectionViewItem {
                     player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
                     if pausedTimesDictionary[podcastSelecetedIndex]?[episodeSelectedIndex] == nil{
                         player?.play()
-                        let interval = CMTime(value: 1, timescale: 2)
-                        player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { (progressTime) in
-                            let seconds = CMTimeGetSeconds(progressTime)
-                            playerSeconds = Float(seconds)
-                            
-                            if let duration = player.currentItem?.duration{
-                                let durationSeconds = CMTimeGetSeconds(duration)
-                                playerDuration = Float(durationSeconds)
-                                
-                            }
-//                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
-                        }
-                        player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-                        networkIndicator.startAnimation(Any?.self)
-                        view.addSubview(networkIndicator)
+                        updateSlider()
+                        observePlayPause()
                         playingIndex = episodeSelectedIndex
                     }else{
                         playingIndex = episodeSelectedIndex
                         player?.seek(to: pausedTimesDictionary[podcastSelecetedIndex]![playingIndex]!)
                         player?.play()
-                        let interval = CMTime(value: 1, timescale: 2)
-                        player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { (progressTime) in
-                            let seconds = CMTimeGetSeconds(progressTime)
-                            playerSeconds = Float(seconds)
-                            
-                            if let duration = player.currentItem?.duration{
-                                let durationSeconds = CMTimeGetSeconds(duration)
-                                playerDuration = Float(durationSeconds)
-                                
-                            }
-//                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
-                        }
-                        player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-                        networkIndicator.startAnimation(Any?.self)
-                        view.addSubview(networkIndicator)
-                        networkIndicator.isHidden = false
- 
+                        observePlayPause()
+                        updateSlider()
                     }
                 }
                 playButton.alphaValue = 0
@@ -278,6 +209,27 @@ class EpisodeCellView: NSCollectionViewItem {
             }
         }
 
+    }
+    
+    func observePlayPause(){
+        networkIndicator.isHidden = false
+        player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
+        networkIndicator.startAnimation(Any?.self)
+        view.addSubview(networkIndicator)
+    }
+    func updateSlider(){
+        let interval = CMTime(value: 1, timescale: 2)
+        player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { (progressTime) in
+            let seconds = CMTimeGetSeconds(progressTime)
+            playerSeconds = Float(seconds)
+            
+            if let duration = player.currentItem?.duration{
+                let durationSeconds = CMTimeGetSeconds(duration)
+                playerDuration = Float(durationSeconds)
+                
+            }
+            //                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
+        }
     }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
