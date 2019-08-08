@@ -18,7 +18,7 @@
                         <constraint firstAttribute="height" constant="90" id="0dO-So-53q"/>
                         <constraint firstAttribute="width" constant="90" id="Jew-NZ-AHE"/>
                     </constraints>
-                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="ATP" id="b4i-Bo-FXb"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="b4i-Bo-FXb"/>
                 </imageView>
             </subviews>
             <constraints>
@@ -35,7 +35,4 @@
             </connections>
         </collectionViewItem>
     </objects>
-    <resources>
-        <image name="ATP" width="1400" height="1400"/>
-    </resources>
 </document>

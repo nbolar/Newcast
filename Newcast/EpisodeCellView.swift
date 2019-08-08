@@ -53,6 +53,7 @@ class EpisodeCellView: NSCollectionViewItem {
     func setHighlight(selected: Bool) {
         view.layer?.borderWidth = selected ? 2.0 : 0.0
     }
+    
     func configureEpisodeCell(episodeCell: Episodes){
         
         episodeTitleField.stringValue = episodeCell.title
@@ -124,14 +125,13 @@ class EpisodeCellView: NSCollectionViewItem {
     }
 
     @IBAction func playPauseButtonClicked(_ sender: Any) {
-        print(pausedTimesDictionary)
         if playingIndex != nil
         {
             if playingIndex == episodeSelectedIndex{
                 if playButton.alphaValue == 1{
                     if episodeSelectedIndex != nil{
                         player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
-                        if pausedTimes[episodeSelectedIndex] == nil{
+                        if pausedTimesDictionary[podcastSelecetedIndex]?[episodeSelectedIndex] == nil{
                             player?.play()
                             playingIndex = episodeSelectedIndex
                         }else{
@@ -169,7 +169,7 @@ class EpisodeCellView: NSCollectionViewItem {
             if playButton.alphaValue == 1{
                 if episodeSelectedIndex != nil{
                     player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
-                    if pausedTimes[episodeSelectedIndex] == nil{
+                    if pausedTimesDictionary[podcastSelecetedIndex]?[episodeSelectedIndex] == nil{
                         player?.play()
                         playingIndex = episodeSelectedIndex
                     }else{

@@ -15,6 +15,7 @@ var podcasts : [String]! = []
 var podcastsImageURL : [String]! = []
 var podcastsTitle : [String]! = []
 var episodes : [Episodes] = []
+var deletedPodcastIndex : Int!
 
 class PodcastVC: NSViewController {
 
@@ -93,7 +94,7 @@ class PodcastVC: NSViewController {
     }
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
         if selected == false{
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clearPodcastEpisodes"), object: nil)
         }
         removePodcastButton.isEnabled = !collectionView.selectionIndexPaths.isEmpty
         for indexPath in atIndexPaths {
@@ -103,6 +104,7 @@ class PodcastVC: NSViewController {
     }
     
     @IBAction func removePodcastButtonClicked(_ sender: Any) {
+        deletedPodcastIndex = nil
         let selectionIndexPaths = collectionView.selectionIndexPaths
         var selectionArray = Array(selectionIndexPaths)
         selectionArray.sort(by: {path1, path2 in return path1.compare(path2) == .orderedDescending})
@@ -111,14 +113,25 @@ class PodcastVC: NSViewController {
             podcasts.remove(at: itemIndexPath.item)
             podcastsImageURL.remove(at: itemIndexPath.item)
             podcastsTitle.remove(at: itemIndexPath.item)
+            pausedTimesDictionary.removeValue(forKey: itemIndexPath.item)
+            deletedPodcastIndex = itemIndexPath.item
             UserDefaults.standard.set(podcasts, forKey: "podcasts")
             UserDefaults.standard.set(podcastsImageURL, forKey: "podcastImagesURL")
             UserDefaults.standard.set(podcastsTitle, forKey: "podcastsTitle")
+            
         }
         collectionView.deselectAll(Any?.self)
         collectionView.deleteItems(at: selectionIndexPaths)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
+        print("Check")
         updateUI()
+        editTimeStamps()
+    }
+    
+    func editTimeStamps(){
+        for index in deletedPodcastIndex..<podcasts.count{
+            pausedTimesDictionary[index] = pausedTimesDictionary[index+1]
+        }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
     }
     
 
