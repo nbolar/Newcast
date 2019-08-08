@@ -1130,8 +1130,13 @@ Gw
                                             <constraint firstAttribute="height" constant="140" id="VIX-Px-iMa"/>
                                             <constraint firstAttribute="width" constant="140" id="grL-es-5pb"/>
                                         </constraints>
-                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="ATP" id="Q72-ey-iPf"/>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="Q72-ey-iPf"/>
                                     </imageView>
+                                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kne-bz-9xP">
+                                        <rect key="frame" x="146" y="28" width="536" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="XdZ-WJ-IBU"/>
+                                    </slider>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="91P-1M-4OD" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" id="OLT-DH-TtW"/>
@@ -1205,6 +1210,7 @@ Gw
                         <outlet property="collectionView" destination="36R-Mb-SPr" id="CoM-A8-Sf3"/>
                         <outlet property="episodesPlaceholderField" destination="7Iw-aQ-0xk" id="naZ-Bk-zIo"/>
                         <outlet property="playerCustomView" destination="RoI-9c-hw7" id="WgD-Ua-wV6"/>
+                        <outlet property="playerSlider" destination="Kne-bz-9xP" id="0Dx-vf-MtW"/>
                         <outlet property="podcastImageView" destination="91P-1M-4OD" id="MKe-Mg-SPT"/>
                         <outlet property="podcastTitleField" destination="VJF-6L-bib" id="7jo-rJ-1DH"/>
                     </connections>
@@ -1215,7 +1221,6 @@ Gw
         </scene>
     </scenes>
     <resources>
-        <image name="ATP" width="1400" height="1400"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSGoBackTemplate" width="9" height="12"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>

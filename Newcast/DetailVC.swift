@@ -14,6 +14,7 @@ var podcastSelecetedIndex : Int!
 
 class DetailVC: NSViewController {
 
+    @IBOutlet weak var playerSlider: NSSlider!
     @IBOutlet weak var episodesPlaceholderField: NSTextField!
     @IBOutlet weak var podcastImageView: SDAnimatedImageView!
     @IBOutlet weak var podcastTitleField: NSTextField!
@@ -34,6 +35,7 @@ class DetailVC: NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateEpisodes), name: NSNotification.Name(rawValue: "updateEpisodes"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "clearPodcastEpisodes"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(moveSlider), name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
         
         setupUI()
     }
@@ -64,6 +66,13 @@ class DetailVC: NSViewController {
         let labelWidth:CGFloat = 30
         let labelHeight:CGFloat = 30
         networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+    }
+    @objc func moveSlider(){
+        if playerDuration != nil && playerSeconds != nil{
+            playerSlider.maxValue = Double(playerDuration)
+            playerSlider.floatValue = playerSeconds
+        }
+        
     }
     
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
