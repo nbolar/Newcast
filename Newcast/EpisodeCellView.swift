@@ -15,6 +15,7 @@ var episodeSelectedIndex: Int!
 var playingIndex: Int!
 var player: AVPlayer! = nil
 var pausedTimes = [CMTime?](repeating: nil, count: episodes.count)
+var pausedTimesDictionary = [Int: [CMTime?]]()
 class EpisodeCellView: NSCollectionViewItem {
 
     
@@ -123,6 +124,7 @@ class EpisodeCellView: NSCollectionViewItem {
     }
 
     @IBAction func playPauseButtonClicked(_ sender: Any) {
+        print(pausedTimesDictionary)
         if playingIndex != nil
         {
             if playingIndex == episodeSelectedIndex{
@@ -133,7 +135,7 @@ class EpisodeCellView: NSCollectionViewItem {
                             player?.play()
                             playingIndex = episodeSelectedIndex
                         }else{
-                            player?.seek(to: pausedTimes[episodeSelectedIndex]!)
+                            player?.seek(to: pausedTimesDictionary[podcastSelecetedIndex]![playingIndex]!)
                             player?.play()
                             playingIndex = episodeSelectedIndex
                         }
@@ -144,6 +146,7 @@ class EpisodeCellView: NSCollectionViewItem {
                     player?.pause()
                     pausedTimes.remove(at: playingIndex)
                     pausedTimes.insert(player?.currentTime(), at: playingIndex)
+                    pausedTimesDictionary[podcastSelecetedIndex] = pausedTimes
                     playingIndex = nil
                     playButton.alphaValue = 1
                     pauseButton.alphaValue = 0
@@ -153,6 +156,7 @@ class EpisodeCellView: NSCollectionViewItem {
                 playingIndex = nil
                 pausedTimes.remove(at: playingIndex)
                 pausedTimes.insert(player?.currentTime(), at: playingIndex)
+                pausedTimesDictionary[podcastSelecetedIndex] = pausedTimes
                 playButton.alphaValue = 0
                 pauseButton.alphaValue = 1
                 player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
@@ -170,7 +174,7 @@ class EpisodeCellView: NSCollectionViewItem {
                         playingIndex = episodeSelectedIndex
                     }else{
                         playingIndex = episodeSelectedIndex
-                        player?.seek(to: pausedTimes[playingIndex]!)
+                        player?.seek(to: pausedTimesDictionary[podcastSelecetedIndex]![playingIndex]!)
                         player?.play()
                     }
                 }
@@ -180,6 +184,7 @@ class EpisodeCellView: NSCollectionViewItem {
                 player?.pause()
                 pausedTimes.remove(at: playingIndex)
                 pausedTimes.insert(player?.currentTime(), at: playingIndex)
+                pausedTimesDictionary[podcastSelecetedIndex] = pausedTimes
                 playingIndex = nil
                 playButton.alphaValue = 1
                 pauseButton.alphaValue = 0
