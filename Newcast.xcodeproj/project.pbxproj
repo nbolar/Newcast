@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E098D4822FC7990003B5E79 /* CustomSliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E098D4722FC7990003B5E79 /* CustomSliderCell.swift */; };
 		4E0AD32722FAA2FE0024E0D9 /* PodcastDescriptionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0AD32622FAA2FE0024E0D9 /* PodcastDescriptionVC.swift */; };
 		4E8F765922F1D9CB00D66844 /* PodcastCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E8F765822F1D9CB00D66844 /* PodcastCellView.xib */; };
 		4E8F765B22F1D9EF00D66844 /* PodcastCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8F765A22F1D9EF00D66844 /* PodcastCellView.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		0D5694FA4D5705ABD0C354BF /* Pods_Newcast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Newcast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E098D4722FC7990003B5E79 /* CustomSliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSliderCell.swift; sourceTree = "<group>"; };
 		4E0AD32622FAA2FE0024E0D9 /* PodcastDescriptionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastDescriptionVC.swift; sourceTree = "<group>"; };
 		4E8F765822F1D9CB00D66844 /* PodcastCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PodcastCellView.xib; sourceTree = "<group>"; };
 		4E8F765A22F1D9EF00D66844 /* PodcastCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastCellView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				4EADDCAA22F6E91300766FB7 /* EpisodeCellView.swift */,
 				4EC78FBE22F9B297002BD120 /* EpisodeInfoVC.swift */,
 				4E0AD32622FAA2FE0024E0D9 /* PodcastDescriptionVC.swift */,
+				4E098D4722FC7990003B5E79 /* CustomSliderCell.swift */,
 				4E8F765322F1D3AB00D66844 /* Xibs */,
 				4EE3C9BC22F176BC006054D3 /* Assets.xcassets */,
 				4EE3C9BE22F176BC006054D3 /* Main.storyboard */,
@@ -256,6 +259,7 @@
 				4EC224A922F1C442008D76D7 /* Parser.swift in Sources */,
 				4EC78FBF22F9B297002BD120 /* EpisodeInfoVC.swift in Sources */,
 				4EC40D4022F318C800B02956 /* PodcastSearchVC.swift in Sources */,
+				4E098D4822FC7990003B5E79 /* CustomSliderCell.swift in Sources */,
 				4EE3C9B922F176BB006054D3 /* AppDelegate.swift in Sources */,
 				4EADDCAB22F6E91400766FB7 /* EpisodeCellView.swift in Sources */,
 				4EE3C9C922F176F8006054D3 /* PodcastVC.swift in Sources */,

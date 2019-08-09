@@ -58,6 +58,8 @@ class DetailVC: NSViewController {
         podcastImageView.layer?.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         podcastTitleField.stringValue = ""
         episodesPlaceholderField.alphaValue = 0
+        playerSlider.isHidden = true
+        
         
         
         
@@ -81,6 +83,7 @@ class DetailVC: NSViewController {
             (item as! EpisodeCellView).setHighlight(selected: selected)
             if selected == true{
                 (item as! EpisodeCellView).showButton(atIndexPaths: indexPath.item)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "podcastChanged"), object: nil)
             }
             if selected == false{
                 (item as! EpisodeCellView).hideButton()
@@ -90,6 +93,7 @@ class DetailVC: NSViewController {
     }
     
     @objc func updateEpisodes(){
+        playerSlider.isHidden = false
         let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
         podcastImageView.addTrackingArea(area)
         collectionView.reloadData()
@@ -115,6 +119,7 @@ class DetailVC: NSViewController {
         podcastImageView.image = nil
         podcastTitleField.stringValue = ""
         episodesPlaceholderField.alphaValue = 0
+        playerSlider.isHidden = true
         episodes.removeAll()
         collectionView.reloadData()
     }

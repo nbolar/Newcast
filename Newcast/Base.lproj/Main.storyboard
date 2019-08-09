@@ -1134,8 +1134,8 @@ Gw
                                     </imageView>
                                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kne-bz-9xP">
                                         <rect key="frame" x="146" y="28" width="536" height="19"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="XdZ-WJ-IBU"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="XdZ-WJ-IBU" customClass="CustomSliderCell" customModule="Newcast" customModuleProvider="target"/>
                                     </slider>
                                 </subviews>
                                 <constraints>
