@@ -16,17 +16,18 @@ class CustomSliderCell: NSSliderCell {
     
     override func drawBar(inside aRect: NSRect, flipped: Bool) {
         var rect = aRect
-        rect.size.height = CGFloat(10)
-        let barRadius = CGFloat(5)
+        rect.size.height = CGFloat(6)
+        let barRadius = CGFloat(2.5)
         let value = CGFloat((self.doubleValue - self.minValue) / (self.maxValue - self.minValue))
         let finalWidth = CGFloat(value * (self.controlView!.frame.size.width - 8))
         var leftRect = rect
         leftRect.size.width = finalWidth
         let bg = NSBezierPath(roundedRect: rect, xRadius: barRadius, yRadius: barRadius)
-        NSColor.darkGray.setFill()
+        NSColor.white.setFill()
         bg.fill()
         let active = NSBezierPath(roundedRect: leftRect, xRadius: barRadius, yRadius: barRadius)
-        NSColor.white.setFill()
+//        CGColor.init(red: 0.39, green: 0.72, blue: 1.0, alpha: 0.9)
+        NSColor.init(red: 0.39, green: 0.62, blue: 1.0, alpha: 0.9).setFill()
         active.fill()
     }
     
@@ -41,20 +42,20 @@ class CustomSliderCell: NSSliderCell {
 //        drawImage?.draw(in: drawRect, from: NSRect.zero, operation: .sourceOver, fraction: fraction, respectFlipped: true, hints: nil)
 //    }
     
-    override func knobRect(flipped: Bool) -> NSRect {
-        let drawImage: NSImage? = .init(imageLiteralResourceName: "pause")
-        
-        var drawRect: NSRect = super.knobRect(flipped: flipped)
-
-        drawRect.size = drawImage?.size ?? CGSize.zero
+//    override func knobRect(flipped: Bool) -> NSRect {
+//        let drawImage: NSImage? = .init(imageLiteralResourceName: "pause")
 //
-//        var bounds: NSRect? = controlView?.bounds
-//        bounds = bounds?.insetBy(dx: 0, dy: 0)
-//        var val = CGFloat(min(maxValue, max(minValue, doubleValue)))
-//        val = (val - CGFloat(minValue)) / CGFloat((maxValue - minValue))
-//        let x: CGFloat = val * bounds!.width + bounds!.minX
-        
-        drawRect = NSOffsetRect(drawRect, -4, -2.5)
-        return drawRect
-    }
+//        var drawRect: NSRect = super.knobRect(flipped: flipped)
+//
+//        drawRect.size = drawImage?.size ?? CGSize.zero
+////
+////        var bounds: NSRect? = controlView?.bounds
+////        bounds = bounds?.insetBy(dx: 0, dy: 0)
+////        var val = CGFloat(min(maxValue, max(minValue, doubleValue)))
+////        val = (val - CGFloat(minValue)) / CGFloat((maxValue - minValue))
+////        let x: CGFloat = val * bounds!.width + bounds!.minX
+//
+//        drawRect = NSOffsetRect(drawRect, -4, -2.5)
+//        return drawRect
+//    }
 }

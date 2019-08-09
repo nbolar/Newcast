@@ -32,6 +32,7 @@ class EpisodeCellView: NSCollectionViewItem {
     let networkIndicator = NSProgressIndicator()
     var previousPlayer: AVPlayer? = nil
     var pausedTime: CMTime? = nil
+    var duration: String!
     
     
     
@@ -79,7 +80,20 @@ class EpisodeCellView: NSCollectionViewItem {
         episodeTitleField.stringValue = episodeCell.title
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, MMM d, yyyy"
-        episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate)) • \(episodeCell.episodeDuration)"
+        if episodeCell.episodeDuration.contains(":")
+        {
+            episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate)) • \(episodeCell.episodeDuration)"
+        }else{
+            if Double(episodeCell.episodeDuration)! >= 3600{
+                duration = String(Int(Double(episodeCell.episodeDuration)! / 60) / 60) + ":" + String(format: "%02d", Int(Double(episodeCell.episodeDuration)! / 60) % 60) + ":" +  String(format: "%02d", Int(Double(episodeCell.episodeDuration)!.truncatingRemainder(dividingBy: 60)))
+                episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate)) • \(duration!)"
+            }else{
+                duration = String(Int(Double(episodeCell.episodeDuration)! / 60) % 60) + ":" +  String(format: "%02d", Int(Double(episodeCell.episodeDuration)!.truncatingRemainder(dividingBy: 60)))
+                episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate)) • \(duration!)"
+            }
+
+        }
+        
         do {
             let doc: Document = try SwiftSoup.parse(episodeCell.podcastDescription)
             episodeDescriptionField.stringValue = (try doc.text())
@@ -259,7 +273,7 @@ class EpisodeCellView: NSCollectionViewItem {
             if let duration = player.currentItem?.duration{
                 let durationSeconds = CMTimeGetSeconds(duration)
                 playerDuration = Float(durationSeconds)
-//               NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
+               NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
             }
             
         }
@@ -273,10 +287,8 @@ class EpisodeCellView: NSCollectionViewItem {
                 DispatchQueue.main.async {[weak self] in
 
                     if newStatus == .playing  {
-                        print("Hello")
                         self?.networkIndicator.isHidden = true
                     } else {
-                        print("Bye")
                         self?.networkIndicator.isHidden = true
                     }
                 }

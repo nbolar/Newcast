@@ -1132,17 +1132,64 @@ Gw
                                         </constraints>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="Q72-ey-iPf"/>
                                     </imageView>
-                                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kne-bz-9xP">
-                                        <rect key="frame" x="146" y="28" width="536" height="19"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kne-bz-9xP">
+                                        <rect key="frame" x="146" y="28" width="548" height="19"/>
                                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="XdZ-WJ-IBU" customClass="CustomSliderCell" customModule="Newcast" customModuleProvider="target"/>
                                     </slider>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N9h-kn-WOD">
+                                        <rect key="frame" x="387" y="62" width="46" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="ZZN-Ow-l0Z"/>
+                                            <constraint firstAttribute="height" constant="46" id="qhb-0W-64o"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="play" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ACg-6E-MKy">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qS3-PE-AVx">
+                                        <rect key="frame" x="506" y="59" width="66" height="51"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="66" id="Zld-oh-Y5T"/>
+                                            <constraint firstAttribute="height" constant="51" id="ecf-Oi-rBf"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSTouchBarSkipAhead30SecondsTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="Eau-Ni-xhE">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tfB-g8-wdw">
+                                        <rect key="frame" x="248" y="59" width="66" height="51"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="51" id="5Vw-tD-fQN"/>
+                                            <constraint firstAttribute="width" constant="66" id="uL4-JF-cvu"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSTouchBarSkipBack30SecondsTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="OCY-qo-eRr">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="N9h-kn-WOD" firstAttribute="leading" secondItem="tfB-g8-wdw" secondAttribute="trailing" constant="73" id="0X4-45-Dfn"/>
+                                    <constraint firstItem="Kne-bz-9xP" firstAttribute="top" secondItem="N9h-kn-WOD" secondAttribute="bottom" constant="17" id="2Pk-OE-66V"/>
+                                    <constraint firstItem="Kne-bz-9xP" firstAttribute="leading" secondItem="91P-1M-4OD" secondAttribute="trailing" constant="8" id="7x6-XM-A3e"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kne-bz-9xP" secondAttribute="bottom" constant="30" id="A5b-b9-cY9"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kne-bz-9xP" secondAttribute="trailing" constant="8" id="ATg-4f-PnQ"/>
+                                    <constraint firstItem="Kne-bz-9xP" firstAttribute="top" secondItem="qS3-PE-AVx" secondAttribute="bottom" constant="14" id="D5o-3K-gFz"/>
+                                    <constraint firstItem="qS3-PE-AVx" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" constant="30" id="ErU-Hw-RA2"/>
                                     <constraint firstItem="91P-1M-4OD" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" id="OLT-DH-TtW"/>
                                     <constraint firstAttribute="trailing" secondItem="91P-1M-4OD" secondAttribute="trailing" constant="560" id="SO1-mB-avK"/>
+                                    <constraint firstItem="qS3-PE-AVx" firstAttribute="leading" secondItem="N9h-kn-WOD" secondAttribute="trailing" constant="73" id="TdF-NV-Usz"/>
                                     <constraint firstAttribute="bottom" secondItem="91P-1M-4OD" secondAttribute="bottom" id="cH0-Xz-DVQ"/>
                                     <constraint firstItem="91P-1M-4OD" firstAttribute="leading" secondItem="RoI-9c-hw7" secondAttribute="leading" id="fOc-rF-5QR"/>
+                                    <constraint firstItem="tfB-g8-wdw" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" constant="30" id="gXf-jj-hvw"/>
+                                    <constraint firstItem="Kne-bz-9xP" firstAttribute="top" secondItem="tfB-g8-wdw" secondAttribute="bottom" constant="14" id="m9Q-xt-sd1"/>
+                                    <constraint firstItem="N9h-kn-WOD" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" constant="32" id="t8v-Qb-RhO"/>
+                                    <constraint firstAttribute="trailing" secondItem="qS3-PE-AVx" secondAttribute="trailing" constant="128" id="uzD-Bc-82a"/>
                                 </constraints>
                             </customView>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VxF-Fu-MBl">
@@ -1209,10 +1256,13 @@ Gw
                         <outlet property="backgroundImageView" destination="pNY-Aa-nSm" id="hlg-Rv-FJz"/>
                         <outlet property="collectionView" destination="36R-Mb-SPr" id="CoM-A8-Sf3"/>
                         <outlet property="episodesPlaceholderField" destination="7Iw-aQ-0xk" id="naZ-Bk-zIo"/>
+                        <outlet property="playPauseButton" destination="N9h-kn-WOD" id="F60-kc-DAI"/>
                         <outlet property="playerCustomView" destination="RoI-9c-hw7" id="WgD-Ua-wV6"/>
                         <outlet property="playerSlider" destination="Kne-bz-9xP" id="0Dx-vf-MtW"/>
                         <outlet property="podcastImageView" destination="91P-1M-4OD" id="MKe-Mg-SPT"/>
                         <outlet property="podcastTitleField" destination="VJF-6L-bib" id="7jo-rJ-1DH"/>
+                        <outlet property="skip30BackButton" destination="tfB-g8-wdw" id="nz1-G8-vIA"/>
+                        <outlet property="skip30ForwardButton" destination="qS3-PE-AVx" id="IRz-3M-Pee"/>
                     </connections>
                 </viewController>
                 <customObject id="G9E-H6-DMk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1224,6 +1274,9 @@ Gw
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSGoBackTemplate" width="9" height="12"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="NSTouchBarSkipAhead30SecondsTemplate" width="17" height="30"/>
+        <image name="NSTouchBarSkipBack30SecondsTemplate" width="17" height="30"/>
+        <image name="play" width="30" height="30"/>
         <image name="wallpaper28" width="1700" height="3500"/>
         <image name="wallpaper28-1" width="1700" height="3500"/>
     </resources>

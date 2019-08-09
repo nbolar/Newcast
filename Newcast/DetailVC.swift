@@ -14,6 +14,9 @@ var podcastSelecetedIndex : Int!
 
 class DetailVC: NSViewController {
 
+    @IBOutlet weak var playPauseButton: NSButton!
+    @IBOutlet weak var skip30ForwardButton: NSButton!
+    @IBOutlet weak var skip30BackButton: NSButton!
     @IBOutlet weak var playerSlider: NSSlider!
     @IBOutlet weak var episodesPlaceholderField: NSTextField!
     @IBOutlet weak var podcastImageView: SDAnimatedImageView!
@@ -59,6 +62,9 @@ class DetailVC: NSViewController {
         podcastTitleField.stringValue = ""
         episodesPlaceholderField.alphaValue = 0
         playerSlider.isHidden = true
+        playPauseButton.isHidden = true
+        skip30BackButton.isHidden = true
+        skip30ForwardButton.isHidden = true
         
         
         
@@ -84,6 +90,10 @@ class DetailVC: NSViewController {
             if selected == true{
                 (item as! EpisodeCellView).showButton(atIndexPaths: indexPath.item)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "podcastChanged"), object: nil)
+                playerSlider.isHidden = false
+                playPauseButton.isHidden = false
+                skip30BackButton.isHidden = false
+                skip30ForwardButton.isHidden = false
             }
             if selected == false{
                 (item as! EpisodeCellView).hideButton()
@@ -93,7 +103,6 @@ class DetailVC: NSViewController {
     }
     
     @objc func updateEpisodes(){
-        playerSlider.isHidden = false
         let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
         podcastImageView.addTrackingArea(area)
         collectionView.reloadData()
@@ -120,6 +129,9 @@ class DetailVC: NSViewController {
         podcastTitleField.stringValue = ""
         episodesPlaceholderField.alphaValue = 0
         playerSlider.isHidden = true
+        playPauseButton.isHidden = true
+        skip30BackButton.isHidden = true
+        skip30ForwardButton.isHidden = true
         episodes.removeAll()
         collectionView.reloadData()
     }
