@@ -148,11 +148,26 @@ class EpisodeCellView: NSCollectionViewItem {
         pauseButton.alphaValue = 0
         
     }
+    func playPlayer(){
+        player?.play()
+        currentSelectedPodcastIndex = podcastSelecetedIndex
+        updateSlider()
+        observePlayPause()
+        playingIndex = episodeSelectedIndex
+    }
+    func pausePlayer(){
+        player?.pause()
+        pausedTimes.remove(at: playingIndex)
+        pausedTimes.insert(player?.currentTime(), at: playingIndex)
+        if currentSelectedPodcastIndex == podcastSelecetedIndex{
+            pausedTimesDictionary[podcastSelecetedIndex] = pausedTimes
+        }else{
+            pausedTimesDictionary[currentSelectedPodcastIndex] = pausedTimes
+        }
+    }
 
     @IBAction func playPauseButtonClicked(_ sender: Any) {
-//        print(pausedTimesDictionary)
-//        print(playingIndex)
-//        print(currentSelectedPodcastIndex)
+
         if playingIndex != nil
         {
             if playingIndex == episodeSelectedIndex && currentSelectedPodcastIndex == podcastSelecetedIndex{
@@ -161,90 +176,49 @@ class EpisodeCellView: NSCollectionViewItem {
                         player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
                         if pausedTimesDictionary[podcastSelecetedIndex]?[episodeSelectedIndex] == nil{
 //                            currentSelectedPodcastIndex = podcastSelecetedIndex
-                            player?.play()
-                            currentSelectedPodcastIndex = podcastSelecetedIndex
-                            updateSlider()
-                            observePlayPause()
-                            playingIndex = episodeSelectedIndex
+                            playPlayer()
                         }else{
                             player?.seek(to: pausedTimesDictionary[podcastSelecetedIndex]![playingIndex]!)
-                            player?.play()
-                            currentSelectedPodcastIndex = podcastSelecetedIndex
-                            updateSlider()
-                            observePlayPause()
-                            playingIndex = episodeSelectedIndex
+                            playPlayer()
                         }
                     }
                     playButton.alphaValue = 0
                     pauseButton.alphaValue = 1
                 }else{
-                    player?.pause()
-                    pausedTimes.remove(at: playingIndex)
-                    pausedTimes.insert(player?.currentTime(), at: playingIndex)
-                    if currentSelectedPodcastIndex == podcastSelecetedIndex{
-                        pausedTimesDictionary[podcastSelecetedIndex] = pausedTimes
-                    }else{
-                        pausedTimesDictionary[currentSelectedPodcastIndex] = pausedTimes
-                    }
-                    
+                    pausePlayer()
                     playingIndex = nil
                     playButton.alphaValue = 1
                     pauseButton.alphaValue = 0
                 }
             }else{
-                player.pause()
-                pausedTimes.remove(at: playingIndex)
-                pausedTimes.insert(player?.currentTime(), at: playingIndex)
-                if currentSelectedPodcastIndex == podcastSelecetedIndex{
-                    pausedTimesDictionary[podcastSelecetedIndex] = pausedTimes
-                }else{
-                    pausedTimesDictionary[currentSelectedPodcastIndex] = pausedTimes
-                }
+                pausePlayer()
                 playingIndex = nil
-//                playButton.alphaValue = 1
-//                pauseButton.alphaValue = 0
                 playPauseButtonClicked(Any?.self)
                 updateSlider()
                 observePlayPause()
-
             }
- 
         }else{
             if playButton.alphaValue == 1{
                 if episodeSelectedIndex != nil{
                     player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
                     if pausedTimesDictionary[podcastSelecetedIndex]?[episodeSelectedIndex] == nil{
                         player?.play()
-                        currentSelectedPodcastIndex = podcastSelecetedIndex
-                        updateSlider()
-                        observePlayPause()
-                        playingIndex = episodeSelectedIndex
+                        playPlayer()
                     }else{
                         playingIndex = episodeSelectedIndex
                         player?.seek(to: pausedTimesDictionary[podcastSelecetedIndex]![playingIndex]!)
-                        player?.play()
-                        currentSelectedPodcastIndex = podcastSelecetedIndex
-                        observePlayPause()
-                        updateSlider()
+                        playPlayer()
                     }
                 }
                 playButton.alphaValue = 0
                 pauseButton.alphaValue = 1
             }else{
-                player?.pause()
-                pausedTimes.remove(at: playingIndex)
-                pausedTimes.insert(player?.currentTime(), at: playingIndex)
-                if currentSelectedPodcastIndex == podcastSelecetedIndex{
-                    pausedTimesDictionary[podcastSelecetedIndex] = pausedTimes
-                }else{
-                    pausedTimesDictionary[currentSelectedPodcastIndex] = pausedTimes
-                }
+                pausePlayer()
                 playingIndex = nil
                 playButton.alphaValue = 1
                 pauseButton.alphaValue = 0
             }
         }
-
     }
     
     func observePlayPause(){
