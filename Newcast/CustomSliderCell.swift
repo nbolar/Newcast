@@ -30,6 +30,7 @@ class CustomSliderCell: NSSliderCell {
         NSColor.init(red: 0.39, green: 0.62, blue: 1.0, alpha: 0.9).setFill()
         active.fill()
     }
+
     
 //    override func drawKnob(_ rect: NSRect) {
 //        let drawImage: NSImage? = .init(imageLiteralResourceName: "pause")

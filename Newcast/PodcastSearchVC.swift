@@ -48,7 +48,7 @@ class PodcastSearchVC: NSViewController {
         let labelWidth:CGFloat = 30
         let labelHeight:CGFloat = 30
         addPodcastButton.isHidden = false
-        
+    
         networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: "updateSearchUI"), object: nil)

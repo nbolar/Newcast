@@ -118,37 +118,26 @@ class EpisodeCellView: NSCollectionViewItem {
         
             if playingIndex == episodeSelectedIndex && currentSelectedPodcastIndex == podcastSelecetedIndex{
                 playButton.alphaValue = 0
-                NSAnimationContext.runAnimationGroup({_ in
-                    NSAnimationContext.current.duration = 0.5
-                    infoButton.animator().alphaValue = 1.0
-                    if playButton.alphaValue == 1{
-                        playButton.animator().alphaValue = 1
-                        pauseButton.animator().alphaValue = 0
-                    }else{
-                        playButton.animator().alphaValue = 0
-                        pauseButton.animator().alphaValue = 1
-                    }
-                }, completionHandler:{
-                })
-            }else{
-                NSAnimationContext.runAnimationGroup({_ in
-                    NSAnimationContext.current.duration = 0.5
-                    infoButton.animator().alphaValue = 1.0
-                    if playButton.alphaValue == 1{
-                        playButton.animator().alphaValue = 0
-                        pauseButton.animator().alphaValue = 1
-                    }else{
-                        playButton.animator().alphaValue = 1
-                        pauseButton.animator().alphaValue = 0
-                    }
-                }, completionHandler:{
-                })
-            }
+                showPlayPauseAnimation(check: 0)
 
-        
-//        infoButtonClicked((Any).self)
-        
+            }else{
+                showPlayPauseAnimation(check: 1)
+            }
     
+    }
+    func showPlayPauseAnimation(check: CGFloat){
+        NSAnimationContext.runAnimationGroup({_ in
+            NSAnimationContext.current.duration = 0.5
+            infoButton.animator().alphaValue = 1.0
+            if playButton.alphaValue == 1{
+                playButton.animator().alphaValue = 1 - check
+                pauseButton.animator().alphaValue = check
+            }else{
+                playButton.animator().alphaValue = check
+                pauseButton.animator().alphaValue = 1 - check
+            }
+        }, completionHandler:{
+        })
     }
     func hideButton(){
         playButton.isEnabled = false
