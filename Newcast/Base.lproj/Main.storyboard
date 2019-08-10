@@ -735,19 +735,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="700"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9z-kX-uw6">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9z-kX-uw6">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="700"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28" id="lJw-hc-9D3"/>
                             </imageView>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="5" horizontalPageScroll="5" verticalLineScroll="5" verticalPageScroll="5" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpB-dp-GU4">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="655"/>
+                                <rect key="frame" x="0.0" y="20" width="400" height="635"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="5CJ-Os-k9e">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="655"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="635"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView selectable="YES" id="Flf-gR-hAF">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="655"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="635"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="Rdo-Dt-Tcc">
                                                 <size key="itemSize" width="90" height="90"/>
@@ -762,7 +761,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="xx9-tE-XOf">
-                                    <rect key="frame" x="373" y="0.0" width="16" height="648"/>
+                                    <rect key="frame" x="384" y="0.0" width="16" height="635"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -806,19 +805,35 @@
                                     <action selector="removePodcastButtonClicked:" target="UAx-cJ-4Oq" id="wty-IQ-k2v"/>
                                 </connections>
                             </button>
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLw-gk-UBo">
+                                <rect key="frame" x="20" y="0.0" width="360" height="22"/>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="Zg3-Ne-bYN">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </searchFieldCell>
+                                <connections>
+                                    <action selector="searchSavedPodcast:" target="UAx-cJ-4Oq" id="b45-dL-uqE"/>
+                                </connections>
+                            </searchField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="xPr-pO-j9x" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="20" id="5X9-WY-zZv"/>
                             <constraint firstItem="A8c-5w-XB3" firstAttribute="bottom" secondItem="N2Y-Sv-0Kf" secondAttribute="bottom" id="6ye-MQ-yBV"/>
+                            <constraint firstItem="RLw-gk-UBo" firstAttribute="centerX" secondItem="j9z-kX-uw6" secondAttribute="centerX" id="D1m-So-iyb"/>
                             <constraint firstAttribute="trailing" secondItem="N2Y-Sv-0Kf" secondAttribute="trailing" constant="11" id="IKG-Nj-wUG"/>
+                            <constraint firstAttribute="bottom" secondItem="RLw-gk-UBo" secondAttribute="bottom" id="Jwk-oO-UKZ"/>
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="leading" secondItem="A8c-5w-XB3" secondAttribute="trailing" constant="8" symbolic="YES" id="KvA-rE-q8t"/>
                             <constraint firstItem="CpB-dp-GU4" firstAttribute="leading" secondItem="d1b-bf-kXE" secondAttribute="leading" id="SUx-Ra-hXF"/>
                             <constraint firstItem="CpB-dp-GU4" firstAttribute="top" secondItem="N2Y-Sv-0Kf" secondAttribute="bottom" constant="1" id="TZk-tX-gPS"/>
+                            <constraint firstItem="RLw-gk-UBo" firstAttribute="centerX" secondItem="CpB-dp-GU4" secondAttribute="centerX" id="Y9Z-hs-N1T"/>
+                            <constraint firstItem="RLw-gk-UBo" firstAttribute="leading" secondItem="xPr-pO-j9x" secondAttribute="leading" id="bOD-uL-QwF"/>
                             <constraint firstItem="xPr-pO-j9x" firstAttribute="leading" secondItem="d1b-bf-kXE" secondAttribute="leading" constant="20" id="gO6-3x-lly"/>
                             <constraint firstAttribute="trailing" secondItem="CpB-dp-GU4" secondAttribute="trailing" id="hIs-kd-nDW"/>
                             <constraint firstItem="CpB-dp-GU4" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="45" id="hPQ-hQ-us6"/>
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="leading" secondItem="xPr-pO-j9x" secondAttribute="trailing" constant="258" id="ktP-4s-ntm"/>
-                            <constraint firstAttribute="bottom" secondItem="CpB-dp-GU4" secondAttribute="bottom" id="pKt-Ye-q4U"/>
+                            <constraint firstAttribute="bottom" secondItem="CpB-dp-GU4" secondAttribute="bottom" constant="20" id="pKt-Ye-q4U"/>
+                            <constraint firstItem="RLw-gk-UBo" firstAttribute="bottom" secondItem="j9z-kX-uw6" secondAttribute="bottom" id="qKP-rd-WjX"/>
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="22" id="qbD-Vn-Drh"/>
                             <constraint firstItem="A8c-5w-XB3" firstAttribute="centerY" secondItem="N2Y-Sv-0Kf" secondAttribute="centerY" id="zaC-2v-vOv"/>
                         </constraints>
@@ -828,11 +843,12 @@
                         <outlet property="backgroundImage" destination="j9z-kX-uw6" id="oUA-b6-6VC"/>
                         <outlet property="collectionView" destination="Flf-gR-hAF" id="jWI-Nx-zVG"/>
                         <outlet property="removePodcastButton" destination="A8c-5w-XB3" id="2C3-md-i7i"/>
+                        <outlet property="searchSavedPodcastsField" destination="RLw-gk-UBo" id="cTc-M4-An7"/>
                     </connections>
                 </viewController>
                 <customObject id="rNd-za-qVj" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="662.5" y="314"/>
+            <point key="canvasLocation" x="662" y="314"/>
         </scene>
         <!--Podcast SearchVC-->
         <scene sceneID="LHc-dr-cCd">

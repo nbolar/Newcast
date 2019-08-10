@@ -23,6 +23,8 @@ class PodcastVC: NSViewController {
     @IBOutlet weak var addPodcastButton: NSButton!
     @IBOutlet weak var collectionView: NSCollectionView!
     @IBOutlet weak var removePodcastButton: NSButton!
+    @IBOutlet weak var searchSavedPodcastsField: NSSearchField!
+    var count: Int!
     
     
     
@@ -43,14 +45,54 @@ class PodcastVC: NSViewController {
             podcastsImageURL = UserDefaults.standard.array(forKey: "podcastImagesURL") as? [String]
             podcastsTitle = UserDefaults.standard.array(forKey: "podcastsTitle") as? [String]
         }
-        
         backgroundImage.alphaValue = 0.6
         addPodcastButton.alphaValue = 0.8
         collectionView.dataSource = self
         collectionView.delegate = self
+        searchSavedPodcastsField.refusesFirstResponder = true
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: "updateUI"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(customURL), name: NSNotification.Name(rawValue: "customURL"), object: nil)
     }
+    
+    
+    @IBAction func searchSavedPodcast(_ sender: Any) {
+        count = 0
+        if searchSavedPodcastsField.stringValue.count != 0{
+            for i in 0..<podcastsTitle.count{
+                let editedTitle = podcastsTitle[i].lowercased()
+                if editedTitle.contains(searchSavedPodcastsField.stringValue) {
+                    scroll(position: count)
+                    break
+                }else if podcasts[i].description.contains(searchSavedPodcastsField.stringValue.lowercased()){
+                    scroll(position: count)
+                    break
+                }
+                count += 1
+            }
+        }
+    }
+    
+    func scroll(position : Int)
+    {
+        let itemIndex = NSIndexPath(forItem: position, inSection: 0)
+        let ctx = NSAnimationContext.current
+        ctx.allowsImplicitAnimation = true
+        collectionView.animator().scrollToItems(at: [itemIndex as IndexPath], scrollPosition: .right)
+        let item = collectionView.item(at: itemIndex as IndexPath)
+        (item as! PodcastCellView).setHighlight(selected: true)
+        Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(unhighlight), userInfo: nil, repeats: false)
+
+    }
+    
+    @objc func unhighlight()
+    {
+        searchSavedPodcastsField.stringValue = ""
+        let itemIndex = NSIndexPath(forItem: count, inSection: 0)
+        let item = collectionView.item(at: itemIndex as IndexPath)
+        (item as! PodcastCellView).setHighlight(selected: false)
+    }
+
+    
     
     @objc func updateUI(){
         collectionView.deselectAll(Any?.self)

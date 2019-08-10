@@ -27,11 +27,14 @@ class PodcastCellView: NSCollectionViewItem {
     }
     
     func setHighlight(selected: Bool) {
-        view.layer?.borderWidth = selected ? 2.0 : 0.0
+        NSAnimationContext.runAnimationGroup({_ in
+            NSAnimationContext.current.duration = 0.7
+            view.layer?.borderWidth = selected ? 2.0 : 0.0
+        }, completionHandler:{
+        })   
     }
     func configurePodcastSearchCell(podcastCell: Parser)
     {
-//        let editedURL = podcastCell.imageURL.replacingOccurrences(of: "100x100bb.jpg", with: "600x600bb.jpg", options: .literal, range: nil)
         podcastImage.sd_setImage(with: URL(string: podcastCell.imageURL), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
     }
     func configurePodcastAddedCell(podcastCell: String){
