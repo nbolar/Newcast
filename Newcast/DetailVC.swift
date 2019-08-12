@@ -110,13 +110,10 @@ class DetailVC: NSViewController {
     
     @IBAction func playPauseButtonClicked(_ sender: Any) {
         if playPauseButton.image?.name() == "play"{
-//            playPauseButton.image = NSImage(named: "pause")
             playCount = 0
-//            playPauseButton.image = NSImage(named: "pause")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playButton"), object: nil)
         }else{
             pauseCount = 0
-//            playPauseButton.image = NSImage(named: "play")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
         }
     }
@@ -172,12 +169,10 @@ class DetailVC: NSViewController {
     
     override func mouseEntered(with event: NSEvent) {
         displayPopUp()
-//        print("Entered")
         
     }
     
     override func mouseExited(with event: NSEvent) {
-//        print("Exited")
         if popoverView.isShown{
             popoverView.close()
 
@@ -222,7 +217,6 @@ extension DetailVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSColl
         return NSSize(width: 680, height: 150)
     }
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-//        player = AVPlayer
         highlightItems(selected: true, atIndexPaths: indexPaths as Set<NSIndexPath>)
     }
     func collectionView(_ collectionView: NSCollectionView, didDeselectItemsAt indexPaths: Set<IndexPath>) {

@@ -71,30 +71,27 @@ class EpisodeCellView: NSCollectionViewItem {
         view.layer?.borderWidth = selected ? 2.0 : 0.0
     }
     
-    //    @objc func podcastChanged(){
-    //        if playingIndex == episodeSelectedIndex {
-    //            playButton.alphaValue = 1.0
-    //            pauseButton.alphaValue = 0.0
-    //        }
-    
-    //    }
-    
     
     @objc func playTestFunction(){
         if playCount == episodeSelectedIndex{
             playPauseButtonClicked(Any?.self)
-            playCount = 2
+            playCount = nil
         }
-        playCount! += 1
+        if playCount != nil{
+           playCount! += 1
+        }
+        
     }
     
     @objc func pauseTestFunction(){
         if pauseCount == episodeSelectedIndex{
-            print(episodeSelectedIndex)
             playPauseButtonClicked(Any?.self)
-            pauseCount = 2
+            pauseCount = nil
         }
-        pauseCount! += 1
+        if pauseCount != nil{
+            pauseCount! += 1
+        }
+        
     }
     
     func configureEpisodeCell(episodeCell: Episodes){
@@ -242,7 +239,6 @@ class EpisodeCellView: NSCollectionViewItem {
                 if episodeSelectedIndex != nil{
                     player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
                     if pausedTimesDictionary[podcastSelecetedIndex]?[episodeSelectedIndex] == nil{
-                        //                        player?.play()
                         playPlayer()
                     }else{
                         playingIndex = episodeSelectedIndex
@@ -300,8 +296,6 @@ class EpisodeCellView: NSCollectionViewItem {
     }
     
     @IBAction func infoButtonClicked(_ sender: Any) {
-        //        print(episodeDescriptions[episodeSelectedIndex])
-        //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showInfo"), object: nil)
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         guard let vc =  storyboard.instantiateController(withIdentifier: "EpisodeInfoVC") as? NSViewController else { return }
         popoverView.contentViewController = vc
