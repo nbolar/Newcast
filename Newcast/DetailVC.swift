@@ -143,6 +143,10 @@ class DetailVC: NSViewController {
         collectionView.reloadData()
     }
     @objc func updateTitle(){
+        if playingIndex != nil{
+            unhideUI()
+        }
+        
         let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
         podcastImageView.addTrackingArea(area)
         podcastTitleField.stringValue = "\(podcastsTitle[podcastSelecetedIndex])"

@@ -170,41 +170,35 @@ class EpisodeCellView: NSCollectionViewItem {
     }
     func playPlayer(){
         player?.play()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
+        
 //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhide"), object: nil)
         currentSelectedPodcastIndex = podcastSelecetedIndex
         updateSlider()
         observePlayPause()
         playingIndex = episodeSelectedIndex
-        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
     }
     func pausePlayer(){
-        playButton.alphaValue = 1
-        pauseButton.alphaValue = 0
         player?.pause()
-        pausedTimes.remove(at: playingIndex)
-        pausedTimes.insert(player?.currentTime(), at: playingIndex)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
+        if playingIndex == nil{
+            pausedTimes.remove(at: episodeSelectedIndex)
+            pausedTimes.insert(player?.currentTime(), at: episodeSelectedIndex)
+        }else{
+            pausedTimes.remove(at: playingIndex)
+            pausedTimes.insert(player?.currentTime(), at: playingIndex)
+        }
+
         if currentSelectedPodcastIndex == podcastSelecetedIndex{
             pausedTimesDictionary[podcastSelecetedIndex] = pausedTimes
         }else{
             pausedTimesDictionary[currentSelectedPodcastIndex] = pausedTimes
         }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
-        
+        playingIndex = nil
         
     }
     
     @IBAction func playPauseButtonClicked(_ sender: Any) {
-//        print(playButton.alphaValue)
-//        print(pauseButton.alphaValue)
-//        if playButton.alphaValue == 0{
-//            playButton.alphaValue = 1
-//            pauseButton.alphaValue = 0
-//        }else{
-//            playButton.alphaValue = 0
-//            pauseButton.alphaValue = 1
-//        }
-        
         if playingIndex != nil
         {
             if playingIndex == episodeSelectedIndex && currentSelectedPodcastIndex == podcastSelecetedIndex{
@@ -222,12 +216,14 @@ class EpisodeCellView: NSCollectionViewItem {
                     playButton.alphaValue = 0
                     pauseButton.alphaValue = 1
                 }else{
+                    print("YAS")
                     pausePlayer()
                     playingIndex = nil
                     playButton.alphaValue = 1
                     pauseButton.alphaValue = 0
                 }
             }else{
+                print("YAS2")
                 pausePlayer()
                 playingIndex = nil
                 playPauseButtonClicked(Any?.self)
@@ -248,7 +244,8 @@ class EpisodeCellView: NSCollectionViewItem {
                 }
                 playButton.alphaValue = 0
                 pauseButton.alphaValue = 1
-            }else{
+            }else if pauseButton.alphaValue == 1{
+                print("YAS3")
                 pausePlayer()
                 playingIndex = nil
                 playButton.alphaValue = 1
