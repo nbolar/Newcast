@@ -19,8 +19,10 @@ var pausedTimesDictionary = [Int: [CMTime?]]()
 var playerSeconds: Float!
 var playerDuration: Float!
 var currentSelectedPodcastIndex: Int!
+var playCount: Int? = nil
+var pauseCount: Int? = nil
 class EpisodeCellView: NSCollectionViewItem {
-
+    
     
     
     @IBOutlet weak var pauseButton: NSButton!
@@ -33,10 +35,9 @@ class EpisodeCellView: NSCollectionViewItem {
     var previousPlayer: AVPlayer? = nil
     var pausedTime: CMTime? = nil
     var duration: String!
-    
-    
-    
     let popoverView = NSPopover()
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,20 +61,41 @@ class EpisodeCellView: NSCollectionViewItem {
         let labelHeight:CGFloat = 30
         networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
         networkIndicator.style = .spinning
-//        NotificationCenter.default.addObserver(self, selector: #selector(podcastChanged), name: NSNotification.Name(rawValue: "podcastChanged"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playTestFunction), name: NSNotification.Name(rawValue: "playButton"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pauseTestFunction), name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
+        
     }
+    
     
     func setHighlight(selected: Bool) {
         view.layer?.borderWidth = selected ? 2.0 : 0.0
     }
     
-//    @objc func podcastChanged(){
-//        if playingIndex == episodeSelectedIndex {
-//            playButton.alphaValue = 1.0
-//            pauseButton.alphaValue = 0.0
-//        }
+    //    @objc func podcastChanged(){
+    //        if playingIndex == episodeSelectedIndex {
+    //            playButton.alphaValue = 1.0
+    //            pauseButton.alphaValue = 0.0
+    //        }
     
-//    }
+    //    }
+    
+    
+    @objc func playTestFunction(){
+        if playCount == episodeSelectedIndex{
+            playPauseButtonClicked(Any?.self)
+            playCount = 2
+        }
+        playCount! += 1
+    }
+    
+    @objc func pauseTestFunction(){
+        if pauseCount == episodeSelectedIndex{
+            print(episodeSelectedIndex)
+            playPauseButtonClicked(Any?.self)
+            pauseCount = 2
+        }
+        pauseCount! += 1
+    }
     
     func configureEpisodeCell(episodeCell: Episodes){
         
@@ -91,7 +113,7 @@ class EpisodeCellView: NSCollectionViewItem {
                 duration = String(Int(Double(episodeCell.episodeDuration)! / 60) % 60) + ":" +  String(format: "%02d", Int(Double(episodeCell.episodeDuration)!.truncatingRemainder(dividingBy: 60)))
                 episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate)) • \(duration!)"
             }
-
+            
         }
         
         do {
@@ -103,27 +125,27 @@ class EpisodeCellView: NSCollectionViewItem {
             print("error")
         }
         
-
-//        episodeDescriptionField.stringValue = episodeCell.podcastDescription
-//        podcastDescriptionView.loadHTMLString(episodeCell.podcastDescription, baseURL: nil)
-//        podcastDescriptionView.evaluateJavaScript("document.body.innerText") { (string, error) in
-//            print(string)
-//        }
+        
+        
+        //        episodeDescriptionField.stringValue = episodeCell.podcastDescription
+        //        podcastDescriptionView.loadHTMLString(episodeCell.podcastDescription, baseURL: nil)
+        //        podcastDescriptionView.evaluateJavaScript("document.body.innerText") { (string, error) in
+        //            print(string)
+        //        }
     }
     func showButton(atIndexPaths: Int!){
         playButton.isEnabled = true
         pauseButton.isEnabled = true
         infoButton.isEnabled = true
         episodeSelectedIndex = atIndexPaths
+        if playingIndex == episodeSelectedIndex && currentSelectedPodcastIndex == podcastSelecetedIndex{
+            playButton.alphaValue = 1
+            showPlayPauseAnimation(check: 0)
+            
+        }else{
+            showPlayPauseAnimation(check: 1)
+        }
         
-            if playingIndex == episodeSelectedIndex && currentSelectedPodcastIndex == podcastSelecetedIndex{
-                playButton.alphaValue = 0
-                showPlayPauseAnimation(check: 0)
-
-            }else{
-                showPlayPauseAnimation(check: 1)
-            }
-    
     }
     func showPlayPauseAnimation(check: CGFloat){
         NSAnimationContext.runAnimationGroup({_ in
@@ -139,23 +161,29 @@ class EpisodeCellView: NSCollectionViewItem {
         }, completionHandler:{
         })
     }
-    func hideButton(){
+    func hideButton(atIndexPaths: Int!){
         playButton.isEnabled = false
         pauseButton.isEnabled = false
         infoButton.isEnabled = false
         infoButton.alphaValue = 0
         playButton.alphaValue = 0
         pauseButton.alphaValue = 0
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hide"), object: nil)
         
     }
     func playPlayer(){
         player?.play()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhide"), object: nil)
         currentSelectedPodcastIndex = podcastSelecetedIndex
         updateSlider()
         observePlayPause()
         playingIndex = episodeSelectedIndex
+        
     }
     func pausePlayer(){
+        playButton.alphaValue = 1
+        pauseButton.alphaValue = 0
         player?.pause()
         pausedTimes.remove(at: playingIndex)
         pausedTimes.insert(player?.currentTime(), at: playingIndex)
@@ -164,10 +192,22 @@ class EpisodeCellView: NSCollectionViewItem {
         }else{
             pausedTimesDictionary[currentSelectedPodcastIndex] = pausedTimes
         }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
+        
+        
     }
-
+    
     @IBAction func playPauseButtonClicked(_ sender: Any) {
-
+//        print(playButton.alphaValue)
+//        print(pauseButton.alphaValue)
+//        if playButton.alphaValue == 0{
+//            playButton.alphaValue = 1
+//            pauseButton.alphaValue = 0
+//        }else{
+//            playButton.alphaValue = 0
+//            pauseButton.alphaValue = 1
+//        }
+        
         if playingIndex != nil
         {
             if playingIndex == episodeSelectedIndex && currentSelectedPodcastIndex == podcastSelecetedIndex{
@@ -175,7 +215,7 @@ class EpisodeCellView: NSCollectionViewItem {
                     if episodeSelectedIndex != nil{
                         player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
                         if pausedTimesDictionary[podcastSelecetedIndex]?[episodeSelectedIndex] == nil{
-//                            currentSelectedPodcastIndex = podcastSelecetedIndex
+                            //                            currentSelectedPodcastIndex = podcastSelecetedIndex
                             playPlayer()
                         }else{
                             player?.seek(to: pausedTimesDictionary[podcastSelecetedIndex]![playingIndex]!)
@@ -202,7 +242,7 @@ class EpisodeCellView: NSCollectionViewItem {
                 if episodeSelectedIndex != nil{
                     player = AVPlayer(url: URL(string: episodesURL[episodeSelectedIndex])!)
                     if pausedTimesDictionary[podcastSelecetedIndex]?[episodeSelectedIndex] == nil{
-                        player?.play()
+                        //                        player?.play()
                         playPlayer()
                     }else{
                         playingIndex = episodeSelectedIndex
@@ -236,7 +276,7 @@ class EpisodeCellView: NSCollectionViewItem {
             if let duration = player.currentItem?.duration{
                 let durationSeconds = CMTimeGetSeconds(duration)
                 playerDuration = Float(durationSeconds)
-               NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
             }
             
         }
@@ -248,7 +288,7 @@ class EpisodeCellView: NSCollectionViewItem {
             let newStatus = AVPlayer.TimeControlStatus(rawValue: newValue)
             if newStatus != oldStatus {
                 DispatchQueue.main.async {[weak self] in
-
+                    
                     if newStatus == .playing  {
                         self?.networkIndicator.isHidden = true
                     } else {
@@ -260,13 +300,16 @@ class EpisodeCellView: NSCollectionViewItem {
     }
     
     @IBAction func infoButtonClicked(_ sender: Any) {
-//        print(episodeDescriptions[episodeSelectedIndex])
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showInfo"), object: nil)
+        //        print(episodeDescriptions[episodeSelectedIndex])
+        //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showInfo"), object: nil)
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         guard let vc =  storyboard.instantiateController(withIdentifier: "EpisodeInfoVC") as? NSViewController else { return }
         popoverView.contentViewController = vc
         popoverView.behavior = .transient
         popoverView.show(relativeTo: infoButton.bounds, of: infoButton, preferredEdge: .maxX)
     }
-    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
+

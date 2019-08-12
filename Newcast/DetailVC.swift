@@ -24,6 +24,7 @@ class DetailVC: NSViewController {
     @IBOutlet weak var collectionView: NSCollectionView!
     @IBOutlet weak var playerCustomView: NSView!
     @IBOutlet weak var backgroundImageView: NSImageView!
+    var playPauseCheck: Int! = 0
     let networkIndicator = NSProgressIndicator()
     let popoverView = NSPopover()
     
@@ -39,8 +40,12 @@ class DetailVC: NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "clearPodcastEpisodes"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(moveSlider), name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playPausePass), name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideUI), name: NSNotification.Name(rawValue: "hide"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(unhideUI), name: NSNotification.Name(rawValue: "unhide"), object: nil)
         
         setupUI()
+        playPauseCheck = 0
     }
     
     func setupUI(){
@@ -75,6 +80,19 @@ class DetailVC: NSViewController {
         let labelHeight:CGFloat = 30
         networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
     }
+    
+    @objc func hideUI(){
+        playerSlider.isHidden = true
+        playPauseButton.isHidden = true
+        skip30BackButton.isHidden = true
+        skip30ForwardButton.isHidden = true
+    }
+    @objc func unhideUI(){
+        playerSlider.isHidden = false
+        playPauseButton.isHidden = false
+        skip30BackButton.isHidden = false
+        skip30ForwardButton.isHidden = false
+    }
     @objc func moveSlider(){
         if playerDuration != nil && playerSeconds != nil{
             playerSlider.maxValue = Double(playerDuration)
@@ -82,7 +100,26 @@ class DetailVC: NSViewController {
         }
         
     }
+    @objc func playPausePass(){
+        if playPauseButton.image?.name() == "play"{
+            playPauseButton.image = NSImage(named: "pause")
+        }else{
+            playPauseButton.image = NSImage(named: "play")
+        }
+    }
     
+    @IBAction func playPauseButtonClicked(_ sender: Any) {
+        if playPauseButton.image?.name() == "play"{
+//            playPauseButton.image = NSImage(named: "pause")
+            playCount = 0
+//            playPauseButton.image = NSImage(named: "pause")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playButton"), object: nil)
+        }else{
+            pauseCount = 0
+//            playPauseButton.image = NSImage(named: "play")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
+        }
+    }
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
         for indexPath in atIndexPaths {
             guard let item = collectionView.item(at: indexPath as IndexPath) else {continue}
@@ -90,13 +127,10 @@ class DetailVC: NSViewController {
             if selected == true{
                 (item as! EpisodeCellView).showButton(atIndexPaths: indexPath.item)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "podcastChanged"), object: nil)
-                playerSlider.isHidden = false
-                playPauseButton.isHidden = false
-                skip30BackButton.isHidden = false
-                skip30ForwardButton.isHidden = false
+                unhideUI()
             }
             if selected == false{
-                (item as! EpisodeCellView).hideButton()
+                (item as! EpisodeCellView).hideButton(atIndexPaths: indexPath.item)
             }
             
         }
