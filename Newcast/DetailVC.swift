@@ -15,6 +15,7 @@ var podcastSelecetedIndex : Int!
 
 class DetailVC: NSViewController {
 
+    @IBOutlet weak var scrollingTextView: ScrollingTextView!
     @IBOutlet weak var playerInfo: NSTextField!
     @IBOutlet weak var playPauseButton: NSButton!
     @IBOutlet weak var skip30ForwardButton: NSButton!
@@ -69,7 +70,7 @@ class DetailVC: NSViewController {
         podcastImageView.alphaValue = 0.9
         podcastImageView.layer?.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         podcastTitleField.stringValue = ""
-        playerInfo.stringValue = ""
+//        playerInfo.stringValue = ""
         episodesPlaceholderField.alphaValue = 0
         playerSlider.isHidden = true
         playPauseButton.isHidden = true
@@ -101,7 +102,7 @@ class DetailVC: NSViewController {
         playPauseButton.isHidden = true
         skip30BackButton.isHidden = true
         skip30ForwardButton.isHidden = true
-        playerInfo.stringValue = ""
+//        playerInfo.stringValue = ""
     }
     @objc func unhideUI(){
         playerSlider.isHidden = false
@@ -119,9 +120,13 @@ class DetailVC: NSViewController {
     }
     @objc func playPausePass(){
         if playPauseButton.image?.name() == "play"{
-            playerInfo.stringValue = "\(podcastsTitle[podcastSelecetedIndex]) — \(episodeTitles[playingIndex])"
+            scrollingTextView.setup(string: "\(podcastsTitle[podcastSelecetedIndex]) — \(episodeTitles[playingIndex])")
+            scrollingTextView.speed = 4
+            view.addSubview(scrollingTextView)
             playPauseButton.image = NSImage(named: "pause")
         }else{
+            scrollingTextView.speed = 0
+            scrollingTextView.setup(string: "\(podcastsTitle[podcastSelecetedIndex]) — \(episodeTitles[playingIndex])")
             playPauseButton.image = NSImage(named: "play")
         }
     }
@@ -187,7 +192,7 @@ class DetailVC: NSViewController {
         playPauseButton.isHidden = true
         skip30BackButton.isHidden = true
         skip30ForwardButton.isHidden = true
-        playerInfo.stringValue = ""
+//        playerInfo.stringValue = ""
         episodes.removeAll()
         collectionView.reloadData()
     }

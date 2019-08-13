@@ -728,13 +728,13 @@
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28" id="lJw-hc-9D3"/>
                             </imageView>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="5" horizontalPageScroll="5" verticalLineScroll="5" verticalPageScroll="5" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpB-dp-GU4">
-                                <rect key="frame" x="0.0" y="20" width="400" height="635"/>
+                                <rect key="frame" x="0.0" y="22" width="400" height="633"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="5CJ-Os-k9e">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="635"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="400" height="633"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <collectionView selectable="YES" id="Flf-gR-hAF">
-                                            <rect key="frame" x="0.0" y="0.0" width="400" height="635"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="633"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" minimumInteritemSpacing="10" minimumLineSpacing="10" id="Rdo-Dt-Tcc">
                                                 <size key="itemSize" width="90" height="90"/>
@@ -749,7 +749,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="xx9-tE-XOf">
-                                    <rect key="frame" x="384" y="0.0" width="16" height="635"/>
+                                    <rect key="frame" x="384" y="0.0" width="16" height="633"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
@@ -825,7 +825,7 @@
                             <constraint firstAttribute="trailing" secondItem="CpB-dp-GU4" secondAttribute="trailing" id="hIs-kd-nDW"/>
                             <constraint firstItem="CpB-dp-GU4" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="45" id="hPQ-hQ-us6"/>
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="leading" secondItem="xPr-pO-j9x" secondAttribute="trailing" constant="258" id="ktP-4s-ntm"/>
-                            <constraint firstAttribute="bottom" secondItem="CpB-dp-GU4" secondAttribute="bottom" constant="20" id="pKt-Ye-q4U"/>
+                            <constraint firstAttribute="bottom" secondItem="CpB-dp-GU4" secondAttribute="bottom" constant="22" id="pKt-Ye-q4U"/>
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="22" id="qbD-Vn-Drh"/>
                             <constraint firstItem="A8c-5w-XB3" firstAttribute="centerY" secondItem="N2Y-Sv-0Kf" secondAttribute="centerY" id="zaC-2v-vOv"/>
                         </constraints>
@@ -1232,15 +1232,6 @@ Gw
                                         </buttonCell>
                                         <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
-                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D8Y-RH-mg7">
-                                        <rect key="frame" x="148" y="6" width="546" height="17"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="df7-Fy-HxG">
-                                            <font key="font" metaFont="systemMedium" size="13"/>
-                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="N9h-kn-WOD" firstAttribute="leading" secondItem="tfB-g8-wdw" secondAttribute="trailing" constant="73" id="0X4-45-Dfn"/>
@@ -1304,18 +1295,25 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="oB3-PF-xDg" customClass="ScrollingTextView" customModule="Newcast" customModuleProvider="target">
+                                <rect key="frame" x="153" y="560" width="538" height="27"/>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="RoI-9c-hw7" firstAttribute="leading" secondItem="HiG-Zd-ZTe" secondAttribute="leading" id="1Ly-WF-oco"/>
+                            <constraint firstItem="oB3-PF-xDg" firstAttribute="leading" secondItem="HiG-Zd-ZTe" secondAttribute="leading" constant="153" id="ARd-ao-UEd"/>
                             <constraint firstItem="VxF-Fu-MBl" firstAttribute="top" secondItem="7Iw-aQ-0xk" secondAttribute="bottom" constant="1" id="EIn-41-RPt"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="leading" secondItem="HiG-Zd-ZTe" secondAttribute="leading" constant="20" symbolic="YES" id="Iyj-Y9-yk5"/>
                             <constraint firstItem="RoI-9c-hw7" firstAttribute="top" secondItem="HiG-Zd-ZTe" secondAttribute="top" id="J9O-41-vaC"/>
                             <constraint firstAttribute="trailing" secondItem="RoI-9c-hw7" secondAttribute="trailing" id="T9N-st-w9v"/>
+                            <constraint firstAttribute="trailing" secondItem="oB3-PF-xDg" secondAttribute="trailing" constant="9" id="bDQ-gX-65t"/>
                             <constraint firstItem="VxF-Fu-MBl" firstAttribute="leading" secondItem="HiG-Zd-ZTe" secondAttribute="leading" id="ecx-q1-PfF"/>
+                            <constraint firstItem="VJF-6L-bib" firstAttribute="top" secondItem="oB3-PF-xDg" secondAttribute="bottom" constant="8" symbolic="YES" id="fLJ-u6-0rC"/>
                             <constraint firstItem="VJF-6L-bib" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="bottom" constant="8" id="gWO-IR-L7k"/>
                             <constraint firstAttribute="trailing" secondItem="VJF-6L-bib" secondAttribute="trailing" constant="20" id="iWf-UY-DUq"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="top" secondItem="HiG-Zd-ZTe" secondAttribute="top" constant="175" id="o2t-Kp-rhb"/>
                             <constraint firstAttribute="trailing" secondItem="VxF-Fu-MBl" secondAttribute="trailing" id="qYT-kV-Cv5"/>
+                            <constraint firstItem="oB3-PF-xDg" firstAttribute="top" secondItem="HiG-Zd-ZTe" secondAttribute="top" constant="113" id="tEN-II-EmO"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="leading" secondItem="VJF-6L-bib" secondAttribute="leading" id="uis-9j-Psq"/>
                             <constraint firstAttribute="bottom" secondItem="VxF-Fu-MBl" secondAttribute="bottom" id="vQv-nZ-kjn"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="top" secondItem="VJF-6L-bib" secondAttribute="bottom" constant="1" id="zjm-La-Al6"/>
@@ -1327,10 +1325,10 @@ Gw
                         <outlet property="episodesPlaceholderField" destination="7Iw-aQ-0xk" id="naZ-Bk-zIo"/>
                         <outlet property="playPauseButton" destination="N9h-kn-WOD" id="F60-kc-DAI"/>
                         <outlet property="playerCustomView" destination="RoI-9c-hw7" id="WgD-Ua-wV6"/>
-                        <outlet property="playerInfo" destination="D8Y-RH-mg7" id="3TP-59-5ef"/>
                         <outlet property="playerSlider" destination="Kne-bz-9xP" id="0Dx-vf-MtW"/>
                         <outlet property="podcastImageView" destination="91P-1M-4OD" id="MKe-Mg-SPT"/>
                         <outlet property="podcastTitleField" destination="VJF-6L-bib" id="7jo-rJ-1DH"/>
+                        <outlet property="scrollingTextView" destination="oB3-PF-xDg" id="Nuy-xH-7CJ"/>
                         <outlet property="skip30BackButton" destination="tfB-g8-wdw" id="nz1-G8-vIA"/>
                         <outlet property="skip30ForwardButton" destination="qS3-PE-AVx" id="IRz-3M-Pee"/>
                     </connections>
