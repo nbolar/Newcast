@@ -21,6 +21,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
-
+    @IBAction func addNewPodcastClicked(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "search"), object: nil)
+        
+    }
+    
 }
 

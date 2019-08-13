@@ -52,6 +52,7 @@ class PodcastVC: NSViewController {
         searchSavedPodcastsField.refusesFirstResponder = true
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: "updateUI"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(customURL), name: NSNotification.Name(rawValue: "customURL"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addPodcastButtonClicked(_:)), name: NSNotification.Name(rawValue: "search"), object: nil)
     }
     
     
