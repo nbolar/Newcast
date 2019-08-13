@@ -68,7 +68,8 @@ class PodcastSearchVC: NSViewController {
     @objc func updateUI(){
         collectionView.reloadData()
         circularProgress.removeFromSuperview()
-        if podcastsNumber == 0{
+        collectionView.reloadData()
+        if podcastsNumber == 0 && podcastSearchField.stringValue.count != 0 {
             noResultsLabel.isHidden = false
         }
     }

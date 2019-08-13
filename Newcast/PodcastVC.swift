@@ -38,7 +38,16 @@ class PodcastVC: NSViewController {
 //        UserDefaults.standard.removeObject(forKey: "podcastsTitle")
         episodes.removeAll()
         view.insertVibrancyView(material: .hudWindow)
+        let fieldBackgroundColor = NSColor(
+            calibratedHue: 230/360,
+            saturation: 0.35,
+            brightness: 0.85,
+            alpha: 0.3)
         
+        searchSavedPodcastsField.layer?.backgroundColor = fieldBackgroundColor.cgColor
+        searchSavedPodcastsField.layer?.borderColor = NSColor.gray.cgColor
+        searchSavedPodcastsField.layer?.borderWidth = 1
+        searchSavedPodcastsField.layer?.cornerRadius = 8
         if UserDefaults.standard.array(forKey: "podcasts") == nil{
             podcasts = []
             podcastsImageURL = []
@@ -252,10 +261,13 @@ extension NSView {
 }
 
 
-//extension NSView {
-//    func makeVibrant() {
-//        if #available(macOS 10.14, *) {
-//            contentView?.insertVibrancyView(material: .underWindowBackground)
-//        }
-//    }
-//}
+extension NSSearchField{
+    @IBInspectable var placeHolderColor: NSColor? {
+        get {
+            return self.placeHolderColor
+        }
+        set {
+            self.placeholderAttributedString = NSAttributedString(string:self.placeholderString != nil ? self.placeholderString! : "", attributes:[NSAttributedString.Key.foregroundColor: newValue!])
+        }
+    }
+}

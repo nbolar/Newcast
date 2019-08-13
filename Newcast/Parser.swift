@@ -71,10 +71,9 @@ class Parser {
             let episode = Episodes()
             episode.title = item["title"].element?.text ?? ""
             episode.podcastDescription = item["itunes:subtitle"].element?.text ?? ""
-            if item["itunes:subtitle"].element == nil{
+            if item["itunes:subtitle"].element == nil || item["itunes:subtitle"].element?.text == ""{
                 episode.podcastDescription = item["description"].element?.text ?? ""
             }
-
             episode.audioURL = item["enclosure"].element?.attribute(by: "url")?.text ?? ""
             episode.episodeDuration = item["itunes:duration"].element?.text ?? ""
             let date = Episodes.formatter.date(from: item["pubDate"].element?.text ?? "")

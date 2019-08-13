@@ -761,7 +761,7 @@
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Podcasts" id="IpI-3d-lhr">
                                     <font key="font" metaFont="systemMedium" size="20"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -789,17 +789,23 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <color key="contentTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="removePodcastButtonClicked:" target="UAx-cJ-4Oq" id="wty-IQ-k2v"/>
                                 </connections>
                             </button>
                             <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLw-gk-UBo">
-                                <rect key="frame" x="20" y="0.0" width="360" height="22"/>
-                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Search Saved Podcasts" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="Zg3-Ne-bYN">
+                                <rect key="frame" x="20" y="0.0" width="360" height="21"/>
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="border" placeholderString="Search Saved Podcasts" drawsBackground="YES" usesSingleLineMode="YES" sendsWholeSearchString="YES" id="Zg3-Ne-bYN">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </searchFieldCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
+                                        <color key="value" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="searchSavedPodcast:" target="UAx-cJ-4Oq" id="b45-dL-uqE"/>
                                 </connections>
@@ -912,7 +918,7 @@ Gw
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Search" id="GVu-MM-ZA9">
                                     <font key="font" metaFont="systemMedium" size="20"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -944,7 +950,7 @@ Gw
                                     <action selector="addURLButtonClicked:" target="bfv-0S-z8C" id="aha-UQ-QfA"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iPM-Gt-K0u">
+                            <textField hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iPM-Gt-K0u">
                                 <rect key="frame" x="98" y="14" width="323" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="2cU-uM-g5k"/>
@@ -1033,7 +1039,7 @@ Gw
                                                         </constraints>
                                                         <textFieldCell key="cell" selectable="YES" alignment="center" title="Multiline Label" id="CYY-Ot-zMC">
                                                             <font key="font" metaFont="systemMedium" size="17"/>
-                                                            <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
@@ -1063,8 +1069,8 @@ Gw
                                                 </constraints>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" drawsBackground="YES" id="K75-JM-euG">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </textFieldCell>
                                             </textField>
                                         </subviews>
@@ -1138,7 +1144,7 @@ Gw
                                 </constraints>
                                 <textFieldCell key="cell" selectable="YES" title="Multiline Label" drawsBackground="YES" id="Fj3-MJ-KsU">
                                     <font key="font" metaFont="systemMedium" size="13"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </textFieldCell>
                             </textField>
@@ -1226,6 +1232,15 @@ Gw
                                         </buttonCell>
                                         <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D8Y-RH-mg7">
+                                        <rect key="frame" x="148" y="6" width="546" height="17"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="df7-Fy-HxG">
+                                            <font key="font" metaFont="systemMedium" size="13"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="N9h-kn-WOD" firstAttribute="leading" secondItem="tfB-g8-wdw" secondAttribute="trailing" constant="73" id="0X4-45-Dfn"/>
@@ -1277,7 +1292,7 @@ Gw
                                 <rect key="frame" x="18" y="507" width="65" height="18"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Episodes" id="8co-AV-GJU">
                                     <font key="font" metaFont="systemMedium" size="14"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -1285,7 +1300,7 @@ Gw
                                 <rect key="frame" x="18" y="526" width="664" height="26"/>
                                 <textFieldCell key="cell" selectable="YES" title="Podcast Title" id="dg7-FV-t9P">
                                     <font key="font" metaFont="systemSemibold" size="20"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -1312,6 +1327,7 @@ Gw
                         <outlet property="episodesPlaceholderField" destination="7Iw-aQ-0xk" id="naZ-Bk-zIo"/>
                         <outlet property="playPauseButton" destination="N9h-kn-WOD" id="F60-kc-DAI"/>
                         <outlet property="playerCustomView" destination="RoI-9c-hw7" id="WgD-Ua-wV6"/>
+                        <outlet property="playerInfo" destination="D8Y-RH-mg7" id="3TP-59-5ef"/>
                         <outlet property="playerSlider" destination="Kne-bz-9xP" id="0Dx-vf-MtW"/>
                         <outlet property="podcastImageView" destination="91P-1M-4OD" id="MKe-Mg-SPT"/>
                         <outlet property="podcastTitleField" destination="VJF-6L-bib" id="7jo-rJ-1DH"/>

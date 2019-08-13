@@ -15,6 +15,7 @@ var podcastSelecetedIndex : Int!
 
 class DetailVC: NSViewController {
 
+    @IBOutlet weak var playerInfo: NSTextField!
     @IBOutlet weak var playPauseButton: NSButton!
     @IBOutlet weak var skip30ForwardButton: NSButton!
     @IBOutlet weak var skip30BackButton: NSButton!
@@ -68,6 +69,7 @@ class DetailVC: NSViewController {
         podcastImageView.alphaValue = 0.9
         podcastImageView.layer?.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         podcastTitleField.stringValue = ""
+        playerInfo.stringValue = ""
         episodesPlaceholderField.alphaValue = 0
         playerSlider.isHidden = true
         playPauseButton.isHidden = true
@@ -99,12 +101,14 @@ class DetailVC: NSViewController {
         playPauseButton.isHidden = true
         skip30BackButton.isHidden = true
         skip30ForwardButton.isHidden = true
+        playerInfo.stringValue = ""
     }
     @objc func unhideUI(){
         playerSlider.isHidden = false
         playPauseButton.isHidden = false
         skip30BackButton.isHidden = false
         skip30ForwardButton.isHidden = false
+        
     }
     @objc func moveSlider(){
         if playerDuration != nil && playerSeconds != nil{
@@ -115,6 +119,7 @@ class DetailVC: NSViewController {
     }
     @objc func playPausePass(){
         if playPauseButton.image?.name() == "play"{
+            playerInfo.stringValue = "\(podcastsTitle[podcastSelecetedIndex]) — \(episodeTitles[playingIndex])"
             playPauseButton.image = NSImage(named: "pause")
         }else{
             playPauseButton.image = NSImage(named: "play")
@@ -182,6 +187,7 @@ class DetailVC: NSViewController {
         playPauseButton.isHidden = true
         skip30BackButton.isHidden = true
         skip30ForwardButton.isHidden = true
+        playerInfo.stringValue = ""
         episodes.removeAll()
         collectionView.reloadData()
     }

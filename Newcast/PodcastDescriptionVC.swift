@@ -20,6 +20,7 @@ class PodcastDescriptionVC: NSViewController {
     }
     
     func setupUI(){
+        view.insertVibrancyView(material: .light)
         backgroundImageView.alphaValue = 0.7
         do {
             let doc: Document = try SwiftSoup.parse(podcastDescription)
