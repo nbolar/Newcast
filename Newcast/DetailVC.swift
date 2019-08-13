@@ -51,6 +51,7 @@ class DetailVC: NSViewController {
     }
     
     func setupUI(){
+        view.insertVibrancyView(material: .hudWindow)
         networkIndicator.style = .spinning
         collectionView.dataSource = self
         collectionView.delegate = self

@@ -37,7 +37,7 @@ class PodcastVC: NSViewController {
 //        UserDefaults.standard.removeObject(forKey: "podcastImagesURL")
 //        UserDefaults.standard.removeObject(forKey: "podcastsTitle")
         episodes.removeAll()
-        
+        view.insertVibrancyView(material: .hudWindow)
         
         if UserDefaults.standard.array(forKey: "podcasts") == nil{
             podcasts = []
@@ -81,9 +81,9 @@ class PodcastVC: NSViewController {
         let itemIndex = NSIndexPath(forItem: position, inSection: 0)
         let ctx = NSAnimationContext.current
         ctx.allowsImplicitAnimation = true
-        collectionView.animator().scrollToItems(at: [itemIndex as IndexPath], scrollPosition: .right)
+        collectionView.animator().scrollToItems(at: [itemIndex as IndexPath], scrollPosition: .bottom)
         let item = collectionView.item(at: itemIndex as IndexPath)
-        (item as! PodcastCellView).setHighlight(selected: true)
+        (item as! PodcastCellView).setSearchHighlight(selected: true)
         Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(unhighlight), userInfo: nil, repeats: false)
 
     }
@@ -225,3 +225,37 @@ extension PodcastVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSCol
     
     
 }
+
+extension NSView {
+    /**
+     - Note: You should almost never need to set `appearanceName` as it's done automatically
+     */
+    @discardableResult
+    func insertVibrancyView(
+        material: NSVisualEffectView.Material = .appearanceBased,
+        blendingMode: NSVisualEffectView.BlendingMode = .behindWindow,
+        appearanceName: NSAppearance.Name? = nil
+        ) -> NSVisualEffectView {
+        let view = NSVisualEffectView(frame: bounds)
+        view.autoresizingMask = [.width, .height]
+        view.material = material
+        view.blendingMode = blendingMode
+        
+        if let appearanceName = appearanceName {
+            view.appearance = NSAppearance(named: appearanceName)
+        }
+        
+        addSubview(view, positioned: .below, relativeTo: nil)
+        
+        return view
+    }
+}
+
+
+//extension NSView {
+//    func makeVibrant() {
+//        if #available(macOS 10.14, *) {
+//            contentView?.insertVibrancyView(material: .underWindowBackground)
+//        }
+//    }
+//}

@@ -77,6 +77,7 @@ class PodcastSearchVC: NSViewController {
         addPodcastButton.isHidden = false
         noResultsLabel.isHidden = true
         podcastsNumber = 0
+        collectionView.deselectAll(Any?.self)
 //        networkIndicator.startAnimation(Any?.self)
 //        view.addSubview(networkIndicator)
         view.addSubview(circularProgress)

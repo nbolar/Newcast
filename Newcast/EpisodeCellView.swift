@@ -106,14 +106,17 @@ class EpisodeCellView: NSCollectionViewItem {
         {
             episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate)) • \(episodeCell.episodeDuration)"
         }else{
-            if Double(episodeCell.episodeDuration)! >= 3600{
-                duration = String(Int(Double(episodeCell.episodeDuration)! / 60) / 60) + ":" + String(format: "%02d", Int(Double(episodeCell.episodeDuration)! / 60) % 60) + ":" +  String(format: "%02d", Int(Double(episodeCell.episodeDuration)!.truncatingRemainder(dividingBy: 60)))
-                episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate)) • \(duration!)"
+            if episodeCell.episodeDuration.count != 0 {
+                if Double(episodeCell.episodeDuration)! >= 3600{
+                    duration = String(Int(Double(episodeCell.episodeDuration)! / 60) / 60) + ":" + String(format: "%02d", Int(Double(episodeCell.episodeDuration)! / 60) % 60) + ":" +  String(format: "%02d", Int(Double(episodeCell.episodeDuration)!.truncatingRemainder(dividingBy: 60)))
+                    episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate)) • \(duration!)"
+                }else{
+                    duration = String(Int(Double(episodeCell.episodeDuration)! / 60) % 60) + ":" +  String(format: "%02d", Int(Double(episodeCell.episodeDuration)!.truncatingRemainder(dividingBy: 60)))
+                    episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate)) • \(duration!)"
+                }
             }else{
-                duration = String(Int(Double(episodeCell.episodeDuration)! / 60) % 60) + ":" +  String(format: "%02d", Int(Double(episodeCell.episodeDuration)!.truncatingRemainder(dividingBy: 60)))
-                episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate)) • \(duration!)"
+                episodePubDateField.stringValue = "\(dateFormatter.string(from: episodeCell.pubDate))"
             }
-            
         }
         
         do {

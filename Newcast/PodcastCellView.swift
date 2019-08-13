@@ -33,6 +33,14 @@ class PodcastCellView: NSCollectionViewItem {
         }, completionHandler:{
         })   
     }
+    
+    func setSearchHighlight(selected: Bool){
+        NSAnimationContext.runAnimationGroup({_ in
+            NSAnimationContext.current.duration = 0.7
+            view.layer?.borderWidth = selected ? 5.0 : 0.0
+        }, completionHandler:{
+        })
+    }
     func configurePodcastSearchCell(podcastCell: Parser)
     {
         podcastImage.sd_setImage(with: URL(string: podcastCell.imageURL), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)

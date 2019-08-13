@@ -720,10 +720,11 @@
                 <viewController id="UAx-cJ-4Oq" customClass="PodcastVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="d1b-bf-kXE">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="700"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                         <subviews>
-                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9z-kX-uw6">
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9z-kX-uw6">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="700"/>
+                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28" id="lJw-hc-9D3"/>
                             </imageView>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="5" horizontalPageScroll="5" verticalLineScroll="5" verticalPageScroll="5" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpB-dp-GU4">
@@ -794,7 +795,7 @@
                             </button>
                             <searchField wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLw-gk-UBo">
                                 <rect key="frame" x="20" y="0.0" width="360" height="22"/>
-                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="Zg3-Ne-bYN">
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Search Saved Podcasts" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="Zg3-Ne-bYN">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -807,7 +808,6 @@
                         <constraints>
                             <constraint firstItem="xPr-pO-j9x" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="20" id="5X9-WY-zZv"/>
                             <constraint firstItem="A8c-5w-XB3" firstAttribute="bottom" secondItem="N2Y-Sv-0Kf" secondAttribute="bottom" id="6ye-MQ-yBV"/>
-                            <constraint firstItem="RLw-gk-UBo" firstAttribute="centerX" secondItem="j9z-kX-uw6" secondAttribute="centerX" id="D1m-So-iyb"/>
                             <constraint firstAttribute="trailing" secondItem="N2Y-Sv-0Kf" secondAttribute="trailing" constant="11" id="IKG-Nj-wUG"/>
                             <constraint firstAttribute="bottom" secondItem="RLw-gk-UBo" secondAttribute="bottom" id="Jwk-oO-UKZ"/>
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="leading" secondItem="A8c-5w-XB3" secondAttribute="trailing" constant="8" symbolic="YES" id="KvA-rE-q8t"/>
@@ -820,7 +820,6 @@
                             <constraint firstItem="CpB-dp-GU4" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="45" id="hPQ-hQ-us6"/>
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="leading" secondItem="xPr-pO-j9x" secondAttribute="trailing" constant="258" id="ktP-4s-ntm"/>
                             <constraint firstAttribute="bottom" secondItem="CpB-dp-GU4" secondAttribute="bottom" constant="20" id="pKt-Ye-q4U"/>
-                            <constraint firstItem="RLw-gk-UBo" firstAttribute="bottom" secondItem="j9z-kX-uw6" secondAttribute="bottom" id="qKP-rd-WjX"/>
                             <constraint firstItem="N2Y-Sv-0Kf" firstAttribute="top" secondItem="d1b-bf-kXE" secondAttribute="top" constant="22" id="qbD-Vn-Drh"/>
                             <constraint firstItem="A8c-5w-XB3" firstAttribute="centerY" secondItem="N2Y-Sv-0Kf" secondAttribute="centerY" id="zaC-2v-vOv"/>
                         </constraints>
