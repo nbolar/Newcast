@@ -1031,7 +1031,7 @@ Gw
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="190" id="Cya-E6-KTL"/>
                                                         </constraints>
-                                                        <textFieldCell key="cell" selectable="YES" title="Multiline Label" id="CYY-Ot-zMC">
+                                                        <textFieldCell key="cell" selectable="YES" alignment="center" title="Multiline Label" id="CYY-Ot-zMC">
                                                             <font key="font" metaFont="systemMedium" size="17"/>
                                                             <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

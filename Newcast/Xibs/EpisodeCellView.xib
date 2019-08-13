@@ -116,7 +116,6 @@
                 <outlet property="infoButton" destination="SQG-r5-7sH" id="Qbe-rU-Icq"/>
                 <outlet property="pauseButton" destination="Tk2-el-CwP" id="3AH-6e-QVm"/>
                 <outlet property="playButton" destination="J0t-4m-bnM" id="c84-X0-AFe"/>
-                <outlet property="playPauseButton" destination="J0t-4m-bnM" id="us5-ax-Y00"/>
                 <outlet property="view" destination="c22-O7-iKe" id="HXK-0k-VQ6"/>
             </connections>
         </collectionViewItem>

@@ -37,7 +37,7 @@ class PodcastCellView: NSCollectionViewItem {
     func setSearchHighlight(selected: Bool){
         NSAnimationContext.runAnimationGroup({_ in
             NSAnimationContext.current.duration = 0.7
-            view.layer?.borderWidth = selected ? 5.0 : 0.0
+            view.layer?.borderWidth = selected ? 4.0 : 0.0
         }, completionHandler:{
         })
     }
