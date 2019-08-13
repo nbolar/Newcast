@@ -11,6 +11,7 @@ import Alamofire
 import SWXMLHash
 import FeedKit
 
+
 var podcasts : [String]! = []
 var podcastsImageURL : [String]! = []
 var podcastsTitle : [String]! = []
@@ -36,6 +37,8 @@ class PodcastVC: NSViewController {
 //        UserDefaults.standard.removeObject(forKey: "podcastImagesURL")
 //        UserDefaults.standard.removeObject(forKey: "podcastsTitle")
         episodes.removeAll()
+        
+        
         if UserDefaults.standard.array(forKey: "podcasts") == nil{
             podcasts = []
             podcastsImageURL = []

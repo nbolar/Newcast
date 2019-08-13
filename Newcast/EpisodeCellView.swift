@@ -10,6 +10,7 @@ import Cocoa
 import SDWebImage
 import SwiftSoup
 import AVFoundation
+import CircularProgressMac
 
 var episodeSelectedIndex: Int!
 var playingIndex: Int!
@@ -36,6 +37,7 @@ class EpisodeCellView: NSCollectionViewItem {
     var pausedTime: CMTime? = nil
     var duration: String!
     let popoverView = NSPopover()
+    let circularProgress = CircularProgress(size: 30)
     
     
     
@@ -59,8 +61,9 @@ class EpisodeCellView: NSCollectionViewItem {
         let labelYPostion:CGFloat = view.bounds.midY + 15
         let labelWidth:CGFloat = 30
         let labelHeight:CGFloat = 30
-        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
-        networkIndicator.style = .spinning
+        circularProgress.isIndeterminate = true
+        circularProgress.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+        circularProgress.color = .white
         NotificationCenter.default.addObserver(self, selector: #selector(playTestFunction), name: NSNotification.Name(rawValue: "playButton"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(pauseTestFunction), name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
         
@@ -255,10 +258,11 @@ class EpisodeCellView: NSCollectionViewItem {
     }
     
     func observePlayPause(){
-        networkIndicator.isHidden = false
+//        networkIndicator.isHidden = false
         player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-        networkIndicator.startAnimation(Any?.self)
-        view.addSubview(networkIndicator)
+//        networkIndicator.startAnimation(Any?.self)
+//        view.addSubview(networkIndicator)
+        view.addSubview(circularProgress)
     }
     func updateSlider(){
         let interval = CMTime(value: 1, timescale: 2)
@@ -283,9 +287,9 @@ class EpisodeCellView: NSCollectionViewItem {
                 DispatchQueue.main.async {[weak self] in
                     
                     if newStatus == .playing  {
-                        self?.networkIndicator.isHidden = true
+                        self?.circularProgress.isHidden = true
                     } else {
-                        self?.networkIndicator.isHidden = true
+                        self?.circularProgress.isHidden = true
                     }
                 }
             }

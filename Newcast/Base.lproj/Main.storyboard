@@ -928,7 +928,7 @@ Gw
                                     <action selector="searchPodcast" target="bfv-0S-z8C" id="gBc-0H-2du"/>
                                 </connections>
                             </searchField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AL7-1R-7hb">
+                            <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AL7-1R-7hb">
                                 <rect key="frame" x="14" y="8" width="82" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ZtP-pm-MtB"/>
@@ -960,12 +960,21 @@ Gw
                                     <action selector="addURLButtonClicked:" target="bfv-0S-z8C" id="sMc-lF-y8p"/>
                                 </connections>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OdI-UN-BH5">
+                                <rect key="frame" x="255" y="291" width="90" height="18"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="NO RESULTS" id="OHE-dH-9Nk">
+                                    <font key="font" metaFont="systemMedium" size="14"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="3gi-gy-qgx" firstAttribute="leading" secondItem="iPM-Gt-K0u" secondAttribute="trailing" constant="22" id="038-Ei-V1f"/>
                             <constraint firstAttribute="trailing" secondItem="szq-lo-DkH" secondAttribute="trailing" constant="20" id="0ZQ-SM-3DD"/>
                             <constraint firstItem="YAM-gE-umR" firstAttribute="top" secondItem="lbB-A7-fyR" secondAttribute="top" constant="29" id="1Zp-hb-gIt"/>
                             <constraint firstItem="Ee5-PG-gGu" firstAttribute="top" secondItem="szq-lo-DkH" secondAttribute="bottom" constant="19" id="8SJ-t1-4Fg"/>
+                            <constraint firstItem="OdI-UN-BH5" firstAttribute="centerX" secondItem="lbB-A7-fyR" secondAttribute="centerX" id="B3L-uF-eHl"/>
                             <constraint firstItem="AL7-1R-7hb" firstAttribute="baseline" secondItem="3gi-gy-qgx" secondAttribute="baseline" constant="-1" id="MqL-ts-sTw"/>
                             <constraint firstAttribute="bottom" secondItem="tg0-W9-vGy" secondAttribute="bottom" constant="14" id="Q9z-cT-qrc"/>
                             <constraint firstItem="tg0-W9-vGy" firstAttribute="leading" secondItem="3gi-gy-qgx" secondAttribute="trailing" constant="8" id="QU6-Oz-cYN"/>
@@ -979,6 +988,7 @@ Gw
                             <constraint firstItem="tg0-W9-vGy" firstAttribute="top" secondItem="Ee5-PG-gGu" secondAttribute="bottom" constant="8" symbolic="YES" id="eew-h0-3eB"/>
                             <constraint firstItem="Ee5-PG-gGu" firstAttribute="leading" secondItem="szq-lo-DkH" secondAttribute="leading" id="hdt-n9-QDe"/>
                             <constraint firstItem="AL7-1R-7hb" firstAttribute="leading" secondItem="lbB-A7-fyR" secondAttribute="leading" constant="20" id="maO-ay-B58"/>
+                            <constraint firstItem="OdI-UN-BH5" firstAttribute="centerY" secondItem="lbB-A7-fyR" secondAttribute="centerY" id="oKD-x9-pRG"/>
                             <constraint firstItem="szq-lo-DkH" firstAttribute="top" secondItem="YAM-gE-umR" secondAttribute="bottom" constant="8" id="ob9-aY-h12"/>
                             <constraint firstItem="iPM-Gt-K0u" firstAttribute="leading" secondItem="AL7-1R-7hb" secondAttribute="trailing" constant="8" id="qoR-k9-07z"/>
                             <constraint firstAttribute="bottom" secondItem="3gi-gy-qgx" secondAttribute="bottom" constant="14" id="sSs-S3-FOt"/>
@@ -991,6 +1001,7 @@ Gw
                         <outlet property="addPodcastButton" destination="tg0-W9-vGy" id="eOp-39-T50"/>
                         <outlet property="collectionView" destination="6bz-BZ-B8i" id="xQi-JQ-OTD"/>
                         <outlet property="customURLField" destination="iPM-Gt-K0u" id="nHL-nz-hLj"/>
+                        <outlet property="noResultsLabel" destination="OdI-UN-BH5" id="XNg-dw-bUG"/>
                         <outlet property="podcastSearchField" destination="szq-lo-DkH" id="R5N-JF-yhI"/>
                         <outlet property="scrollView" destination="Ee5-PG-gGu" id="3EK-Mu-Z8k"/>
                     </connections>

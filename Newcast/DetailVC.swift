@@ -9,6 +9,7 @@
 import Cocoa
 import SDWebImage
 import AVFoundation
+import CircularProgressMac
 
 var podcastSelecetedIndex : Int!
 
@@ -27,6 +28,7 @@ class DetailVC: NSViewController {
     var playPauseCheck: Int! = 0
     let networkIndicator = NSProgressIndicator()
     let popoverView = NSPopover()
+    let circularProgress = CircularProgress(size: 60)
     
     
     
@@ -74,11 +76,21 @@ class DetailVC: NSViewController {
         
         
         
+//        let labelXPostion:CGFloat = view.bounds.midX
+//        let labelYPostion:CGFloat = view.bounds.midY
+//        let labelWidth:CGFloat = 30
+//        let labelHeight:CGFloat = 30
+//        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+        
+        circularProgress.isIndeterminate = true
+        circularProgress.color = .white
         let labelXPostion:CGFloat = view.bounds.midX
         let labelYPostion:CGFloat = view.bounds.midY
-        let labelWidth:CGFloat = 30
-        let labelHeight:CGFloat = 30
-        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+        let labelWidth:CGFloat = 60
+        let labelHeight:CGFloat = 60
+        circularProgress.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+        
+//        view.addSubview(circularProgress)
     }
     
     @objc func hideUI(){
@@ -137,7 +149,8 @@ class DetailVC: NSViewController {
         let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
         podcastImageView.addTrackingArea(area)
         collectionView.reloadData()
-        networkIndicator.removeFromSuperview()
+//        networkIndicator.removeFromSuperview()
+        circularProgress.removeFromSuperview()
         episodesPlaceholderField.alphaValue = 1.0
         collectionView.deselectAll(Any?.self)
         collectionView.reloadData()
@@ -152,8 +165,9 @@ class DetailVC: NSViewController {
         podcastTitleField.stringValue = "\(podcastsTitle[podcastSelecetedIndex])"
         podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), context: nil)
         collectionView.reloadData()
-        networkIndicator.startAnimation(Any?.self)
-        view.addSubview(networkIndicator)
+//        networkIndicator.startAnimation(Any?.self)
+//        view.addSubview(networkIndicator)
+        view.addSubview(circularProgress)
     }
     
     @objc func deletedPodcast(){

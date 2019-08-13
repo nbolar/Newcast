@@ -9,6 +9,7 @@
 import Cocoa
 import Alamofire
 import Network
+import CircularProgressMac
 
 var feedURL : [String]!
 var customPodcastURL : String!
@@ -16,6 +17,7 @@ var customPodcastURL : String!
 class PodcastSearchVC: NSViewController {
     
     
+    @IBOutlet weak var noResultsLabel: NSTextField!
     @IBOutlet weak var addPodcastButton: NSButton!
     @IBOutlet weak var customURLField: NSTextField!
     @IBOutlet weak var scrollView: NSScrollView!
@@ -23,6 +25,7 @@ class PodcastSearchVC: NSViewController {
     @IBOutlet weak var podcastSearchField: NSSearchField!
     var selectedIndex : Int!
     let networkIndicator = NSProgressIndicator()
+    let circularProgress = CircularProgress(size: 40)
     static let instance = PodcastSearchVC()
     fileprivate var _podcastSearch = [Parser]()
     
@@ -42,14 +45,21 @@ class PodcastSearchVC: NSViewController {
         podcastsNumber = 0
         networkIndicator.style = .spinning
         customURLField.alphaValue = 0
-        
-        let labelXPostion:CGFloat = view.bounds.midX
+        noResultsLabel.isHidden = true
+//        let labelXPostion:CGFloat = view.bounds.midX
+//        let labelYPostion:CGFloat = view.bounds.midY
+//        let labelWidth:CGFloat = 30
+//        let labelHeight:CGFloat = 30
+//        addPodcastButton.isHidden = false
+//
+//        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+        circularProgress.isIndeterminate = true
+        circularProgress.color = .white
+        let labelXPostion:CGFloat = view.bounds.midX - 30
         let labelYPostion:CGFloat = view.bounds.midY
-        let labelWidth:CGFloat = 30
-        let labelHeight:CGFloat = 30
-        addPodcastButton.isHidden = false
-    
-        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+        let labelWidth:CGFloat = 40
+        let labelHeight:CGFloat = 40
+        circularProgress.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: "updateSearchUI"), object: nil)
         
@@ -57,14 +67,19 @@ class PodcastSearchVC: NSViewController {
     
     @objc func updateUI(){
         collectionView.reloadData()
-        networkIndicator.removeFromSuperview()
+        circularProgress.removeFromSuperview()
+        if podcastsNumber == 0{
+            noResultsLabel.isHidden = false
+        }
     }
     
     @IBAction func searchPodcast(_ sender: Any){
         addPodcastButton.isHidden = false
+        noResultsLabel.isHidden = true
         podcastsNumber = 0
-        networkIndicator.startAnimation(Any?.self)
-        view.addSubview(networkIndicator)
+//        networkIndicator.startAnimation(Any?.self)
+//        view.addSubview(networkIndicator)
+        view.addSubview(circularProgress)
         //        let url = URL(string: "https://atp.fm/episodes?format=rss")
         
         let editedURL = podcastSearchField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
