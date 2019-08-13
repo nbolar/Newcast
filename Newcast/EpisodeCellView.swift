@@ -222,14 +222,12 @@ class EpisodeCellView: NSCollectionViewItem {
                     playButton.alphaValue = 0
                     pauseButton.alphaValue = 1
                 }else{
-                    print("YAS")
                     pausePlayer()
                     playingIndex = nil
                     playButton.alphaValue = 1
                     pauseButton.alphaValue = 0
                 }
             }else{
-                print("YAS2")
                 pausePlayer()
                 playingIndex = nil
                 playPauseButtonClicked(Any?.self)
@@ -251,7 +249,6 @@ class EpisodeCellView: NSCollectionViewItem {
                 playButton.alphaValue = 0
                 pauseButton.alphaValue = 1
             }else if pauseButton.alphaValue == 1{
-                print("YAS3")
                 pausePlayer()
                 playingIndex = nil
                 playButton.alphaValue = 1
