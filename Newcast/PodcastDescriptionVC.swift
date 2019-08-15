@@ -21,7 +21,7 @@ class PodcastDescriptionVC: NSViewController {
     
     func setupUI(){
         view.insertVibrancyView(material: .light)
-        backgroundImageView.alphaValue = 0.7
+        backgroundImageView.alphaValue = 0.5
         do {
             let doc: Document = try SwiftSoup.parse(podcastDescription)
             descriptionLabelField.stringValue = (try doc.text())

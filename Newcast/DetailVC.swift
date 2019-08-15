@@ -12,6 +12,7 @@ import AVFoundation
 import CircularProgressMac
 
 var podcastSelecetedIndex : Int!
+var seekToPosition: Float64!
 
 class DetailVC: NSViewController {
 
@@ -31,6 +32,7 @@ class DetailVC: NSViewController {
     let networkIndicator = NSProgressIndicator()
     let popoverView = NSPopover()
     let circularProgress = CircularProgress(size: 60)
+    var deleted: Bool!
     
     
     
@@ -70,13 +72,12 @@ class DetailVC: NSViewController {
         podcastImageView.alphaValue = 0.9
         podcastImageView.layer?.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         podcastTitleField.stringValue = ""
-//        playerInfo.stringValue = ""
+        scrollingTextView.setup(string: "")
         episodesPlaceholderField.alphaValue = 0
         playerSlider.isHidden = true
         playPauseButton.isHidden = true
         skip30BackButton.isHidden = true
         skip30ForwardButton.isHidden = true
-        
         
         
         
@@ -88,8 +89,8 @@ class DetailVC: NSViewController {
         
         circularProgress.isIndeterminate = true
         circularProgress.color = .white
-        let labelXPostion:CGFloat = view.bounds.midX
-        let labelYPostion:CGFloat = view.bounds.midY
+        let labelXPostion:CGFloat = 350
+        let labelYPostion:CGFloat = 253
         let labelWidth:CGFloat = 60
         let labelHeight:CGFloat = 60
         circularProgress.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
@@ -118,6 +119,12 @@ class DetailVC: NSViewController {
         }
         
     }
+    @IBAction func musicSliderPositionChanged(_ sender: NSSlider) {
+        print("Hello")
+        test = sender.doubleValue
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sliderChanged"), object: nil)
+    }
+    
     @objc func playPausePass(){
         if playPauseButton.image?.name() == "play"{
             scrollingTextView.setup(string: "\(podcastsTitle[podcastSelecetedIndex]) — \(episodeTitles[playingIndex])")
@@ -192,7 +199,7 @@ class DetailVC: NSViewController {
         playPauseButton.isHidden = true
         skip30BackButton.isHidden = true
         skip30ForwardButton.isHidden = true
-//        playerInfo.stringValue = ""
+        scrollingTextView.setup(string: "")
         episodes.removeAll()
         collectionView.reloadData()
     }

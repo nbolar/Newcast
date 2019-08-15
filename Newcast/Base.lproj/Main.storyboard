@@ -1192,6 +1192,9 @@ Gw
                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kne-bz-9xP">
                                         <rect key="frame" x="146" y="28" width="548" height="19"/>
                                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="XdZ-WJ-IBU" customClass="CustomSliderCell" customModule="Newcast" customModuleProvider="target"/>
+                                        <connections>
+                                            <action selector="musicSliderPositionChanged:" target="oai-QY-2Tg" id="JUR-t8-tWb"/>
+                                        </connections>
                                     </slider>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N9h-kn-WOD">
                                         <rect key="frame" x="387" y="62" width="46" height="46"/>
@@ -1296,7 +1299,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="oB3-PF-xDg" customClass="ScrollingTextView" customModule="Newcast" customModuleProvider="target">
-                                <rect key="frame" x="153" y="560" width="538" height="27"/>
+                                <rect key="frame" x="153" y="566" width="538" height="27"/>
                             </customView>
                         </subviews>
                         <constraints>
@@ -1308,12 +1311,12 @@ Gw
                             <constraint firstAttribute="trailing" secondItem="RoI-9c-hw7" secondAttribute="trailing" id="T9N-st-w9v"/>
                             <constraint firstAttribute="trailing" secondItem="oB3-PF-xDg" secondAttribute="trailing" constant="9" id="bDQ-gX-65t"/>
                             <constraint firstItem="VxF-Fu-MBl" firstAttribute="leading" secondItem="HiG-Zd-ZTe" secondAttribute="leading" id="ecx-q1-PfF"/>
-                            <constraint firstItem="VJF-6L-bib" firstAttribute="top" secondItem="oB3-PF-xDg" secondAttribute="bottom" constant="8" symbolic="YES" id="fLJ-u6-0rC"/>
+                            <constraint firstItem="VJF-6L-bib" firstAttribute="top" secondItem="oB3-PF-xDg" secondAttribute="bottom" constant="14" id="fLJ-u6-0rC"/>
                             <constraint firstItem="VJF-6L-bib" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="bottom" constant="8" id="gWO-IR-L7k"/>
                             <constraint firstAttribute="trailing" secondItem="VJF-6L-bib" secondAttribute="trailing" constant="20" id="iWf-UY-DUq"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="top" secondItem="HiG-Zd-ZTe" secondAttribute="top" constant="175" id="o2t-Kp-rhb"/>
                             <constraint firstAttribute="trailing" secondItem="VxF-Fu-MBl" secondAttribute="trailing" id="qYT-kV-Cv5"/>
-                            <constraint firstItem="oB3-PF-xDg" firstAttribute="top" secondItem="HiG-Zd-ZTe" secondAttribute="top" constant="113" id="tEN-II-EmO"/>
+                            <constraint firstItem="oB3-PF-xDg" firstAttribute="top" secondItem="HiG-Zd-ZTe" secondAttribute="top" constant="107" id="tEN-II-EmO"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="leading" secondItem="VJF-6L-bib" secondAttribute="leading" id="uis-9j-Psq"/>
                             <constraint firstAttribute="bottom" secondItem="VxF-Fu-MBl" secondAttribute="bottom" id="vQv-nZ-kjn"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="top" secondItem="VJF-6L-bib" secondAttribute="bottom" constant="1" id="zjm-La-Al6"/>

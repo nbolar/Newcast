@@ -22,6 +22,7 @@ var playerDuration: Float!
 var currentSelectedPodcastIndex: Int!
 var playCount: Int? = nil
 var pauseCount: Int? = nil
+var test: Float64? = nil
 class EpisodeCellView: NSCollectionViewItem {
     
     
@@ -58,7 +59,7 @@ class EpisodeCellView: NSCollectionViewItem {
         episodePubDateField.textColor = .lightGray
         
         let labelXPostion:CGFloat = 325
-        let labelYPostion:CGFloat = view.bounds.midY + 15
+        let labelYPostion:CGFloat = view.bounds.midY + 13
         let labelWidth:CGFloat = 30
         let labelHeight:CGFloat = 30
         circularProgress.isIndeterminate = true
@@ -66,6 +67,7 @@ class EpisodeCellView: NSCollectionViewItem {
         circularProgress.color = .white
         NotificationCenter.default.addObserver(self, selector: #selector(playTestFunction), name: NSNotification.Name(rawValue: "playButton"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(pauseTestFunction), name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(seekToPosition), name: NSNotification.Name(rawValue: "sliderChanged"), object: nil)
         
     }
     
@@ -256,9 +258,14 @@ class EpisodeCellView: NSCollectionViewItem {
             }
         }
     }
+    @objc func seekToPosition(){
+        let seekTime = CMTimeMakeWithSeconds(test ?? 0, preferredTimescale: 1)
+        player?.seek(to: seekTime, completionHandler: { (completedSeek) in
+        })
+}
     
     func observePlayPause(){
-//        networkIndicator.isHidden = false
+        circularProgress.isHidden = false
         player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
 //        networkIndicator.startAnimation(Any?.self)
 //        view.addSubview(networkIndicator)

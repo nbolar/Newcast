@@ -28,6 +28,7 @@ class PodcastSearchVC: NSViewController {
     let circularProgress = CircularProgress(size: 40)
     static let instance = PodcastSearchVC()
     fileprivate var _podcastSearch = [Parser]()
+    let popoverView = NSPopover()
     
     var podcastSearch: [Parser]{
         get{
@@ -118,6 +119,13 @@ class PodcastSearchVC: NSViewController {
             selectedIndex = indexPath.item
             guard let item = collectionView.item(at: indexPath as IndexPath) else {continue}
             (item as! PodcastCellView).setHighlight(selected: selected)
+//            if selected == true{
+//                let storyboard = NSStoryboard(name: "Main", bundle: nil)
+//                guard let vc =  storyboard.instantiateController(withIdentifier: "PodcastDescriptionVC") as? NSViewController else { return }
+//                popoverView.contentViewController = vc
+//                popoverView.behavior = .transient
+//                popoverView.show(relativeTo: (item as! PodcastCellView).podcastImage.bounds, of: (item as! PodcastCellView).podcastImage, preferredEdge: .maxX)
+//            }
             
         }
         
