@@ -724,7 +724,7 @@
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j9z-kX-uw6">
                                 <rect key="frame" x="0.0" y="0.0" width="400" height="700"/>
-                                <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28" id="lJw-hc-9D3"/>
                             </imageView>
                             <scrollView wantsLayer="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="5" horizontalPageScroll="5" verticalLineScroll="5" verticalPageScroll="5" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpB-dp-GU4">
@@ -756,7 +756,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xPr-pO-j9x">
                                 <rect key="frame" x="18" y="656" width="88" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="84" id="bwy-9g-fs0"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="84" id="bwy-9g-fs0"/>
                                     <constraint firstAttribute="height" constant="24" id="qx7-hx-nl8"/>
                                 </constraints>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Podcasts" id="IpI-3d-lhr">
@@ -771,7 +771,7 @@
                                     <constraint firstAttribute="height" constant="22" id="9uk-dO-hgC"/>
                                     <constraint firstAttribute="width" constant="27" id="Ga3-ss-59f"/>
                                 </constraints>
-                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gvf-yI-9IS">
+                                <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gvf-yI-9IS">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="systemBold"/>
                                 </buttonCell>
@@ -780,8 +780,8 @@
                                     <action selector="addPodcastButtonClicked:" target="UAx-cJ-4Oq" id="RKg-2W-lmD"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8c-5w-XB3">
-                                <rect key="frame" x="320" y="649" width="40" height="32"/>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A8c-5w-XB3">
+                                <rect key="frame" x="320" y="649" width="40" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="28" id="r46-9G-96a"/>
                                 </constraints>
@@ -1222,6 +1222,9 @@ Gw
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="skip30AheadClicked:" target="oai-QY-2Tg" id="pe2-hT-ioL"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tfB-g8-wdw">
                                         <rect key="frame" x="248" y="59" width="66" height="51"/>
@@ -1234,6 +1237,9 @@ Gw
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="skip30BehindClicked:" target="oai-QY-2Tg" id="V0O-Va-qI1"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -1315,6 +1321,7 @@ Gw
                             <constraint firstItem="VJF-6L-bib" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="bottom" constant="8" id="gWO-IR-L7k"/>
                             <constraint firstAttribute="trailing" secondItem="VJF-6L-bib" secondAttribute="trailing" constant="20" id="iWf-UY-DUq"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="top" secondItem="HiG-Zd-ZTe" secondAttribute="top" constant="175" id="o2t-Kp-rhb"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7Iw-aQ-0xk" secondAttribute="trailing" constant="20" symbolic="YES" id="ppM-WF-zx8"/>
                             <constraint firstAttribute="trailing" secondItem="VxF-Fu-MBl" secondAttribute="trailing" id="qYT-kV-Cv5"/>
                             <constraint firstItem="oB3-PF-xDg" firstAttribute="top" secondItem="HiG-Zd-ZTe" secondAttribute="top" constant="107" id="tEN-II-EmO"/>
                             <constraint firstItem="7Iw-aQ-0xk" firstAttribute="leading" secondItem="VJF-6L-bib" secondAttribute="leading" id="uis-9j-Psq"/>

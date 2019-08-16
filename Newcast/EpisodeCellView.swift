@@ -23,6 +23,7 @@ var currentSelectedPodcastIndex: Int!
 var playCount: Int? = nil
 var pauseCount: Int? = nil
 var test: Float64? = nil
+var sliderStop: Int? = nil
 class EpisodeCellView: NSCollectionViewItem {
     
     
@@ -69,8 +70,7 @@ class EpisodeCellView: NSCollectionViewItem {
         NotificationCenter.default.addObserver(self, selector: #selector(pauseTestFunction), name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(seekToPosition), name: NSNotification.Name(rawValue: "sliderChanged"), object: nil)
         
-    }
-    
+    }    
     
     func setHighlight(selected: Bool) {
         view.layer?.borderWidth = selected ? 2.0 : 0.0
@@ -259,10 +259,16 @@ class EpisodeCellView: NSCollectionViewItem {
         }
     }
     @objc func seekToPosition(){
-        let seekTime = CMTimeMakeWithSeconds(test ?? 0, preferredTimescale: 1)
-        player?.seek(to: seekTime, completionHandler: { (completedSeek) in
-        })
+        if sliderStop == 0{
+            let seekTime = CMTimeMakeWithSeconds(test ?? 0, preferredTimescale: 1)
+            player?.seek(to: seekTime, completionHandler: { (completedSeek) in
+            })
+            sliderStop = nil
+        }else{
+            sliderStop = nil
+        }
 }
+    
     
     func observePlayPause(){
         circularProgress.isHidden = false

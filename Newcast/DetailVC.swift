@@ -119,9 +119,29 @@ class DetailVC: NSViewController {
         }
         
     }
-    @IBAction func musicSliderPositionChanged(_ sender: NSSlider) {
-        print("Hello")
-        test = sender.doubleValue
+    @IBAction func skip30AheadClicked(_ sender: Any) {
+        playerSlider.doubleValue += 30
+        if playerSlider.doubleValue <= playerSlider.maxValue{
+            musicSliderPositionChanged(Any?.self)
+        }else{
+            playerSlider.doubleValue = playerSlider.maxValue
+            musicSliderPositionChanged(Any?.self)
+        }
+    }
+    
+    @IBAction func skip30BehindClicked(_ sender: Any) {
+        playerSlider.doubleValue -= 30
+        if playerSlider.doubleValue >= 0{
+            musicSliderPositionChanged(Any?.self)
+        }else{
+            playerSlider.doubleValue = 0
+            musicSliderPositionChanged(Any?.self)
+        }
+    }
+    
+    @IBAction func musicSliderPositionChanged(_ sender: Any) {
+        test = playerSlider.doubleValue
+        sliderStop = 0
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "sliderChanged"), object: nil)
     }
     
