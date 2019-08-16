@@ -117,6 +117,10 @@ class DetailVC: NSViewController {
             playerSlider.maxValue = Double(playerDuration)
             playerSlider.floatValue = playerSeconds
         }
+        if playerSlider.doubleValue == Double(playerDuration){
+            pauseCount = 0
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
+        }
         
     }
     @IBAction func skip30AheadClicked(_ sender: Any) {

@@ -189,12 +189,27 @@ class EpisodeCellView: NSCollectionViewItem {
     func pausePlayer(){
         player?.pause()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
+        let duration = player.currentItem!.duration
+
+        
+        
         if playingIndex == nil{
-            pausedTimes.remove(at: episodeSelectedIndex)
-            pausedTimes.insert(player?.currentTime(), at: episodeSelectedIndex)
+            if player.currentTime().seconds >= duration.seconds{
+                pausedTimes.remove(at: episodeSelectedIndex)
+                pausedTimes.insert(CMTime.zero, at: episodeSelectedIndex)
+            }else{
+                pausedTimes.remove(at: episodeSelectedIndex)
+                pausedTimes.insert(player?.currentTime(), at: episodeSelectedIndex)
+            }
         }else{
-            pausedTimes.remove(at: playingIndex)
-            pausedTimes.insert(player?.currentTime(), at: playingIndex)
+            if player.currentTime().seconds >= duration.seconds{
+                pausedTimes.remove(at: playingIndex)
+                pausedTimes.insert(CMTime.zero, at: playingIndex)
+            }else{
+                pausedTimes.remove(at: playingIndex)
+                pausedTimes.insert(player?.currentTime(), at: playingIndex)
+            }
+            
         }
 
         if currentSelectedPodcastIndex == podcastSelecetedIndex{
@@ -244,6 +259,7 @@ class EpisodeCellView: NSCollectionViewItem {
                         playPlayer()
                     }else{
                         playingIndex = episodeSelectedIndex
+   
                         player?.seek(to: pausedTimesDictionary[podcastSelecetedIndex]![playingIndex]!)
                         playPlayer()
                     }
