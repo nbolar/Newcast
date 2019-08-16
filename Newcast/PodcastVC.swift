@@ -65,7 +65,10 @@ class PodcastVC: NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: "updateUI"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(customURL), name: NSNotification.Name(rawValue: "customURL"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addPodcastButtonClicked(_:)), name: NSNotification.Name(rawValue: "search"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(activateSearch), name: NSNotification.Name(rawValue: "searchSavedPodcast"), object: nil)
+        
     }
+
     
     
     @IBAction func searchSavedPodcast(_ sender: Any) {

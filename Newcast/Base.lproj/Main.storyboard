@@ -160,7 +160,7 @@
                                                 <items>
                                                     <menuItem title="Find…" tag="1" keyEquivalent="f" id="Xz5-n4-O0W">
                                                         <connections>
-                                                            <action selector="performFindPanelAction:" target="Ady-hI-5gd" id="cD7-Qs-BN4"/>
+                                                            <action selector="findPodcastClicked:" target="Voe-Tx-rLC" id="R51-jK-baP"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Find and Replace…" tag="12" keyEquivalent="f" id="YEy-JH-Tfz">
@@ -1140,7 +1140,7 @@ Gw
                                 <rect key="frame" x="10" y="10" width="527" height="119"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="119" id="10w-0f-dms"/>
-                                    <constraint firstAttribute="width" constant="527" id="n7e-Rh-z6L"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="527" id="n7e-Rh-z6L"/>
                                 </constraints>
                                 <textFieldCell key="cell" selectable="YES" title="Multiline Label" drawsBackground="YES" id="Fj3-MJ-KsU">
                                     <font key="font" metaFont="systemMedium" size="13"/>
@@ -1164,6 +1164,43 @@ Gw
                 <customObject id="dWO-gm-Nkz" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1639.5" y="1288"/>
+        </scene>
+        <!--Status BarVC-->
+        <scene sceneID="YIL-go-Do8">
+            <objects>
+                <viewController identifier="StatusBarVC" storyboardIdentifier="StatusBarVC" id="sAj-L5-aN6" customClass="StatusBarVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="to6-vj-Ml0">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IMP-we-epO">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="NrR-7E-Ai0"/>
+                                    <constraint firstAttribute="width" constant="300" id="W5Q-mK-5wK"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28" id="JBW-xX-pa8"/>
+                            </imageView>
+                            <visualEffectView appearanceType="inheritedVibrantLight" fixedFrame="YES" blendingMode="withinWindow" material="HUDWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-0D-qtw">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </visualEffectView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="IMP-we-epO" firstAttribute="top" secondItem="to6-vj-Ml0" secondAttribute="top" id="52R-yl-eLg"/>
+                            <constraint firstAttribute="trailing" secondItem="IMP-we-epO" secondAttribute="trailing" id="DgM-OZ-eUi"/>
+                            <constraint firstItem="IMP-we-epO" firstAttribute="leading" secondItem="to6-vj-Ml0" secondAttribute="leading" id="T4D-Yy-Elq"/>
+                            <constraint firstAttribute="bottom" secondItem="IMP-we-epO" secondAttribute="bottom" id="uAw-eY-fT0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="IMP-we-epO" id="GSV-I8-oS8"/>
+                        <outlet property="visualEffectView" destination="dD4-0D-qtw" id="1Mf-sq-yYz"/>
+                    </connections>
+                </viewController>
+                <customObject id="fFA-yW-Ox4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1627" y="1577"/>
         </scene>
         <!--DetailVC-->
         <scene sceneID="L0i-n2-T8u">

@@ -184,6 +184,7 @@ class EpisodeCellView: NSCollectionViewItem {
         updateSlider()
         observePlayPause()
         playingIndex = episodeSelectedIndex
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "setBackground"), object: nil)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
     }
     func pausePlayer(){
