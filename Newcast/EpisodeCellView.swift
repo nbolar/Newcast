@@ -144,7 +144,7 @@ class EpisodeCellView: NSCollectionViewItem {
         infoButton.isEnabled = true
         episodeSelectedIndex = atIndexPaths
         if playingIndex == episodeSelectedIndex && currentSelectedPodcastIndex == podcastSelecetedIndex{
-            playButton.alphaValue = 1
+            playButton.alphaValue = 0
             showPlayPauseAnimation(check: 0)
             
         }else{
