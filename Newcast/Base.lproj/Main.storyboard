@@ -1237,6 +1237,11 @@ Gw
                                         <rect key="frame" x="27" y="58" width="246" height="27"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </customView>
+                                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXX-HQ-sAY">
+                                        <rect key="frame" x="25" y="103" width="250" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="T66-LZ-94K" customClass="CustomSliderCell" customModule="Newcast" customModuleProvider="target"/>
+                                    </slider>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="dvf-Bj-hr3" firstAttribute="leading" secondItem="c0N-CA-GUS" secondAttribute="trailing" constant="53" id="03a-Rb-dOZ"/>

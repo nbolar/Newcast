@@ -18,12 +18,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         
         statusItem.button?.title = "--"
+        statusItem.button?.sendAction(on: [NSEvent.EventTypeMask.leftMouseUp, NSEvent.EventTypeMask.rightMouseUp])
         statusItem.button?.action = #selector(AppDelegate.statusBarButtonClicked(_ :))
     }
     
     
     @objc func statusBarButtonClicked(_ sender: AnyObject?) {
-       displayPopUp()
+        let event = NSApp.currentEvent!
+        
+        if event.type == NSEvent.EventType.leftMouseUp
+        {
+           displayPopUp()
+            
+        }else if event.type == NSEvent.EventType.rightMouseUp{
+            
+            var appVersion: String? {
+                return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+            }
+            let menu = NSMenu()
+            menu.addItem(NSMenuItem(title: "Newcast version \(appVersion ?? "")", action: nil, keyEquivalent: ""))
+            menu.addItem(NSMenuItem.separator())
+            menu.addItem(NSMenuItem(title: "Quit Newcast", action: #selector(self.quitApp), keyEquivalent: "q"))
+            
+            statusItem.popUpMenu(menu)
+            
+            
+        }
+    }
+    @objc func quitApp()
+    {
+        NSApp.terminate(self)
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -67,8 +67,8 @@ class StatusBarVC: NSViewController {
         if currentSelectedPodcastIndex != nil
         {
             backgroundImageView.sd_setImage(with: URL(string: podcastsImageURL[currentSelectedPodcastIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
-            scrollingTextViewEpisode.setup(string: "\(episodeTitles[episodeSelectedIndex])")
-            scrollingTextViewAuthor.setup(string: "\(podcastsTitle[podcastSelecetedIndex])")
+            scrollingTextViewEpisode.setup(string: "\(episodeTitles[playingIndex ?? episodeSelectedIndex])")
+//            scrollingTextViewAuthor.setup(string: "\(podcastsTitle[currentSelectedPodcastIndex])")
             scrollingTextViewEpisode.speed = 4
             scrollingTextViewAuthor.speed = 4
             view.addSubview(scrollingTextViewEpisode)
