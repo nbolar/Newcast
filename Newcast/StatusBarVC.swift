@@ -9,9 +9,16 @@
 import Cocoa
 import SDWebImage
 
+
 class StatusBarVC: NSViewController {
 
     
+   
+    @IBOutlet weak var scrollingTextViewAuthor: ScrollingTextView!
+    @IBOutlet weak var scrollingTextViewEpisode: ScrollingTextView!
+    @IBOutlet weak var skipAheadButton: NSButton!
+    @IBOutlet weak var playPauseButton: NSButton!
+    @IBOutlet weak var skipBackButton: NSButton!
     @IBOutlet weak var visualEffectView: NSVisualEffectView!
     @IBOutlet weak var backgroundImageView: SDAnimatedImageView!
     
@@ -29,6 +36,13 @@ class StatusBarVC: NSViewController {
         visualEffectView.isHidden = true
         visualEffectView.wantsLayer = true
         visualEffectView.layer?.cornerRadius = 4
+        playPauseButton.isHidden = true
+        skipBackButton.isHidden = true
+        skipAheadButton.isHidden = true
+        scrollingTextViewEpisode.isHidden = true
+        scrollingTextViewAuthor.isHidden = true
+        scrollingTextViewEpisode.setup(string: "")
+        scrollingTextViewAuthor.setup(string: "")
         setBackgroundImage()
         NotificationCenter.default.addObserver(self, selector: #selector(setBackgroundImage), name: NSNotification.Name(rawValue: "setBackground"), object: nil)
         
@@ -53,19 +67,42 @@ class StatusBarVC: NSViewController {
         if currentSelectedPodcastIndex != nil
         {
             backgroundImageView.sd_setImage(with: URL(string: podcastsImageURL[currentSelectedPodcastIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
+            scrollingTextViewEpisode.setup(string: "\(episodeTitles[episodeSelectedIndex])")
+            scrollingTextViewAuthor.setup(string: "\(podcastsTitle[podcastSelecetedIndex])")
+            scrollingTextViewEpisode.speed = 4
+            scrollingTextViewAuthor.speed = 4
+            view.addSubview(scrollingTextViewEpisode)
+            view.addSubview(scrollingTextViewAuthor)
         }
         
     }
     
     override func mouseEntered(with event: NSEvent) {
         visualEffectView.isHidden = false
+        playPauseButton.isHidden = false
+        skipBackButton.isHidden = false
+        skipAheadButton.isHidden = false
+        scrollingTextViewEpisode.isHidden = false
+        scrollingTextViewAuthor.isHidden = false
         fade(type: .fadeIn)
         
     }
     
     override func mouseExited(with event: NSEvent) {
         visualEffectView.isHidden = true
+        playPauseButton.isHidden = true
+        skipBackButton.isHidden = true
+        skipAheadButton.isHidden = true
+        scrollingTextViewEpisode.isHidden = true
+        scrollingTextViewAuthor.isHidden = true
         fade(type: .fadeOut)
     }
+    @IBAction func skipBehindButtonClicked(_ sender: Any) {
+    }
     
+    @IBAction func playPauseButtonClicked(_ sender: Any) {
+    }
+    
+    @IBAction func skipAheadButtonClicked(_ sender: Any) {
+    }
 }

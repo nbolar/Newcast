@@ -1181,20 +1181,95 @@ Gw
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28" id="JBW-xX-pa8"/>
                             </imageView>
-                            <visualEffectView appearanceType="inheritedVibrantLight" fixedFrame="YES" blendingMode="withinWindow" material="HUDWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-0D-qtw">
+                            <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="withinWindow" material="HUDWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-0D-qtw">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c0N-CA-GUS">
+                                        <rect key="frame" x="130" y="133" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3MB-dn-7om"/>
+                                            <constraint firstAttribute="width" constant="40" id="pIb-Bz-vhM"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="play" imagePosition="only" alignment="center" imageScaling="axesIndependently" inset="2" id="vod-4c-RA7">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="playPauseButtonClicked:" target="sAj-L5-aN6" id="sZd-3f-V5z"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dvf-Bj-hr3">
+                                        <rect key="frame" x="223" y="128" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="hbZ-Pm-2sP"/>
+                                            <constraint firstAttribute="width" constant="50" id="w0N-Ni-feb"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSTouchBarSkipAhead30SecondsTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="3Xr-Qa-WD5">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="skipAheadButtonClicked:" target="sAj-L5-aN6" id="l1Z-ON-mI8"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UhA-QU-zM1">
+                                        <rect key="frame" x="27" y="128" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="OLk-dX-1bN"/>
+                                            <constraint firstAttribute="width" constant="50" id="SNA-IU-mQg"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="NSTouchBarSkipBack30SecondsTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="vZ2-wi-x41">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="skipBehindButtonClicked:" target="sAj-L5-aN6" id="pUS-zd-PG6"/>
+                                        </connections>
+                                    </button>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJO-uu-anM" customClass="ScrollingTextView" customModule="Newcast" customModuleProvider="target">
+                                        <rect key="frame" x="27" y="204" width="246" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </customView>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BMV-mX-bVv" customClass="ScrollingTextView" customModule="Newcast" customModuleProvider="target">
+                                        <rect key="frame" x="27" y="58" width="246" height="27"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </customView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="dvf-Bj-hr3" firstAttribute="leading" secondItem="c0N-CA-GUS" secondAttribute="trailing" constant="53" id="03a-Rb-dOZ"/>
+                                    <constraint firstItem="dvf-Bj-hr3" firstAttribute="leading" secondItem="c0N-CA-GUS" secondAttribute="trailing" constant="53" id="Ai4-rr-fwK"/>
+                                    <constraint firstItem="c0N-CA-GUS" firstAttribute="top" secondItem="dD4-0D-qtw" secondAttribute="top" constant="127" id="Xdd-8i-zWe"/>
+                                    <constraint firstItem="UhA-QU-zM1" firstAttribute="top" secondItem="dD4-0D-qtw" secondAttribute="top" constant="122" id="aPE-0m-V1S"/>
+                                    <constraint firstAttribute="bottom" secondItem="c0N-CA-GUS" secondAttribute="bottom" constant="133" id="bnr-Q2-Our"/>
+                                    <constraint firstAttribute="trailing" secondItem="dvf-Bj-hr3" secondAttribute="trailing" constant="27" id="bzB-yd-agW"/>
+                                    <constraint firstItem="UhA-QU-zM1" firstAttribute="leading" secondItem="dD4-0D-qtw" secondAttribute="leading" constant="27" id="caM-gK-awv"/>
+                                    <constraint firstItem="dvf-Bj-hr3" firstAttribute="top" secondItem="dD4-0D-qtw" secondAttribute="top" constant="122" id="erW-Sz-yTS"/>
+                                    <constraint firstAttribute="bottom" secondItem="dvf-Bj-hr3" secondAttribute="bottom" constant="128" id="ezT-OD-B7c"/>
+                                    <constraint firstItem="c0N-CA-GUS" firstAttribute="leading" secondItem="UhA-QU-zM1" secondAttribute="trailing" constant="53" id="nc1-aG-BqA"/>
+                                    <constraint firstAttribute="bottom" secondItem="UhA-QU-zM1" secondAttribute="bottom" constant="128" id="xEC-vE-K15"/>
+                                    <constraint firstItem="c0N-CA-GUS" firstAttribute="leading" secondItem="UhA-QU-zM1" secondAttribute="trailing" constant="53" id="yI9-JX-PSp"/>
+                                </constraints>
                             </visualEffectView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="dD4-0D-qtw" firstAttribute="leading" secondItem="IMP-we-epO" secondAttribute="leading" id="18u-Ld-pIn"/>
                             <constraint firstItem="IMP-we-epO" firstAttribute="top" secondItem="to6-vj-Ml0" secondAttribute="top" id="52R-yl-eLg"/>
                             <constraint firstAttribute="trailing" secondItem="IMP-we-epO" secondAttribute="trailing" id="DgM-OZ-eUi"/>
                             <constraint firstItem="IMP-we-epO" firstAttribute="leading" secondItem="to6-vj-Ml0" secondAttribute="leading" id="T4D-Yy-Elq"/>
+                            <constraint firstItem="dD4-0D-qtw" firstAttribute="top" secondItem="IMP-we-epO" secondAttribute="top" id="jwy-YH-e1B"/>
                             <constraint firstAttribute="bottom" secondItem="IMP-we-epO" secondAttribute="bottom" id="uAw-eY-fT0"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backgroundImageView" destination="IMP-we-epO" id="GSV-I8-oS8"/>
+                        <outlet property="playPauseButton" destination="c0N-CA-GUS" id="fR2-40-ZOG"/>
+                        <outlet property="scrollingTextViewAuthor" destination="YJO-uu-anM" id="a8M-fb-RK4"/>
+                        <outlet property="scrollingTextViewEpisode" destination="BMV-mX-bVv" id="U3t-DE-byr"/>
+                        <outlet property="skipAheadButton" destination="dvf-Bj-hr3" id="uTC-yb-kep"/>
+                        <outlet property="skipBackButton" destination="UhA-QU-zM1" id="deq-1X-S2q"/>
                         <outlet property="visualEffectView" destination="dD4-0D-qtw" id="1Mf-sq-yYz"/>
                     </connections>
                 </viewController>
