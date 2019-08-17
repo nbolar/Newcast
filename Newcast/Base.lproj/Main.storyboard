@@ -1196,7 +1196,7 @@ Gw
                                         </buttonCell>
                                         <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <action selector="playPauseButtonClicked:" target="sAj-L5-aN6" id="sZd-3f-V5z"/>
+                                            <action selector="playPauseButtonClicked:" target="sAj-L5-aN6" id="1KO-6v-ZCY"/>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dvf-Bj-hr3">
@@ -1211,7 +1211,7 @@ Gw
                                         </buttonCell>
                                         <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <action selector="skipAheadButtonClicked:" target="sAj-L5-aN6" id="l1Z-ON-mI8"/>
+                                            <action selector="skip30AheadClicked:" target="sAj-L5-aN6" id="Mmn-nL-OsP"/>
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UhA-QU-zM1">
@@ -1226,7 +1226,7 @@ Gw
                                         </buttonCell>
                                         <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <action selector="skipBehindButtonClicked:" target="sAj-L5-aN6" id="pUS-zd-PG6"/>
+                                            <action selector="skip30BehindClicked:" target="sAj-L5-aN6" id="PTZ-tK-utA"/>
                                         </connections>
                                     </button>
                                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJO-uu-anM" customClass="ScrollingTextView" customModule="Newcast" customModuleProvider="target">
@@ -1240,7 +1240,10 @@ Gw
                                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXX-HQ-sAY">
                                         <rect key="frame" x="25" y="103" width="250" height="19"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="above" sliderType="linear" id="T66-LZ-94K" customClass="CustomSliderCell" customModule="Newcast" customModuleProvider="target"/>
+                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="T66-LZ-94K" customClass="CustomSliderCell" customModule="Newcast" customModuleProvider="target"/>
+                                        <connections>
+                                            <action selector="musicSliderPositionChanged:" target="sAj-L5-aN6" id="DPD-94-Sxn"/>
+                                        </connections>
                                     </slider>
                                 </subviews>
                                 <constraints>
@@ -1271,6 +1274,7 @@ Gw
                     <connections>
                         <outlet property="backgroundImageView" destination="IMP-we-epO" id="GSV-I8-oS8"/>
                         <outlet property="playPauseButton" destination="c0N-CA-GUS" id="fR2-40-ZOG"/>
+                        <outlet property="playerSlider" destination="AXX-HQ-sAY" id="bFE-Sg-X1a"/>
                         <outlet property="scrollingTextViewAuthor" destination="YJO-uu-anM" id="a8M-fb-RK4"/>
                         <outlet property="scrollingTextViewEpisode" destination="BMV-mX-bVv" id="U3t-DE-byr"/>
                         <outlet property="skipAheadButton" destination="dvf-Bj-hr3" id="uTC-yb-kep"/>
