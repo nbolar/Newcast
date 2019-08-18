@@ -47,13 +47,6 @@ class PodcastSearchVC: NSViewController {
         networkIndicator.style = .spinning
         customURLField.alphaValue = 0
         noResultsLabel.isHidden = true
-//        let labelXPostion:CGFloat = view.bounds.midX
-//        let labelYPostion:CGFloat = view.bounds.midY
-//        let labelWidth:CGFloat = 30
-//        let labelHeight:CGFloat = 30
-//        addPodcastButton.isHidden = false
-//
-//        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
         circularProgress.isIndeterminate = true
         circularProgress.color = .white
         let labelXPostion:CGFloat = view.bounds.midX - 30
@@ -80,10 +73,7 @@ class PodcastSearchVC: NSViewController {
         noResultsLabel.isHidden = true
         podcastsNumber = 0
         collectionView.deselectAll(Any?.self)
-//        networkIndicator.startAnimation(Any?.self)
-//        view.addSubview(networkIndicator)
         view.addSubview(circularProgress)
-        //        let url = URL(string: "https://atp.fm/episodes?format=rss")
         
         let editedURL = podcastSearchField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         let url = URL(string: "https://itunes.apple.com/search?term=\(editedURL)&entity=podcast&limit=100")
@@ -119,14 +109,6 @@ class PodcastSearchVC: NSViewController {
             selectedIndex = indexPath.item
             guard let item = collectionView.item(at: indexPath as IndexPath) else {continue}
             (item as! PodcastCellView).setHighlight(selected: selected)
-//            if selected == true{
-//                let storyboard = NSStoryboard(name: "Main", bundle: nil)
-//                guard let vc =  storyboard.instantiateController(withIdentifier: "PodcastDescriptionVC") as? NSViewController else { return }
-//                popoverView.contentViewController = vc
-//                popoverView.behavior = .transient
-//                popoverView.show(relativeTo: (item as! PodcastCellView).podcastImage.bounds, of: (item as! PodcastCellView).podcastImage, preferredEdge: .maxX)
-//            }
-            
         }
         
     }

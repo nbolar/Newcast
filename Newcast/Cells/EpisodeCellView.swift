@@ -129,14 +129,6 @@ class EpisodeCellView: NSCollectionViewItem {
         } catch {
             print("error")
         }
-        
-        
-        
-        //        episodeDescriptionField.stringValue = episodeCell.podcastDescription
-        //        podcastDescriptionView.loadHTMLString(episodeCell.podcastDescription, baseURL: nil)
-        //        podcastDescriptionView.evaluateJavaScript("document.body.innerText") { (string, error) in
-        //            print(string)
-        //        }
     }
     func showButton(atIndexPaths: Int!){
         playButton.isEnabled = true
