@@ -4,7 +4,9 @@
 [![Platform](https://img.shields.io/badge/swift-4.2-orange.svg?style=flat)](https://swift.org/blog/swift-4-2-released/)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/nbolar/newcast/)
 
-I love listening to podcasts but unfortunately I never found a third party macOS podcast player that I liked. So, I decided to build one myself. Here is Newcast. It doesn't have any fancy features yet, but I hope to build on this and add them in later on.
+I love listening to podcasts but unfortunately I never found a third party macOS podcast player that I liked. So, I decided to build one myself. Here is Newcast. 
+
+It doesn't have any fancy features yet, but I hope to build on this and add them later on.
 
 ----
 
