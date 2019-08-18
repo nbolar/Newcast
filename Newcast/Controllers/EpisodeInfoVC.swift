@@ -11,7 +11,7 @@ import WebKit
 import SDWebImage
 
 class EpisodeInfoVC: NSViewController {
-
+    
     @IBOutlet weak var podcastTitleField: NSTextField!
     @IBOutlet weak var episodeInfoWebView: WKWebView!
     @IBOutlet weak var podcastImageView: SDAnimatedImageView!
@@ -20,7 +20,7 @@ class EpisodeInfoVC: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(showInfo), name: NSNotification.Name(rawValue: "showInfo"), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(showInfo), name: NSNotification.Name(rawValue: "showInfo"), object: nil)
         view.wantsLayer = true
         view.layer?.backgroundColor = .white
         view.layer?.cornerRadius = 8
@@ -29,8 +29,8 @@ class EpisodeInfoVC: NSViewController {
         podcastImageView.wantsLayer = true
         podcastImageView.layer?.cornerRadius = 8
         podcastImageView.layer?.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-    
-
+        
+        
         showInfo()
     }
     
@@ -41,7 +41,7 @@ class EpisodeInfoVC: NSViewController {
             episodeInfoWebView.setValue(false, forKey: "drawsBackground")
             episodeInfoWebView.loadHTMLString(episodeDescriptions[episodeSelectedIndex], baseURL: nil)
         }
-
+        
         
     }
     

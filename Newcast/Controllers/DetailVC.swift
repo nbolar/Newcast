@@ -11,11 +11,10 @@ import SDWebImage
 import AVFoundation
 import CircularProgressMac
 
-var podcastSelecetedIndex : Int!
 var seekToPosition: Float64!
 
 class DetailVC: NSViewController {
-
+    
     @IBOutlet weak var endTime: NSTextField!
     @IBOutlet weak var startTime: NSTextField!
     @IBOutlet weak var scrollingTextView: ScrollingTextView!
@@ -84,21 +83,21 @@ class DetailVC: NSViewController {
         endTime.stringValue = ""
         
         
-//        let labelXPostion:CGFloat = view.bounds.midX
-//        let labelYPostion:CGFloat = view.bounds.midY
-//        let labelWidth:CGFloat = 30
-//        let labelHeight:CGFloat = 30
-//        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
+        //        let labelXPostion:CGFloat = view.bounds.midX
+        //        let labelYPostion:CGFloat = view.bounds.midY
+        //        let labelWidth:CGFloat = 30
+        //        let labelHeight:CGFloat = 30
+        //        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
         
         circularProgress.isIndeterminate = true
-        circularProgress.color = .white
+        circularProgress.color = NSColor.init(red: 0.39, green: 0.82, blue: 1.0, alpha: 0.9)
         let labelXPostion:CGFloat = 350
         let labelYPostion:CGFloat = 253
         let labelWidth:CGFloat = 60
         let labelHeight:CGFloat = 60
         circularProgress.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
         
-//        view.addSubview(circularProgress)
+        //        view.addSubview(circularProgress)
     }
     
     @objc func hideUI(){
@@ -106,7 +105,7 @@ class DetailVC: NSViewController {
         playPauseButton.isHidden = true
         skip30BackButton.isHidden = true
         skip30ForwardButton.isHidden = true
-//        playerInfo.stringValue = ""
+        //        playerInfo.stringValue = ""
     }
     @objc func unhideUI(){
         playerSlider.isHidden = false
@@ -207,7 +206,7 @@ class DetailVC: NSViewController {
         let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
         podcastImageView.addTrackingArea(area)
         collectionView.reloadData()
-//        networkIndicator.removeFromSuperview()
+        //        networkIndicator.removeFromSuperview()
         circularProgress.removeFromSuperview()
         episodesPlaceholderField.alphaValue = 1.0
         collectionView.deselectAll(Any?.self)
@@ -223,8 +222,8 @@ class DetailVC: NSViewController {
         podcastTitleField.stringValue = "\(podcastsTitle[podcastSelecetedIndex])"
         podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), context: nil)
         collectionView.reloadData()
-//        networkIndicator.startAnimation(Any?.self)
-//        view.addSubview(networkIndicator)
+        //        networkIndicator.startAnimation(Any?.self)
+        //        view.addSubview(networkIndicator)
         view.addSubview(circularProgress)
     }
     
@@ -252,12 +251,12 @@ class DetailVC: NSViewController {
     override func mouseExited(with event: NSEvent) {
         if popoverView.isShown{
             popoverView.close()
-
+            
         }
     }
     
     func displayPopUp(){
-//        print(podcastDescription)
+        //        print(podcastDescription)
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         guard let vc =  storyboard.instantiateController(withIdentifier: "PodcastDescriptionVC") as? NSViewController else { return }
         popoverView.contentViewController = vc
@@ -300,7 +299,7 @@ extension DetailVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSColl
         collectionView.deselectAll(Any?.self)
         highlightItems(selected: false, atIndexPaths: indexPaths as Set<NSIndexPath>)
     }
-
+    
     
     
 }

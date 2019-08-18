@@ -37,7 +37,7 @@ class PodcastSearchVC: NSViewController {
             _podcastSearch = newValue
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -103,7 +103,7 @@ class PodcastSearchVC: NSViewController {
         podcastSearchField.placeholderString = "Podcast Added!"
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
     }
-
+    
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
         for indexPath in atIndexPaths {
             selectedIndex = indexPath.item
@@ -126,10 +126,10 @@ class PodcastSearchVC: NSViewController {
             customPodcastURL = customURLField.stringValue.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
             customURLField.stringValue = ""
             customURLField.placeholderString = "Podcast Added!"
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
+            //            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateUI"), object: nil)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "customURL"), object: nil)
         }
-
+        
     }
     
     deinit {

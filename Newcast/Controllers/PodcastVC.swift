@@ -11,15 +11,26 @@ import Alamofire
 import SWXMLHash
 import FeedKit
 
-
+/// Array containing the rss feed URLs of the podcast that has been added by the user
 var podcasts : [String]! = []
+
+/// Array containing the image URLs of the podcast that has been added by the user
 var podcastsImageURL : [String]! = []
+
+/// Array containing the titles of the podcast that has been added by the user
 var podcastsTitle : [String]! = []
+
+/// Array containing episodes of the selected podcast
 var episodes : [Episodes] = []
+
+/// Tracks the index of the podcast that has been deleted by the user
 var deletedPodcastIndex : Int!
 
-class PodcastVC: NSViewController {
+/// Tracks the index of the podcast that has been selected by the user
+var podcastSelecetedIndex : Int!
 
+class PodcastVC: NSViewController {
+    
     @IBOutlet weak var backgroundImage: NSImageView!
     @IBOutlet weak var addPodcastButton: NSButton!
     @IBOutlet weak var collectionView: NSCollectionView!
@@ -33,9 +44,9 @@ class PodcastVC: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         
-//        UserDefaults.standard.removeObject(forKey: "podcasts")
-//        UserDefaults.standard.removeObject(forKey: "podcastImagesURL")
-//        UserDefaults.standard.removeObject(forKey: "podcastsTitle")
+        //        UserDefaults.standard.removeObject(forKey: "podcasts")
+        //        UserDefaults.standard.removeObject(forKey: "podcastImagesURL")
+        //        UserDefaults.standard.removeObject(forKey: "podcastsTitle")
         episodes.removeAll()
         view.insertVibrancyView(material: .hudWindow)
         let fieldBackgroundColor = NSColor(
@@ -65,10 +76,10 @@ class PodcastVC: NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: NSNotification.Name(rawValue: "updateUI"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(customURL), name: NSNotification.Name(rawValue: "customURL"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addPodcastButtonClicked(_:)), name: NSNotification.Name(rawValue: "search"), object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(activateSearch), name: NSNotification.Name(rawValue: "searchSavedPodcast"), object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(activateSearch), name: NSNotification.Name(rawValue: "searchSavedPodcast"), object: nil)
         
     }
-
+    
     
     
     @IBAction func searchSavedPodcast(_ sender: Any) {
@@ -97,7 +108,7 @@ class PodcastVC: NSViewController {
         let item = collectionView.item(at: itemIndex as IndexPath)
         (item as! PodcastCellView).setSearchHighlight(selected: true)
         Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(unhighlight), userInfo: nil, repeats: false)
-
+        
     }
     
     @objc func unhighlight()
@@ -107,7 +118,7 @@ class PodcastVC: NSViewController {
         let item = collectionView.item(at: itemIndex as IndexPath)
         (item as! PodcastCellView).setHighlight(selected: false)
     }
-
+    
     
     
     @objc func updateUI(){
@@ -131,7 +142,7 @@ class PodcastVC: NSViewController {
         AF.request(url!).responseData(completionHandler: { (response) in
             let parser = Parser()
             if response.data != nil{
-               episodes = parser.getPodcastMetaData(response.data!)
+                episodes = parser.getPodcastMetaData(response.data!)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateEpisodes"), object: nil)
             }
         })
@@ -192,11 +203,11 @@ class PodcastVC: NSViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
     }
     
-
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
 }
 
 extension PodcastVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSCollectionViewDelegateFlowLayout{
@@ -210,7 +221,7 @@ extension PodcastVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSCol
             forecastCell.configurePodcastAddedCell(podcastCell: podcastsImageURL[indexPath.item])
             return forecastCell
         }
-
+        
         return forecastItem
         
         

@@ -29,33 +29,33 @@ class CustomSliderCell: NSSliderCell {
         NSColor.init(red: 0.39, green: 0.82, blue: 1.0, alpha: 0.9).setFill()
         active.fill()
     }
-
+    
     
     override func drawKnob(_ rect: NSRect) {
         let drawImage: NSImage? = .init(imageLiteralResourceName: "thumb")
-
+        
         var drawRect = rect
         drawRect = knobRect(flipped: controlView?.isFlipped ?? false)
-
+        
         let fraction: CGFloat = 1.0
-
+        
         drawImage?.draw(in: drawRect, from: NSRect.zero, operation: .sourceOver, fraction: fraction, respectFlipped: true, hints: nil)
     }
     
-//    override func knobRect(flipped: Bool) -> NSRect {
-//        let drawImage: NSImage? = .init(imageLiteralResourceName: "pause")
-//
-//        var drawRect: NSRect = super.knobRect(flipped: flipped)
-//
-//        drawRect.size = drawImage?.size ?? CGSize.zero
-////
-////        var bounds: NSRect? = controlView?.bounds
-////        bounds = bounds?.insetBy(dx: 0, dy: 0)
-////        var val = CGFloat(min(maxValue, max(minValue, doubleValue)))
-////        val = (val - CGFloat(minValue)) / CGFloat((maxValue - minValue))
-////        let x: CGFloat = val * bounds!.width + bounds!.minX
-//
-//        drawRect = NSOffsetRect(drawRect, -4, -2.5)
-//        return drawRect
-//    }
+    //    override func knobRect(flipped: Bool) -> NSRect {
+    //        let drawImage: NSImage? = .init(imageLiteralResourceName: "pause")
+    //
+    //        var drawRect: NSRect = super.knobRect(flipped: flipped)
+    //
+    //        drawRect.size = drawImage?.size ?? CGSize.zero
+    ////
+    ////        var bounds: NSRect? = controlView?.bounds
+    ////        bounds = bounds?.insetBy(dx: 0, dy: 0)
+    ////        var val = CGFloat(min(maxValue, max(minValue, doubleValue)))
+    ////        val = (val - CGFloat(minValue)) / CGFloat((maxValue - minValue))
+    ////        let x: CGFloat = val * bounds!.width + bounds!.minX
+    //
+    //        drawRect = NSOffsetRect(drawRect, -4, -2.5)
+    //        return drawRect
+    //    }
 }

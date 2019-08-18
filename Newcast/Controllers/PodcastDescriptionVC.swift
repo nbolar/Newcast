@@ -10,7 +10,7 @@ import Cocoa
 import SwiftSoup
 
 class PodcastDescriptionVC: NSViewController {
-
+    
     @IBOutlet weak var backgroundImageView: NSImageView!
     @IBOutlet weak var descriptionLabelField: NSTextField!
     override func viewDidLoad() {

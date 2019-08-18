@@ -13,9 +13,9 @@ var playPauseCheck: Int? = 0
 
 
 class StatusBarVC: NSViewController {
-
     
-   
+    
+    
     @IBOutlet weak var endTime: NSTextField!
     @IBOutlet weak var startTime: NSTextField!
     @IBOutlet weak var playerSlider: NSSlider!
@@ -121,12 +121,12 @@ class StatusBarVC: NSViewController {
             }
             playPauseCheck = 0
         }
-
+        
     }
     
     @IBAction func playPauseButtonClicked(_ sender: Any) {
         
-        if playingIndex == nil || episodeSelectedIndex == nil{
+        if playingIndex == nil && episodeSelectedIndex == nil{
             if alertView?.window?.isVisible == true
             {
                 alertView?.resignFirstResponder()
@@ -144,7 +144,7 @@ class StatusBarVC: NSViewController {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
             }
         }
-
+        
     }
     
     @objc func displayPopUp() {
@@ -190,9 +190,9 @@ class StatusBarVC: NSViewController {
             scrollingTextViewEpisode.setup(string: "\(episodeTitles[playingIndex ?? episodeSelectedIndex])")
             scrollingTextViewAuthor.setup(string: "")
             scrollingTextViewEpisode.speed = 4
-//            scrollingTextViewAuthor.speed = 4
+            //            scrollingTextViewAuthor.speed = 4
             view.addSubview(scrollingTextViewEpisode)
-//            view.addSubview(scrollingTextViewAuthor)
+            //            view.addSubview(scrollingTextViewAuthor)
         }
         
     }
@@ -221,5 +221,5 @@ class StatusBarVC: NSViewController {
         scrollingTextViewAuthor.isHidden = true
         fade(type: .fadeOut)
     }
-
+    
 }

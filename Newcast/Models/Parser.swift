@@ -38,7 +38,7 @@ class Parser {
         
         var podcastSearch = [Parser]()
         let json = try! JSON(data: APIData)
-//        print(json)
+        //        print(json)
         
         if let list = json["results"].array{
             for podcast in list

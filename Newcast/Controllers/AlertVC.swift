@@ -9,7 +9,7 @@
 import Cocoa
 
 class AlertVC: NSViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.

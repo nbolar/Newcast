@@ -10,7 +10,7 @@ import Cocoa
 import SDWebImage
 
 class PodcastCellView: NSCollectionViewItem {
-
+    
     @IBOutlet weak var podcastImage: SDAnimatedImageView!
     override func viewDidLoad() {
         super.viewDidLoad()

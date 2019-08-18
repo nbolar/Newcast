@@ -12,16 +12,34 @@ import SwiftSoup
 import AVFoundation
 import CircularProgressMac
 
+/// Episode selected under a certain podcast
 var episodeSelectedIndex: Int!
+
+/// Index of the playing epsiode
 var playingIndex: Int!
 var player: AVPlayer! = nil
+
+/// Array containing the times at which each podcast episode has been paused at
 var pausedTimes = [CMTime?](repeating: nil, count: episodes.count)
+
+/// Dictionary containing the podcast index and the corresponding pasued times
 var pausedTimesDictionary = [Int: [CMTime?]]()
+
+/// Player current time in seconds
 var playerSeconds: Float!
+
+/// Duration of an episode
 var playerDuration: Float!
+
+/// Index of the presently selected podcast which may/may not be the same as the podcastSelectedIndex variable
 var currentSelectedPodcastIndex: Int!
+
+/// Variable used to prevent the collection view from repeatedly showing the play button
 var playCount: Int? = nil
+
+/// Variable used to prevent the collection view from repeatedly showing the pause button
 var pauseCount: Int? = nil
+
 var test: Float64? = nil
 var sliderStop: Int? = nil
 class EpisodeCellView: NSCollectionViewItem {
@@ -70,6 +88,7 @@ class EpisodeCellView: NSCollectionViewItem {
         NotificationCenter.default.addObserver(self, selector: #selector(pauseTestFunction), name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(seekToPosition), name: NSNotification.Name(rawValue: "sliderChanged"), object: nil)
         
+        
     }    
     
     func setHighlight(selected: Bool) {
@@ -83,7 +102,7 @@ class EpisodeCellView: NSCollectionViewItem {
             playCount = nil
         }
         if playCount != nil{
-           playCount! += 1
+            playCount! += 1
         }
         
     }
@@ -165,7 +184,7 @@ class EpisodeCellView: NSCollectionViewItem {
         infoButton.alphaValue = 0
         playButton.alphaValue = 0
         pauseButton.alphaValue = 0
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hide"), object: nil)
+        //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hide"), object: nil)
         
     }
     func playPlayer(){
@@ -175,8 +194,8 @@ class EpisodeCellView: NSCollectionViewItem {
         sendNotifications()
         updateSlider()
         observePlayPause()
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhide"), object: nil)
-
+        //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhide"), object: nil)
+        
         
     }
     
@@ -195,8 +214,6 @@ class EpisodeCellView: NSCollectionViewItem {
         
         let duration = player.currentItem!.duration
 
-        
-        
         if playingIndex == nil{
             if player.currentTime().seconds >= duration.seconds{
                 pausedTimes.remove(at: episodeSelectedIndex)
@@ -215,7 +232,7 @@ class EpisodeCellView: NSCollectionViewItem {
             }
             
         }
-
+        
         if currentSelectedPodcastIndex == podcastSelecetedIndex{
             pausedTimesDictionary[podcastSelecetedIndex] = pausedTimes
         }else{
@@ -225,6 +242,7 @@ class EpisodeCellView: NSCollectionViewItem {
         
     }
     
+    /// This method handles the play/pause action by either playing from the start of an episode / pausing episode / seeking to an episode play postion from last stopped time
     @IBAction func playPauseButtonClicked(_ sender: Any) {
         if playingIndex != nil
         {
@@ -263,7 +281,7 @@ class EpisodeCellView: NSCollectionViewItem {
                         playPlayer()
                     }else{
                         playingIndex = episodeSelectedIndex
-   
+                        
                         player?.seek(to: pausedTimesDictionary[podcastSelecetedIndex]![playingIndex]!)
                         playPlayer()
                     }
@@ -287,14 +305,14 @@ class EpisodeCellView: NSCollectionViewItem {
         }else{
             sliderStop = nil
         }
-}
+    }
     
     
     func observePlayPause(){
         circularProgress.isHidden = false
         player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-//        networkIndicator.startAnimation(Any?.self)
-//        view.addSubview(networkIndicator)
+        //        networkIndicator.startAnimation(Any?.self)
+        //        view.addSubview(networkIndicator)
         view.addSubview(circularProgress)
     }
     func updateSlider(){
@@ -312,6 +330,7 @@ class EpisodeCellView: NSCollectionViewItem {
         }
     }
     
+    /// This method shows the user when a certain episode is buffering 
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "timeControlStatus", let change = change, let newValue = change[NSKeyValueChangeKey.newKey] as? Int, let oldValue = change[NSKeyValueChangeKey.oldKey] as? Int {
             let oldStatus = AVPlayer.TimeControlStatus(rawValue: oldValue)
