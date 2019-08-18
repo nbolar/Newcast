@@ -1165,6 +1165,26 @@ Gw
             </objects>
             <point key="canvasLocation" x="1639.5" y="1288"/>
         </scene>
+        <!--Window Controller-->
+        <scene sceneID="i4X-IT-2gp">
+            <objects>
+                <windowController storyboardIdentifier="playerViewController" id="1Dm-aX-HPn" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Yto-41-G2f">
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="294" y="362" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+                        <connections>
+                            <outlet property="delegate" destination="1Dm-aX-HPn" id="TyW-GR-5G9"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="sAj-L5-aN6" kind="relationship" relationship="window.shadowedContentViewController" id="28o-iH-yDb"/>
+                    </connections>
+                </windowController>
+                <customObject id="sTI-MS-8Wl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1254" y="1576"/>
+        </scene>
         <!--Status BarVC-->
         <scene sceneID="YIL-go-Do8">
             <objects>
@@ -1181,7 +1201,7 @@ Gw
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28" id="JBW-xX-pa8"/>
                             </imageView>
-                            <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="withinWindow" material="HUDWindow" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-0D-qtw">
+                            <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-0D-qtw">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c0N-CA-GUS">
@@ -1238,17 +1258,51 @@ Gw
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     </customView>
                                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXX-HQ-sAY">
-                                        <rect key="frame" x="25" y="103" width="250" height="19"/>
+                                        <rect key="frame" x="27" y="104" width="246" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="T66-LZ-94K" customClass="CustomSliderCell" customModule="Newcast" customModuleProvider="target"/>
+                                        <sliderCell key="cell" controlSize="small" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="T66-LZ-94K" customClass="CustomSliderCell" customModule="Newcast" customModuleProvider="target"/>
                                         <connections>
                                             <action selector="musicSliderPositionChanged:" target="sAj-L5-aN6" id="DPD-94-Sxn"/>
                                         </connections>
                                     </slider>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XAA-tm-Sfa">
+                                        <rect key="frame" x="0.0" y="1" width="15" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="BVr-1x-upv"/>
+                                            <constraint firstAttribute="width" constant="15" id="UMQ-8R-Bfg"/>
+                                        </constraints>
+                                        <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="newcast_small_icon" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="q02-VJ-coA">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="newcastButtonClicked:" target="sAj-L5-aN6" id="fTA-gA-2UE"/>
+                                        </connections>
+                                    </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GCF-lL-Iwt">
+                                        <rect key="frame" x="18" y="87" width="37" height="17"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="Fk6-7h-kGy">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0zY-8u-WQD">
+                                        <rect key="frame" x="238" y="87" width="37" height="17"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="4Cl-7p-P4j">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="dvf-Bj-hr3" firstAttribute="leading" secondItem="c0N-CA-GUS" secondAttribute="trailing" constant="53" id="03a-Rb-dOZ"/>
                                     <constraint firstItem="dvf-Bj-hr3" firstAttribute="leading" secondItem="c0N-CA-GUS" secondAttribute="trailing" constant="53" id="Ai4-rr-fwK"/>
+                                    <constraint firstItem="XAA-tm-Sfa" firstAttribute="leading" secondItem="dD4-0D-qtw" secondAttribute="leading" id="MT4-d8-FIV"/>
                                     <constraint firstItem="c0N-CA-GUS" firstAttribute="top" secondItem="dD4-0D-qtw" secondAttribute="top" constant="127" id="Xdd-8i-zWe"/>
                                     <constraint firstItem="UhA-QU-zM1" firstAttribute="top" secondItem="dD4-0D-qtw" secondAttribute="top" constant="122" id="aPE-0m-V1S"/>
                                     <constraint firstAttribute="bottom" secondItem="c0N-CA-GUS" secondAttribute="bottom" constant="133" id="bnr-Q2-Our"/>
@@ -1257,6 +1311,7 @@ Gw
                                     <constraint firstItem="dvf-Bj-hr3" firstAttribute="top" secondItem="dD4-0D-qtw" secondAttribute="top" constant="122" id="erW-Sz-yTS"/>
                                     <constraint firstAttribute="bottom" secondItem="dvf-Bj-hr3" secondAttribute="bottom" constant="128" id="ezT-OD-B7c"/>
                                     <constraint firstItem="c0N-CA-GUS" firstAttribute="leading" secondItem="UhA-QU-zM1" secondAttribute="trailing" constant="53" id="nc1-aG-BqA"/>
+                                    <constraint firstAttribute="bottom" secondItem="XAA-tm-Sfa" secondAttribute="bottom" constant="1" id="tRG-Ak-PsM"/>
                                     <constraint firstAttribute="bottom" secondItem="UhA-QU-zM1" secondAttribute="bottom" constant="128" id="xEC-vE-K15"/>
                                     <constraint firstItem="c0N-CA-GUS" firstAttribute="leading" secondItem="UhA-QU-zM1" secondAttribute="trailing" constant="53" id="yI9-JX-PSp"/>
                                 </constraints>
@@ -1273,18 +1328,73 @@ Gw
                     </view>
                     <connections>
                         <outlet property="backgroundImageView" destination="IMP-we-epO" id="GSV-I8-oS8"/>
+                        <outlet property="endTime" destination="0zY-8u-WQD" id="xVa-zE-HHy"/>
                         <outlet property="playPauseButton" destination="c0N-CA-GUS" id="fR2-40-ZOG"/>
                         <outlet property="playerSlider" destination="AXX-HQ-sAY" id="bFE-Sg-X1a"/>
                         <outlet property="scrollingTextViewAuthor" destination="YJO-uu-anM" id="a8M-fb-RK4"/>
                         <outlet property="scrollingTextViewEpisode" destination="BMV-mX-bVv" id="U3t-DE-byr"/>
                         <outlet property="skipAheadButton" destination="dvf-Bj-hr3" id="uTC-yb-kep"/>
                         <outlet property="skipBackButton" destination="UhA-QU-zM1" id="deq-1X-S2q"/>
+                        <outlet property="startTime" destination="GCF-lL-Iwt" id="R6k-cx-KMI"/>
                         <outlet property="visualEffectView" destination="dD4-0D-qtw" id="1Mf-sq-yYz"/>
                     </connections>
                 </viewController>
                 <customObject id="fFA-yW-Ox4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1627" y="1577"/>
+            <point key="canvasLocation" x="1783" y="1576"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="fTo-IL-ZDA">
+            <objects>
+                <windowController storyboardIdentifier="alertWindowController" id="0ex-m7-71x" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="dh6-Ot-1BI">
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="294" y="362" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+                        <connections>
+                            <outlet property="delegate" destination="0ex-m7-71x" id="es4-fl-iaM"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="hMV-BA-99h" kind="relationship" relationship="window.shadowedContentViewController" id="bD7-bp-gjP"/>
+                    </connections>
+                </windowController>
+                <customObject id="ydQ-Wb-eTd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1286" y="1958"/>
+        </scene>
+        <!--AlertVC-->
+        <scene sceneID="5iB-vB-CvD">
+            <objects>
+                <viewController id="hMV-BA-99h" customClass="AlertVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Wzj-cc-Yak">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="K2D-Dd-UyA">
+                                <rect key="frame" x="-2" y="0.0" width="304" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0Pn-Wi-0KZ"/>
+                                    <constraint firstAttribute="width" constant="300" id="hN2-iX-kb0"/>
+                                </constraints>
+                                <textFieldCell key="cell" selectable="YES" title="Please select a podcast to play from the main app window." id="qlu-Cz-Sho">
+                                    <font key="font" metaFont="systemMedium" size="14"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="K2D-Dd-UyA" firstAttribute="leading" secondItem="Wzj-cc-Yak" secondAttribute="leading" id="EWp-zB-kPW"/>
+                            <constraint firstItem="K2D-Dd-UyA" firstAttribute="top" secondItem="Wzj-cc-Yak" secondAttribute="top" id="Isf-g6-1t5"/>
+                            <constraint firstAttribute="bottom" secondItem="K2D-Dd-UyA" secondAttribute="bottom" id="UhN-nf-E8u"/>
+                            <constraint firstAttribute="trailing" secondItem="K2D-Dd-UyA" secondAttribute="trailing" id="rqp-FK-V15"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="Fna-tD-tjr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1865" y="1948"/>
         </scene>
         <!--DetailVC-->
         <scene sceneID="L0i-n2-T8u">
@@ -1311,14 +1421,14 @@ Gw
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" id="Q72-ey-iPf"/>
                                     </imageView>
                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kne-bz-9xP">
-                                        <rect key="frame" x="146" y="28" width="548" height="19"/>
+                                        <rect key="frame" x="146" y="46" width="548" height="19"/>
                                         <sliderCell key="cell" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="XdZ-WJ-IBU" customClass="CustomSliderCell" customModule="Newcast" customModuleProvider="target"/>
                                         <connections>
                                             <action selector="musicSliderPositionChanged:" target="oai-QY-2Tg" id="JUR-t8-tWb"/>
                                         </connections>
                                     </slider>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N9h-kn-WOD">
-                                        <rect key="frame" x="387" y="62" width="46" height="46"/>
+                                        <rect key="frame" x="387" y="67" width="46" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="46" id="ZZN-Ow-l0Z"/>
                                             <constraint firstAttribute="height" constant="46" id="qhb-0W-64o"/>
@@ -1333,7 +1443,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qS3-PE-AVx">
-                                        <rect key="frame" x="506" y="59" width="66" height="51"/>
+                                        <rect key="frame" x="506" y="64" width="66" height="51"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="66" id="Zld-oh-Y5T"/>
                                             <constraint firstAttribute="height" constant="51" id="ecf-Oi-rBf"/>
@@ -1348,7 +1458,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tfB-g8-wdw">
-                                        <rect key="frame" x="248" y="59" width="66" height="51"/>
+                                        <rect key="frame" x="248" y="64" width="66" height="51"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="51" id="5Vw-tD-fQN"/>
                                             <constraint firstAttribute="width" constant="66" id="uL4-JF-cvu"/>
@@ -1362,23 +1472,43 @@ Gw
                                             <action selector="skip30BehindClicked:" target="oai-QY-2Tg" id="V0O-Va-qI1"/>
                                         </connections>
                                     </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="03u-JQ-Itg">
+                                        <rect key="frame" x="142" y="31" width="37" height="17"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="EBl-iL-Lz3">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="29r-Yp-KSh">
+                                        <rect key="frame" x="657" y="31" width="37" height="17"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="wVN-i8-rDa">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="N9h-kn-WOD" firstAttribute="leading" secondItem="tfB-g8-wdw" secondAttribute="trailing" constant="73" id="0X4-45-Dfn"/>
-                                    <constraint firstItem="Kne-bz-9xP" firstAttribute="top" secondItem="N9h-kn-WOD" secondAttribute="bottom" constant="17" id="2Pk-OE-66V"/>
+                                    <constraint firstItem="Kne-bz-9xP" firstAttribute="top" secondItem="N9h-kn-WOD" secondAttribute="bottom" constant="4" id="2Pk-OE-66V"/>
                                     <constraint firstItem="Kne-bz-9xP" firstAttribute="leading" secondItem="91P-1M-4OD" secondAttribute="trailing" constant="8" id="7x6-XM-A3e"/>
-                                    <constraint firstAttribute="bottom" secondItem="Kne-bz-9xP" secondAttribute="bottom" constant="30" id="A5b-b9-cY9"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kne-bz-9xP" secondAttribute="bottom" constant="48" id="A5b-b9-cY9"/>
                                     <constraint firstAttribute="trailing" secondItem="Kne-bz-9xP" secondAttribute="trailing" constant="8" id="ATg-4f-PnQ"/>
-                                    <constraint firstItem="Kne-bz-9xP" firstAttribute="top" secondItem="qS3-PE-AVx" secondAttribute="bottom" constant="14" id="D5o-3K-gFz"/>
-                                    <constraint firstItem="qS3-PE-AVx" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" constant="30" id="ErU-Hw-RA2"/>
+                                    <constraint firstItem="Kne-bz-9xP" firstAttribute="top" secondItem="qS3-PE-AVx" secondAttribute="bottom" constant="1" id="D5o-3K-gFz"/>
+                                    <constraint firstItem="qS3-PE-AVx" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" constant="25" id="ErU-Hw-RA2"/>
+                                    <constraint firstItem="03u-JQ-Itg" firstAttribute="top" secondItem="Kne-bz-9xP" secondAttribute="bottom" id="Guz-qz-NBd"/>
+                                    <constraint firstItem="03u-JQ-Itg" firstAttribute="leading" secondItem="91P-1M-4OD" secondAttribute="trailing" constant="4" id="L36-Ca-Hfh"/>
                                     <constraint firstItem="91P-1M-4OD" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" id="OLT-DH-TtW"/>
+                                    <constraint firstItem="03u-JQ-Itg" firstAttribute="baseline" secondItem="29r-Yp-KSh" secondAttribute="baseline" id="PJZ-pq-RIT"/>
                                     <constraint firstAttribute="trailing" secondItem="91P-1M-4OD" secondAttribute="trailing" constant="560" id="SO1-mB-avK"/>
                                     <constraint firstItem="qS3-PE-AVx" firstAttribute="leading" secondItem="N9h-kn-WOD" secondAttribute="trailing" constant="73" id="TdF-NV-Usz"/>
+                                    <constraint firstItem="29r-Yp-KSh" firstAttribute="trailing" secondItem="Kne-bz-9xP" secondAttribute="trailing" id="Ula-ed-DNU"/>
                                     <constraint firstAttribute="bottom" secondItem="91P-1M-4OD" secondAttribute="bottom" id="cH0-Xz-DVQ"/>
                                     <constraint firstItem="91P-1M-4OD" firstAttribute="leading" secondItem="RoI-9c-hw7" secondAttribute="leading" id="fOc-rF-5QR"/>
-                                    <constraint firstItem="tfB-g8-wdw" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" constant="30" id="gXf-jj-hvw"/>
-                                    <constraint firstItem="Kne-bz-9xP" firstAttribute="top" secondItem="tfB-g8-wdw" secondAttribute="bottom" constant="14" id="m9Q-xt-sd1"/>
-                                    <constraint firstItem="N9h-kn-WOD" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" constant="32" id="t8v-Qb-RhO"/>
+                                    <constraint firstItem="tfB-g8-wdw" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" constant="25" id="gXf-jj-hvw"/>
+                                    <constraint firstItem="Kne-bz-9xP" firstAttribute="top" secondItem="tfB-g8-wdw" secondAttribute="bottom" constant="1" id="m9Q-xt-sd1"/>
+                                    <constraint firstItem="N9h-kn-WOD" firstAttribute="top" secondItem="RoI-9c-hw7" secondAttribute="top" constant="27" id="t8v-Qb-RhO"/>
                                     <constraint firstAttribute="trailing" secondItem="qS3-PE-AVx" secondAttribute="trailing" constant="128" id="uzD-Bc-82a"/>
                                 </constraints>
                             </customView>
@@ -1453,6 +1583,7 @@ Gw
                     <connections>
                         <outlet property="backgroundImageView" destination="pNY-Aa-nSm" id="hlg-Rv-FJz"/>
                         <outlet property="collectionView" destination="36R-Mb-SPr" id="CoM-A8-Sf3"/>
+                        <outlet property="endTime" destination="29r-Yp-KSh" id="0dX-AX-dKD"/>
                         <outlet property="episodesPlaceholderField" destination="7Iw-aQ-0xk" id="naZ-Bk-zIo"/>
                         <outlet property="playPauseButton" destination="N9h-kn-WOD" id="F60-kc-DAI"/>
                         <outlet property="playerCustomView" destination="RoI-9c-hw7" id="WgD-Ua-wV6"/>
@@ -1462,6 +1593,7 @@ Gw
                         <outlet property="scrollingTextView" destination="oB3-PF-xDg" id="Nuy-xH-7CJ"/>
                         <outlet property="skip30BackButton" destination="tfB-g8-wdw" id="nz1-G8-vIA"/>
                         <outlet property="skip30ForwardButton" destination="qS3-PE-AVx" id="IRz-3M-Pee"/>
+                        <outlet property="startTime" destination="03u-JQ-Itg" id="iVF-5J-PSg"/>
                     </connections>
                 </viewController>
                 <customObject id="G9E-H6-DMk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1475,6 +1607,7 @@ Gw
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSTouchBarSkipAhead30SecondsTemplate" width="17" height="30"/>
         <image name="NSTouchBarSkipBack30SecondsTemplate" width="17" height="30"/>
+        <image name="newcast_small_icon" width="39" height="36"/>
         <image name="play" width="30" height="30"/>
         <image name="wallpaper28" width="1700" height="3500"/>
         <image name="wallpaper28-1" width="1700" height="3500"/>

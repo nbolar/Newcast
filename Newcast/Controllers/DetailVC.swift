@@ -16,6 +16,8 @@ var seekToPosition: Float64!
 
 class DetailVC: NSViewController {
 
+    @IBOutlet weak var endTime: NSTextField!
+    @IBOutlet weak var startTime: NSTextField!
     @IBOutlet weak var scrollingTextView: ScrollingTextView!
     @IBOutlet weak var playerInfo: NSTextField!
     @IBOutlet weak var playPauseButton: NSButton!
@@ -78,7 +80,8 @@ class DetailVC: NSViewController {
         playPauseButton.isHidden = true
         skip30BackButton.isHidden = true
         skip30ForwardButton.isHidden = true
-        
+        startTime.stringValue = ""
+        endTime.stringValue = ""
         
         
 //        let labelXPostion:CGFloat = view.bounds.midX
@@ -116,6 +119,19 @@ class DetailVC: NSViewController {
         if playerDuration != nil && playerSeconds != nil{
             playerSlider.maxValue = Double(playerDuration)
             playerSlider.floatValue = playerSeconds
+            
+            if Double(playerDuration) >= 3600{
+                endTime.stringValue = String(Int(Double(playerDuration) / 60) / 60) + ":" + String(format: "%02d", Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
+            }else{
+                endTime.stringValue = String(Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
+            }
+            
+            if Double(playerSeconds) >= 3600{
+                startTime.stringValue = String(Int(Double(playerSeconds) / 60) / 60) + ":" + String(format: "%02d", Int(Double(playerSeconds) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerSeconds).truncatingRemainder(dividingBy: 60)))
+            }else{
+                startTime.stringValue = String(Int(Double(playerSeconds) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerSeconds).truncatingRemainder(dividingBy: 60)))
+            }
+            
         }
         if playerSlider.doubleValue == Double(playerDuration){
             pauseCount = 0

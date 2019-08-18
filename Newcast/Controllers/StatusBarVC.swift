@@ -9,11 +9,15 @@
 import Cocoa
 import SDWebImage
 
+var playPauseCheck: Int? = 0
+
 
 class StatusBarVC: NSViewController {
 
     
    
+    @IBOutlet weak var endTime: NSTextField!
+    @IBOutlet weak var startTime: NSTextField!
     @IBOutlet weak var playerSlider: NSSlider!
     @IBOutlet weak var scrollingTextViewAuthor: ScrollingTextView!
     @IBOutlet weak var scrollingTextViewEpisode: ScrollingTextView!
@@ -22,6 +26,7 @@ class StatusBarVC: NSViewController {
     @IBOutlet weak var skipBackButton: NSButton!
     @IBOutlet weak var visualEffectView: NSVisualEffectView!
     @IBOutlet weak var backgroundImageView: SDAnimatedImageView!
+    lazy var alertView: NSWindowController? = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "alertWindowController") as? NSWindowController
     
     private enum FadeType {
         case fadeIn, fadeOut
@@ -30,13 +35,14 @@ class StatusBarVC: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        
+        view.wantsLayer = true
+        view.layer?.cornerRadius = 8
         view.insertVibrancyView(material: .light)
         let area = NSTrackingArea.init(rect: backgroundImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
         backgroundImageView.addTrackingArea(area)
         visualEffectView.isHidden = true
         visualEffectView.wantsLayer = true
-        visualEffectView.layer?.cornerRadius = 4
+        visualEffectView.layer?.cornerRadius = 8
         playPauseButton.isHidden = true
         skipBackButton.isHidden = true
         skipAheadButton.isHidden = true
@@ -44,11 +50,23 @@ class StatusBarVC: NSViewController {
         scrollingTextViewAuthor.isHidden = true
         scrollingTextViewEpisode.setup(string: "")
         scrollingTextViewAuthor.setup(string: "")
+        startTime.stringValue = ""
+        endTime.stringValue = ""
         setBackgroundImage()
+        playPausePass()
         NotificationCenter.default.addObserver(self, selector: #selector(setBackgroundImage), name: NSNotification.Name(rawValue: "setBackground"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(moveSlider), name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(playPausePass), name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playPausePass), name: NSNotification.Name(rawValue: "playPausePassStatus"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(close), name: NSNotification.Name(rawValue: "close"), object: nil)
         
+    }
+    
+    override func viewDidAppear() {
+        if playingIndex == nil{
+            scrollingTextViewAuthor.setup(string: "                 No Podcast Playing")
+            view.addSubview(scrollingTextViewAuthor)
+            scrollingTextViewAuthor.speed = 0
+        }
     }
     
     @objc func moveSlider(){
@@ -56,6 +74,18 @@ class StatusBarVC: NSViewController {
             playerSlider.maxValue = Double(playerDuration)
             playerSlider.floatValue = playerSeconds
         }
+        if Double(playerDuration) >= 3600{
+            endTime.stringValue = String(Int(Double(playerDuration) / 60) / 60) + ":" + String(format: "%02d", Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
+        }else{
+            endTime.stringValue = String(Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
+        }
+        
+        if Double(playerSeconds) >= 3600{
+            startTime.stringValue = String(Int(Double(playerSeconds) / 60) / 60) + ":" + String(format: "%02d", Int(Double(playerSeconds) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerSeconds).truncatingRemainder(dividingBy: 60)))
+        }else{
+            startTime.stringValue = String(Int(Double(playerSeconds) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerSeconds).truncatingRemainder(dividingBy: 60)))
+        }
+        
         if playerSlider.doubleValue == Double(playerDuration){
             pauseCount = 0
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
@@ -83,20 +113,52 @@ class StatusBarVC: NSViewController {
     }
     
     @objc func playPausePass(){
-        if playPauseButton.image?.name() == "play"{
-            playPauseButton.image = NSImage(named: "pause")
-        }else{
-            playPauseButton.image = NSImage(named: "play")
+        if playPauseCheck == 1{
+            if playPauseButton.image?.name() == "play"{
+                playPauseButton.image = NSImage(named: "pause")
+            }else{
+                playPauseButton.image = NSImage(named: "play")
+            }
+            playPauseCheck = 0
         }
+
     }
     
     @IBAction func playPauseButtonClicked(_ sender: Any) {
-        if playPauseButton.image?.name() == "play"{
-            playCount = 0
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playButton"), object: nil)
+        
+        if playingIndex == nil || episodeSelectedIndex == nil{
+            if alertView?.window?.isVisible == true
+            {
+                alertView?.resignFirstResponder()
+                alertView?.close()
+            }else{
+                
+                displayPopUp()
+            }
         }else{
-            pauseCount = 0
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
+            if playPauseButton.image?.name() == "play"{
+                playCount = 0
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playButton"), object: nil)
+            }else{
+                pauseCount = 0
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
+            }
+        }
+
+    }
+    
+    @objc func displayPopUp() {
+        
+        alertView?.window?.styleMask = .titled
+        alertView?.window?.setFrameOrigin(NSPoint(x: xWidth, y: yHeight))
+        alertView?.showWindow(self)
+    }
+    
+    @objc func close(){
+        if alertView?.window?.isVisible == true
+        {
+            alertView?.resignFirstResponder()
+            alertView?.close()
         }
     }
     
@@ -126,13 +188,17 @@ class StatusBarVC: NSViewController {
         {
             backgroundImageView.sd_setImage(with: URL(string: podcastsImageURL[currentSelectedPodcastIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
             scrollingTextViewEpisode.setup(string: "\(episodeTitles[playingIndex ?? episodeSelectedIndex])")
-//            scrollingTextViewAuthor.setup(string: "\(podcastsTitle[currentSelectedPodcastIndex])")
+            scrollingTextViewAuthor.setup(string: "")
             scrollingTextViewEpisode.speed = 4
-            scrollingTextViewAuthor.speed = 4
+//            scrollingTextViewAuthor.speed = 4
             view.addSubview(scrollingTextViewEpisode)
-            view.addSubview(scrollingTextViewAuthor)
+//            view.addSubview(scrollingTextViewAuthor)
         }
         
+    }
+    @IBAction func newcastButtonClicked(_ sender: Any) {
+        NSWorkspace.shared.open(URL(fileURLWithPath: "/Applications/Newcast.app"))
+        self.dismiss(nil)
     }
     
     override func mouseEntered(with event: NSEvent) {

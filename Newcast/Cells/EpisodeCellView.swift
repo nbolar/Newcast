@@ -178,18 +178,29 @@ class EpisodeCellView: NSCollectionViewItem {
     }
     func playPlayer(){
         player?.play()
-        
-//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhide"), object: nil)
         currentSelectedPodcastIndex = podcastSelecetedIndex
+        playingIndex = episodeSelectedIndex
+        sendNotifications()
         updateSlider()
         observePlayPause()
-        playingIndex = episodeSelectedIndex
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhide"), object: nil)
+
+        
+    }
+    
+    func sendNotifications(){
+        playPauseCheck = 1
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "setBackground"), object: nil)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePassStatus"), object: nil)
     }
+    
     func pausePlayer(){
         player?.pause()
+        playPauseCheck = 1
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "playPausePassStatus"), object: nil)
+        
         let duration = player.currentItem!.duration
 
         
