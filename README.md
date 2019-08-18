@@ -1,4 +1,4 @@
-# Newcast
+# ![newcastHeader](https://user-images.githubusercontent.com/45484873/63222207-4b662880-c1ad-11e9-9c91-67c7ad98c9a5.png)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) 
 [![Platform](http://img.shields.io/badge/platform-macOS-black.svg?style=flat)](https://developer.apple.com/resources/)
 [![Platform](https://img.shields.io/badge/swift-4.2-orange.svg?style=flat)](https://swift.org/blog/swift-4-2-released/)
