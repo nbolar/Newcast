@@ -1266,7 +1266,7 @@ Gw
                                         </connections>
                                     </slider>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XAA-tm-Sfa">
-                                        <rect key="frame" x="0.0" y="1" width="15" height="15"/>
+                                        <rect key="frame" x="6" y="6" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="BVr-1x-upv"/>
                                             <constraint firstAttribute="width" constant="15" id="UMQ-8R-Bfg"/>
@@ -1278,6 +1278,7 @@ Gw
                                         <color key="contentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="newcastButtonClicked:" target="sAj-L5-aN6" id="fTA-gA-2UE"/>
+                                            <segue destination="B8D-0N-5wS" kind="show" id="uI0-Fk-GFB"/>
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GCF-lL-Iwt">
@@ -1302,7 +1303,7 @@ Gw
                                 <constraints>
                                     <constraint firstItem="dvf-Bj-hr3" firstAttribute="leading" secondItem="c0N-CA-GUS" secondAttribute="trailing" constant="53" id="03a-Rb-dOZ"/>
                                     <constraint firstItem="dvf-Bj-hr3" firstAttribute="leading" secondItem="c0N-CA-GUS" secondAttribute="trailing" constant="53" id="Ai4-rr-fwK"/>
-                                    <constraint firstItem="XAA-tm-Sfa" firstAttribute="leading" secondItem="dD4-0D-qtw" secondAttribute="leading" id="MT4-d8-FIV"/>
+                                    <constraint firstItem="XAA-tm-Sfa" firstAttribute="leading" secondItem="dD4-0D-qtw" secondAttribute="leading" constant="6" id="MT4-d8-FIV"/>
                                     <constraint firstItem="c0N-CA-GUS" firstAttribute="top" secondItem="dD4-0D-qtw" secondAttribute="top" constant="127" id="Xdd-8i-zWe"/>
                                     <constraint firstItem="UhA-QU-zM1" firstAttribute="top" secondItem="dD4-0D-qtw" secondAttribute="top" constant="122" id="aPE-0m-V1S"/>
                                     <constraint firstAttribute="bottom" secondItem="c0N-CA-GUS" secondAttribute="bottom" constant="133" id="bnr-Q2-Our"/>
@@ -1311,7 +1312,7 @@ Gw
                                     <constraint firstItem="dvf-Bj-hr3" firstAttribute="top" secondItem="dD4-0D-qtw" secondAttribute="top" constant="122" id="erW-Sz-yTS"/>
                                     <constraint firstAttribute="bottom" secondItem="dvf-Bj-hr3" secondAttribute="bottom" constant="128" id="ezT-OD-B7c"/>
                                     <constraint firstItem="c0N-CA-GUS" firstAttribute="leading" secondItem="UhA-QU-zM1" secondAttribute="trailing" constant="53" id="nc1-aG-BqA"/>
-                                    <constraint firstAttribute="bottom" secondItem="XAA-tm-Sfa" secondAttribute="bottom" constant="1" id="tRG-Ak-PsM"/>
+                                    <constraint firstAttribute="bottom" secondItem="XAA-tm-Sfa" secondAttribute="bottom" constant="6" id="tRG-Ak-PsM"/>
                                     <constraint firstAttribute="bottom" secondItem="UhA-QU-zM1" secondAttribute="bottom" constant="128" id="xEC-vE-K15"/>
                                     <constraint firstItem="c0N-CA-GUS" firstAttribute="leading" secondItem="UhA-QU-zM1" secondAttribute="trailing" constant="53" id="yI9-JX-PSp"/>
                                 </constraints>
@@ -1368,14 +1369,14 @@ Gw
             <objects>
                 <viewController id="hMV-BA-99h" customClass="AlertVC" customModule="Newcast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Wzj-cc-Yak">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                        <rect key="frame" x="0.0" y="0.0" width="303" height="40"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="K2D-Dd-UyA">
-                                <rect key="frame" x="-2" y="0.0" width="304" height="40"/>
+                                <rect key="frame" x="4" y="0.0" width="294" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0Pn-Wi-0KZ"/>
-                                    <constraint firstAttribute="width" constant="300" id="hN2-iX-kb0"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="290" id="hN2-iX-kb0"/>
                                 </constraints>
                                 <textFieldCell key="cell" selectable="YES" title="Please select a podcast to play from the main app window." id="qlu-Cz-Sho">
                                     <font key="font" metaFont="systemMedium" size="14"/>
@@ -1385,16 +1386,16 @@ Gw
                             </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="K2D-Dd-UyA" firstAttribute="leading" secondItem="Wzj-cc-Yak" secondAttribute="leading" id="EWp-zB-kPW"/>
+                            <constraint firstItem="K2D-Dd-UyA" firstAttribute="leading" secondItem="Wzj-cc-Yak" secondAttribute="leading" constant="6" id="EWp-zB-kPW"/>
                             <constraint firstItem="K2D-Dd-UyA" firstAttribute="top" secondItem="Wzj-cc-Yak" secondAttribute="top" id="Isf-g6-1t5"/>
                             <constraint firstAttribute="bottom" secondItem="K2D-Dd-UyA" secondAttribute="bottom" id="UhN-nf-E8u"/>
-                            <constraint firstAttribute="trailing" secondItem="K2D-Dd-UyA" secondAttribute="trailing" id="rqp-FK-V15"/>
+                            <constraint firstAttribute="trailing" secondItem="K2D-Dd-UyA" secondAttribute="trailing" constant="7" id="rqp-FK-V15"/>
                         </constraints>
                     </view>
                 </viewController>
                 <customObject id="Fna-tD-tjr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1865" y="1948"/>
+            <point key="canvasLocation" x="1864.5" y="1948"/>
         </scene>
         <!--DetailVC-->
         <scene sceneID="L0i-n2-T8u">
