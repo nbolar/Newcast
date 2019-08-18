@@ -30,7 +30,7 @@ class Parser {
         }
     }
     
-    
+    /// Parses the JSON podcast search results from the iTunes API.
     func parsePodcastMetaData(_ APIData: Data) -> [Parser]{
         feedsURL.removeAll()
         imagesURL.removeAll()
@@ -59,6 +59,8 @@ class Parser {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateSearchUI"), object: nil)
         return podcastSearch
     }
+    
+    /// Parses the rss feed of the podcast.
     func getPodcastMetaData(_ APIData: Data) -> [Episodes]{
         episodeDescriptions.removeAll()
         episodeTitles.removeAll()
