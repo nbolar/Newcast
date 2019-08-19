@@ -35,6 +35,15 @@ class StatusBarVC: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+        setupUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(setBackgroundImage), name: NSNotification.Name(rawValue: "setBackground"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(moveSlider), name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(playPausePass), name: NSNotification.Name(rawValue: "playPausePassStatus"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(close), name: NSNotification.Name(rawValue: "close"), object: nil)
+        
+    }
+    
+    func setupUI(){
         view.wantsLayer = true
         view.layer?.cornerRadius = 8
         view.insertVibrancyView(material: .light)
@@ -54,11 +63,6 @@ class StatusBarVC: NSViewController {
         endTime.stringValue = ""
         setBackgroundImage()
         playPausePass()
-        NotificationCenter.default.addObserver(self, selector: #selector(setBackgroundImage), name: NSNotification.Name(rawValue: "setBackground"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(moveSlider), name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(playPausePass), name: NSNotification.Name(rawValue: "playPausePassStatus"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(close), name: NSNotification.Name(rawValue: "close"), object: nil)
-        
     }
     
     override func viewDidAppear() {
@@ -77,7 +81,7 @@ class StatusBarVC: NSViewController {
         if Double(playerDuration) >= 3600{
             endTime.stringValue = String(Int(Double(playerDuration) / 60) / 60) + ":" + String(format: "%02d", Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
         }else{
-            endTime.stringValue = String(Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
+//            endTime.stringValue = String(Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
         }
         
         if Double(playerSeconds) >= 3600{

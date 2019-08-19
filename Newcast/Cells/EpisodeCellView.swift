@@ -53,7 +53,6 @@ class EpisodeCellView: NSCollectionViewItem {
     @IBOutlet weak var episodePubDateField: NSTextField!
     @IBOutlet weak var episodeTitleField: NSTextField!
     let networkIndicator = NSProgressIndicator()
-    var previousPlayer: AVPlayer? = nil
     var pausedTime: CMTime? = nil
     var duration: String!
     let popoverView = NSPopover()
@@ -64,6 +63,7 @@ class EpisodeCellView: NSCollectionViewItem {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
+//        UserDefaults.standard.removeObject(forKey: "pausedTimesDictionary")
         self.view.wantsLayer = true
         self.view.layer?.backgroundColor = CGColor.init(gray: 0.9, alpha: 0.2)
         self.view.layer?.cornerRadius = 8
@@ -87,15 +87,21 @@ class EpisodeCellView: NSCollectionViewItem {
         NotificationCenter.default.addObserver(self, selector: #selector(playTestFunction), name: NSNotification.Name(rawValue: "playButton"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(pauseTestFunction), name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(seekToPosition), name: NSNotification.Name(rawValue: "sliderChanged"), object: nil)
+        if UserDefaults.standard.object(forKey: "pausedTimesDictionary") != nil{
+            let decoded  = UserDefaults.standard.object(forKey: "pausedTimesDictionary") as! Data
+            pausedTimesDictionary = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Int: [CMTime?]]
+        }
+        
         
         
     }    
     
+    /// Highlights the selected episode
     func setHighlight(selected: Bool) {
         view.layer?.borderWidth = selected ? 2.0 : 0.0
     }
     
-    
+    /// this function is used to play the paused/new podcast episode from the DetailVC play/pause button
     @objc func playTestFunction(){
         if playCount == episodeSelectedIndex{
             playPauseButtonClicked(Any?.self)
@@ -107,6 +113,7 @@ class EpisodeCellView: NSCollectionViewItem {
         
     }
     
+    /// this function is used to pause the playing podcast episode from the DetailVC play/pause button
     @objc func pauseTestFunction(){
         if pauseCount == episodeSelectedIndex{
             playPauseButtonClicked(Any?.self)
@@ -117,6 +124,7 @@ class EpisodeCellView: NSCollectionViewItem {
         }
         
     }
+    
     /// Configures the Episode Cells
     func configureEpisodeCell(episodeCell: Episodes){
         
@@ -149,6 +157,8 @@ class EpisodeCellView: NSCollectionViewItem {
             print("error")
         }
     }
+    
+    /// Shows the buttons corresponding to a particular episode cell
     func showButton(atIndexPaths: Int!){
         playButton.isEnabled = true
         pauseButton.isEnabled = true
@@ -177,6 +187,8 @@ class EpisodeCellView: NSCollectionViewItem {
         }, completionHandler:{
         })
     }
+    
+    /// Hides the buttons corresponding to a particular episode cell
     func hideButton(atIndexPaths: Int!){
         playButton.isEnabled = false
         pauseButton.isEnabled = false
@@ -184,9 +196,8 @@ class EpisodeCellView: NSCollectionViewItem {
         infoButton.alphaValue = 0
         playButton.alphaValue = 0
         pauseButton.alphaValue = 0
-        //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hide"), object: nil)
-        
     }
+    
     func playPlayer(){
         player?.play()
         currentSelectedPodcastIndex = podcastSelecetedIndex
@@ -194,9 +205,6 @@ class EpisodeCellView: NSCollectionViewItem {
         sendNotifications()
         updateSlider()
         observePlayPause()
-        //        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "unhide"), object: nil)
-        
-        
     }
     
     func sendNotifications(){
@@ -238,6 +246,10 @@ class EpisodeCellView: NSCollectionViewItem {
         }else{
             pausedTimesDictionary[currentSelectedPodcastIndex] = pausedTimes
         }
+        
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: pausedTimesDictionary)
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(encodedData, forKey: "pausedTimesDictionary")
         playingIndex = nil
         
     }
@@ -281,7 +293,6 @@ class EpisodeCellView: NSCollectionViewItem {
                         playPlayer()
                     }else{
                         playingIndex = episodeSelectedIndex
-                        
                         player?.seek(to: pausedTimesDictionary[podcastSelecetedIndex]![playingIndex]!)
                         playPlayer()
                     }
@@ -307,14 +318,14 @@ class EpisodeCellView: NSCollectionViewItem {
         }
     }
     
-    
+    /// This function observes whether or not the player is buffering and/or playing
     func observePlayPause(){
         circularProgress.isHidden = false
         player.addObserver(self, forKeyPath: "timeControlStatus", options: [.old, .new], context: nil)
-        //        networkIndicator.startAnimation(Any?.self)
-        //        view.addSubview(networkIndicator)
         view.addSubview(circularProgress)
     }
+    
+    /// Sliders in the DetailVC and StatusBarVC are controlled from this function
     func updateSlider(){
         let interval = CMTime(value: 1, timescale: 2)
         player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { (progressTime) in
@@ -358,5 +369,6 @@ class EpisodeCellView: NSCollectionViewItem {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+
 }
 

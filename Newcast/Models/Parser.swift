@@ -53,8 +53,6 @@ class Parser {
             }
             
         }
-        
-        //        let feedURL = json["results"][0]["feedUrl"].stringValue
         podcastsNumber = json["resultCount"].intValue
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateSearchUI"), object: nil)
         return podcastSearch

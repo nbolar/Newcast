@@ -44,10 +44,6 @@ class PodcastVC: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         
-        //        UserDefaults.standard.removeObject(forKey: "podcasts")
-        //        UserDefaults.standard.removeObject(forKey: "podcastImagesURL")
-        //        UserDefaults.standard.removeObject(forKey: "podcastsTitle")
-        episodes.removeAll()
         view.insertVibrancyView(material: .hudWindow)
         let fieldBackgroundColor = NSColor(
             calibratedHue: 230/360,
@@ -59,6 +55,7 @@ class PodcastVC: NSViewController {
         searchSavedPodcastsField.layer?.borderColor = NSColor.gray.cgColor
         searchSavedPodcastsField.layer?.borderWidth = 1
         searchSavedPodcastsField.layer?.cornerRadius = 8
+        episodes.removeAll()
         if UserDefaults.standard.array(forKey: "podcasts") == nil{
             podcasts = []
             podcastsImageURL = []
@@ -79,7 +76,6 @@ class PodcastVC: NSViewController {
         //        NotificationCenter.default.addObserver(self, selector: #selector(activateSearch), name: NSNotification.Name(rawValue: "searchSavedPodcast"), object: nil)
         
     }
-    
     
     
     @IBAction func searchSavedPodcast(_ sender: Any) {
@@ -119,12 +115,12 @@ class PodcastVC: NSViewController {
         (item as! PodcastCellView).setHighlight(selected: false)
     }
     
-    
-    
     @objc func updateUI(){
         collectionView.deselectAll(Any?.self)
         collectionView.reloadData()
     }
+    
+    /// This function is yet be completely implemented. This allows the user to add a custom Feed URL.
     @objc func customURL(){
         podcasts.append(customPodcastURL)
         let url = URL(string: customPodcastURL)
@@ -137,6 +133,7 @@ class PodcastVC: NSViewController {
         collectionView.reloadData()
     }
     
+    /// Function used to call the parser to parse through the xml feed URL
     func podcastListing(podcastFeedURL : String){
         let url = URL(string: podcastFeedURL)
         AF.request(url!).responseData(completionHandler: { (response) in
@@ -220,9 +217,9 @@ extension PodcastVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSCol
             guard let forecastCell = forecastItem as? PodcastCellView else { return forecastItem}
             forecastCell.configurePodcastAddedCell(podcastCell: podcastsImageURL[indexPath.item])
             return forecastCell
+        }else{
+            return forecastItem
         }
-        
-        return forecastItem
         
         
     }

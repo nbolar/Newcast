@@ -56,6 +56,7 @@ class DetailVC: NSViewController {
     }
     
     func setupUI(){
+        
         view.insertVibrancyView(material: .hudWindow)
         networkIndicator.style = .spinning
         collectionView.dataSource = self
@@ -75,20 +76,16 @@ class DetailVC: NSViewController {
         podcastTitleField.stringValue = ""
         scrollingTextView.setup(string: "")
         episodesPlaceholderField.alphaValue = 0
-        playerSlider.isHidden = true
-        playPauseButton.isHidden = true
-        skip30BackButton.isHidden = true
-        skip30ForwardButton.isHidden = true
-        startTime.stringValue = ""
-        endTime.stringValue = ""
-        
-        
-        //        let labelXPostion:CGFloat = view.bounds.midX
-        //        let labelYPostion:CGFloat = view.bounds.midY
-        //        let labelWidth:CGFloat = 30
-        //        let labelHeight:CGFloat = 30
-        //        networkIndicator.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
-        
+        if playingIndex == nil{
+            playerSlider.isHidden = true
+            playPauseButton.isHidden = true
+            skip30BackButton.isHidden = true
+            skip30ForwardButton.isHidden = true
+            startTime.stringValue = ""
+            endTime.stringValue = ""
+        }else{
+            playPauseButton.image = NSImage(named: "pause")
+        }
         circularProgress.isIndeterminate = true
         circularProgress.color = NSColor.init(red: 0.39, green: 0.82, blue: 1.0, alpha: 0.9)
         let labelXPostion:CGFloat = 350
@@ -96,8 +93,6 @@ class DetailVC: NSViewController {
         let labelWidth:CGFloat = 60
         let labelHeight:CGFloat = 60
         circularProgress.frame = CGRect(x: labelXPostion, y: labelYPostion, width: labelWidth, height: labelHeight)
-        
-        //        view.addSubview(circularProgress)
     }
     
     @objc func hideUI(){
@@ -119,12 +114,13 @@ class DetailVC: NSViewController {
             playerSlider.maxValue = Double(playerDuration)
             playerSlider.floatValue = playerSeconds
             
-            if Double(playerDuration) >= 3600{
-                endTime.stringValue = String(Int(Double(playerDuration) / 60) / 60) + ":" + String(format: "%02d", Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
-            }else{
-                endTime.stringValue = String(Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
+            if !(playerDuration.isNaN || playerDuration.isInfinite) {
+                if (playerDuration) >= 3600{
+                    endTime.stringValue = String(Int(Double(playerDuration) / 60) / 60) + ":" + String(format: "%02d", Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
+                }else{
+                    endTime.stringValue = String(Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
+                }
             }
-            
             if Double(playerSeconds) >= 3600{
                 startTime.stringValue = String(Int(Double(playerSeconds) / 60) / 60) + ":" + String(format: "%02d", Int(Double(playerSeconds) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerSeconds).truncatingRemainder(dividingBy: 60)))
             }else{
@@ -132,10 +128,12 @@ class DetailVC: NSViewController {
             }
             
         }
-        if playerSlider.doubleValue == Double(playerDuration){
-            pauseCount = 0
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
-        }
+//        if playerSlider.doubleValue == Double(playerDuration){
+//            pauseCount = 0
+//            print("Hello")
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pauseButton"), object: nil)
+//            pauseCount = nil
+//        }
         
     }
     @IBAction func skip30AheadClicked(_ sender: Any) {
