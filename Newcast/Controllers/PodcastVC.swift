@@ -44,6 +44,25 @@ class PodcastVC: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
         
+        UserDefaults.standard.removeObject(forKey: "playingIndex")
+        UserDefaults.standard.removeObject(forKey: "currentSelectedPodcastIndex")
+        
+        // Fix the below stuff properly
+//        if UserDefaults.standard.bool(forKey: "playingIndex") == false{
+//            playingIndex = nil
+//        }else{
+//            playingIndex = UserDefaults.standard.integer(forKey: "playingIndex")
+//        }
+//        if UserDefaults.standard.bool(forKey: "currentSelectedPodcastIndex") == false{
+//            currentSelectedPodcastIndex = nil
+//        }else{
+//            currentSelectedPodcastIndex = UserDefaults.standard.integer(forKey: "currentSelectedPodcastIndex")
+//            podcastSelecetedIndex = currentSelectedPodcastIndex
+//            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(savedDetails), userInfo: nil, repeats: true)
+//
+//        }
+        
+        
         view.insertVibrancyView(material: .hudWindow)
         let fieldBackgroundColor = NSColor(
             calibratedHue: 230/360,
@@ -77,6 +96,9 @@ class PodcastVC: NSViewController {
         
     }
     
+    @objc func savedDetails(){
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
+    }
     
     @IBAction func searchSavedPodcast(_ sender: Any) {
         count = 0
@@ -205,6 +227,16 @@ class PodcastVC: NSViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+//    override func viewWillDisappear() {
+//        if playingIndex != nil && currentSelectedPodcastIndex != nil {
+//            
+//            UserDefaults.standard.set(playingIndex!, forKey: "playingIndex")
+//            UserDefaults.standard.set(currentSelectedPodcastIndex!, forKey: "currentSelectedPodcastIndex")
+//        }
+//        
+//        // Save this in userdefaults and then call this in viewdidload to check if there is any podcast playing and then call update title in detailVC
+//    }
+    
 }
 
 extension PodcastVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSCollectionViewDelegateFlowLayout{
@@ -236,6 +268,7 @@ extension PodcastVC: NSCollectionViewDelegate, NSCollectionViewDataSource, NSCol
     }
     
     func collectionView(_ collectionView: NSCollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        episodesCheck = 1
         selectedPodcast(atIndexPaths: indexPaths as Set<NSIndexPath>)
         highlightItems(selected: true, atIndexPaths: indexPaths as Set<NSIndexPath>)
     }

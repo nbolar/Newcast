@@ -55,6 +55,8 @@ class DetailVC: NSViewController {
         playPauseCheck = 0
     }
     
+
+    
     func setupUI(){
         
         view.insertVibrancyView(material: .hudWindow)

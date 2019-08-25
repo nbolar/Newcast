@@ -46,6 +46,7 @@ class StatusBarVC: NSViewController {
     func setupUI(){
         view.wantsLayer = true
         view.layer?.cornerRadius = 8
+        view.layer?.backgroundColor = .black
         view.insertVibrancyView(material: .light)
         let area = NSTrackingArea.init(rect: backgroundImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
         backgroundImageView.addTrackingArea(area)

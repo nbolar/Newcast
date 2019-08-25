@@ -1199,7 +1199,7 @@ Gw
                                     <constraint firstAttribute="height" constant="300" id="NrR-7E-Ai0"/>
                                     <constraint firstAttribute="width" constant="300" id="W5Q-mK-5wK"/>
                                 </constraints>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28" id="JBW-xX-pa8"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="wallpaper28-1" id="JBW-xX-pa8"/>
                             </imageView>
                             <visualEffectView appearanceType="inheritedVibrantLight" blendingMode="withinWindow" material="dark" state="active" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-0D-qtw">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>

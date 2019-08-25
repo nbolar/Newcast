@@ -40,6 +40,9 @@ var playCount: Int? = nil
 /// Variable used to prevent the collection view from repeatedly showing the pause button
 var pauseCount: Int? = nil
 
+/// Variable used to prevent the collection view from repeatedly adding episodes
+var episodesCheck: Int? = nil
+
 var test: Float64? = nil
 var sliderStop: Int? = nil
 class EpisodeCellView: NSCollectionViewItem {
@@ -91,9 +94,7 @@ class EpisodeCellView: NSCollectionViewItem {
             let decoded  = UserDefaults.standard.object(forKey: "pausedTimesDictionary") as! Data
             pausedTimesDictionary = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Int: [CMTime?]]
         }
-        
-        
-        
+        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(episodeCheck), userInfo: nil, repeats: true)
     }    
     
     /// Highlights the selected episode
@@ -111,6 +112,15 @@ class EpisodeCellView: NSCollectionViewItem {
             playCount! += 1
         }
         
+    }
+    
+    @objc func episodeCheck(){
+        if episodesCheck == 1{
+            if pausedTimesDictionary[podcastSelecetedIndex]?.count ?? -1 < episodes.count{
+                pausedTimesDictionary[podcastSelecetedIndex]?.insert(nil, at: 0)
+            }
+            episodesCheck? += 1
+        }
     }
     
     /// this function is used to pause the playing podcast episode from the DetailVC play/pause button
@@ -366,9 +376,44 @@ class EpisodeCellView: NSCollectionViewItem {
         popoverView.behavior = .transient
         popoverView.show(relativeTo: infoButton.bounds, of: infoButton, preferredEdge: .maxX)
     }
+    
+//    override func viewWillDisappear() {
+//        let duration = player.currentItem!.duration
+//        if playingIndex == nil{
+//            if player.currentTime().seconds >= duration.seconds{
+//                pausedTimes.remove(at: episodeSelectedIndex)
+//                pausedTimes.insert(CMTime.zero, at: episodeSelectedIndex)
+//            }else{
+//                pausedTimes.remove(at: episodeSelectedIndex)
+//                pausedTimes.insert(player?.currentTime(), at: episodeSelectedIndex)
+//            }
+//        }else{
+//            if player.currentTime().seconds >= duration.seconds{
+//                pausedTimes.remove(at: playingIndex)
+//                pausedTimes.insert(CMTime.zero, at: playingIndex)
+//            }else{
+//                pausedTimes.remove(at: playingIndex)
+//                pausedTimes.insert(player?.currentTime(), at: playingIndex)
+//            }
+//
+//        }
+//
+//        if currentSelectedPodcastIndex == podcastSelecetedIndex{
+//            pausedTimesDictionary[podcastSelecetedIndex] = pausedTimes
+//        }else{
+//            pausedTimesDictionary[currentSelectedPodcastIndex] = pausedTimes
+//        }
+//
+//        let encodedData = NSKeyedArchiver.archivedData(withRootObject: pausedTimesDictionary)
+//        let userDefaults = UserDefaults.standard
+//        userDefaults.set(encodedData, forKey: "pausedTimesDictionary")
+//    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+    
+    
 
 }
 
