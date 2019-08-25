@@ -114,14 +114,7 @@ class EpisodeCellView: NSCollectionViewItem {
         
     }
     
-    @objc func episodeCheck(){
-        if episodesCheck == 1{
-            if pausedTimesDictionary[podcastSelecetedIndex]?.count ?? -1 < episodes.count{
-                pausedTimesDictionary[podcastSelecetedIndex]?.insert(nil, at: 0)
-            }
-            episodesCheck? += 1
-        }
-    }
+
     
     /// this function is used to pause the playing podcast episode from the DetailVC play/pause button
     @objc func pauseTestFunction(){
@@ -133,6 +126,16 @@ class EpisodeCellView: NSCollectionViewItem {
             pauseCount! += 1
         }
         
+    }
+    
+    /// This function checks whether there are new episodes of the current selected podcast
+    @objc func episodeCheck(){
+        if episodesCheck == 1{
+            if pausedTimesDictionary[podcastSelecetedIndex]?.count ?? -1 < episodes.count{
+                pausedTimesDictionary[podcastSelecetedIndex]?.insert(nil, at: 0)
+            }
+            episodesCheck? += 1
+        }
     }
     
     /// Configures the Episode Cells

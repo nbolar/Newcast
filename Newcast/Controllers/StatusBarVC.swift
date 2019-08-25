@@ -191,15 +191,20 @@ class StatusBarVC: NSViewController {
     @objc func setBackgroundImage(){
         if currentSelectedPodcastIndex != nil
         {
-            backgroundImageView.sd_setImage(with: URL(string: podcastsImageURL[currentSelectedPodcastIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
-            scrollingTextViewEpisode.setup(string: "\(episodeTitles[playingIndex ?? episodeSelectedIndex])")
-            scrollingTextViewAuthor.setup(string: "")
-            scrollingTextViewEpisode.speed = 4
-            //            scrollingTextViewAuthor.speed = 4
-            view.addSubview(scrollingTextViewEpisode)
-            //            view.addSubview(scrollingTextViewAuthor)
+            if playingIndex != nil{
+                backgroundImageView.sd_setImage(with: URL(string: podcastsImageURL[currentSelectedPodcastIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
+                scrollingTextViewEpisode.setup(string: "\(episodeTitles[playingIndex])")
+                scrollingTextViewAuthor.setup(string: "")
+                scrollingTextViewEpisode.speed = 4
+                view.addSubview(scrollingTextViewEpisode)
+            }else if episodeSelectedIndex != nil{
+                backgroundImageView.sd_setImage(with: URL(string: podcastsImageURL[currentSelectedPodcastIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), completed: nil)
+                scrollingTextViewEpisode.setup(string: "\(episodeTitles[episodeSelectedIndex])")
+                scrollingTextViewAuthor.setup(string: "")
+                scrollingTextViewEpisode.speed = 4
+                view.addSubview(scrollingTextViewEpisode)
+            }
         }
-        
     }
     @IBAction func newcastButtonClicked(_ sender: Any) {
         NSWorkspace.shared.open(URL(fileURLWithPath: "/Applications/Newcast.app"))
