@@ -81,8 +81,8 @@ class StatusBarVC: NSViewController {
         }
         if Double(playerDuration) >= 3600{
             endTime.stringValue = String(Int(Double(playerDuration) / 60) / 60) + ":" + String(format: "%02d", Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
-        }else{
-//            endTime.stringValue = String(Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
+        }else if !playerDuration.isNaN{
+            endTime.stringValue = String(Int(Double(playerDuration) / 60) % 60) + ":" +  String(format: "%02d", Int(Double(playerDuration).truncatingRemainder(dividingBy: 60)))
         }
         
         if Double(playerSeconds) >= 3600{
@@ -182,8 +182,7 @@ class StatusBarVC: NSViewController {
         fadeAnim.fromValue = from
         fadeAnim.toValue = to
         fadeAnim.duration = 0.3
-        visualEffectView.layer?.add(fadeAnim, forKey: "opacity")
-        
+        visualEffectView.layer?.add(fadeAnim, forKey: "opacity")        
         visualEffectView.alphaValue = CGFloat(to)
         
     }

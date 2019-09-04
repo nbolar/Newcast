@@ -1282,19 +1282,19 @@ Gw
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GCF-lL-Iwt">
-                                        <rect key="frame" x="18" y="87" width="37" height="17"/>
+                                        <rect key="frame" x="18" y="87" width="61" height="17"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="Fk6-7h-kGy">
-                                            <font key="font" usesAppearanceFont="YES"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Label" id="Fk6-7h-kGy">
+                                            <font key="font" metaFont="system" size="11"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0zY-8u-WQD">
-                                        <rect key="frame" x="238" y="87" width="37" height="17"/>
+                                        <rect key="frame" x="221" y="87" width="54" height="17"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="4Cl-7p-P4j">
-                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <font key="font" metaFont="system" size="11"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>

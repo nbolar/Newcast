@@ -227,15 +227,15 @@ class PodcastVC: NSViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-//    override func viewWillDisappear() {
-//        if playingIndex != nil && currentSelectedPodcastIndex != nil {
-//            
-//            UserDefaults.standard.set(playingIndex!, forKey: "playingIndex")
-//            UserDefaults.standard.set(currentSelectedPodcastIndex!, forKey: "currentSelectedPodcastIndex")
-//        }
-//        
-//        // Save this in userdefaults and then call this in viewdidload to check if there is any podcast playing and then call update title in detailVC
-//    }
+    override func viewWillDisappear() {
+        if playingIndex != nil && currentSelectedPodcastIndex != nil {
+            
+            UserDefaults.standard.set(playingIndex!, forKey: "playingIndex")
+            UserDefaults.standard.set(currentSelectedPodcastIndex!, forKey: "currentSelectedPodcastIndex")
+        }
+        
+        // Save this in userdefaults and then call this in viewdidload to check if there is any podcast playing and then call update title in detailVC
+    }
     
 }
 
