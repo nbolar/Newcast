@@ -43,6 +43,9 @@ var pauseCount: Int? = nil
 /// Variable used to prevent the collection view from repeatedly adding episodes
 var episodesCheck: Int? = nil
 
+/// Variable used to save the paused episodeTitle
+var episodeTitle: String? = nil
+
 var test: Float64? = nil
 var sliderStop: Int? = nil
 class EpisodeCellView: NSCollectionViewItem {

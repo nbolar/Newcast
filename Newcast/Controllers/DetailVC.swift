@@ -45,7 +45,7 @@ class DetailVC: NSViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateEpisodes), name: NSNotification.Name(rawValue: "updateEpisodes"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "clearPodcastEpisodes"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(clearPodcastEpisodes), name: NSNotification.Name(rawValue: "clearPodcastEpisodes"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(moveSlider), name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(playPausePass), name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(hideUI), name: NSNotification.Name(rawValue: "hide"), object: nil)
@@ -76,7 +76,6 @@ class DetailVC: NSViewController {
         podcastImageView.alphaValue = 0.9
         podcastImageView.layer?.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         podcastTitleField.stringValue = ""
-        scrollingTextView.setup(string: "")
         episodesPlaceholderField.alphaValue = 0
         if playingIndex == nil{
             playerSlider.isHidden = true
@@ -85,6 +84,7 @@ class DetailVC: NSViewController {
             skip30ForwardButton.isHidden = true
             startTime.stringValue = ""
             endTime.stringValue = ""
+            scrollingTextView.setup(string: "")
         }else{
             playPauseButton.image = NSImage(named: "pause")
         }
@@ -109,6 +109,7 @@ class DetailVC: NSViewController {
         playPauseButton.isHidden = false
         skip30BackButton.isHidden = false
         skip30ForwardButton.isHidden = false
+        
         
     }
     @objc func moveSlider(){
@@ -172,7 +173,7 @@ class DetailVC: NSViewController {
             playPauseButton.image = NSImage(named: "pause")
         }else{
             scrollingTextView.speed = 0
-            scrollingTextView.setup(string: "\(podcastsTitle[podcastSelecetedIndex]) — \(episodeTitles[playingIndex])")
+            scrollingTextView.setup(string: "\(podcastsTitle[currentSelectedPodcastIndex]) — \(episodeTitle ?? "")")
             playPauseButton.image = NSImage(named: "play")
         }
     }
@@ -238,9 +239,17 @@ class DetailVC: NSViewController {
         playPauseButton.isHidden = true
         skip30BackButton.isHidden = true
         skip30ForwardButton.isHidden = true
-        scrollingTextView.setup(string: "")
         episodes.removeAll()
         collectionView.reloadData()
+    }
+    
+    @objc func clearPodcastEpisodes(){
+        let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
+        podcastImageView.removeTrackingArea(area)
+        collectionView.deselectAll(Any?.self)
+        episodes.removeAll()
+        collectionView.reloadData()
+
     }
     
     override func mouseEntered(with event: NSEvent) {
