@@ -182,7 +182,9 @@ class PodcastVC: NSViewController {
     }
     func highlightItems(selected: Bool, atIndexPaths: Set<NSIndexPath>) {
         if selected == false{
-            episodeTitle = episodeTitles[episodeSelectedIndex ?? playingIndex]
+            if playingIndex != nil || episodeSelectedIndex != nil{
+                episodeTitle = episodeTitles[episodeSelectedIndex ?? playingIndex]
+            }
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "clearPodcastEpisodes"), object: nil)
         }
         removePodcastButton.isEnabled = !collectionView.selectionIndexPaths.isEmpty

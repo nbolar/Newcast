@@ -86,7 +86,11 @@ class DetailVC: NSViewController {
             endTime.stringValue = ""
             scrollingTextView.setup(string: "")
         }else{
+            podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), context: nil)
             playPauseButton.image = NSImage(named: "pause")
+            scrollingTextView.setup(string: "\(podcastsTitle[podcastSelecetedIndex]) — \(episodeTitles[playingIndex])")
+            scrollingTextView.speed = 4
+            view.addSubview(scrollingTextView)
         }
         circularProgress.isIndeterminate = true
         circularProgress.color = NSColor.init(red: 0.39, green: 0.82, blue: 1.0, alpha: 0.9)
@@ -109,7 +113,7 @@ class DetailVC: NSViewController {
         playPauseButton.isHidden = false
         skip30BackButton.isHidden = false
         skip30ForwardButton.isHidden = false
-        
+        podcastImageView.isHidden = false
         
     }
     @objc func moveSlider(){
