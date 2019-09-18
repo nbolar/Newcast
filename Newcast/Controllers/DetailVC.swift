@@ -89,11 +89,12 @@ class DetailVC: NSViewController {
             podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), context: nil)
             playPauseButton.image = NSImage(named: "pause")
             scrollingTextView.setup(string: "\(podcastsTitle[podcastSelecetedIndex]) — \(episodeTitles[playingIndex])")
-            scrollingTextView.speed = 4
+            scrollingTextView.speed = 5
             view.addSubview(scrollingTextView)
         }
         circularProgress.isIndeterminate = true
-        circularProgress.color = NSColor.init(red: 0.39, green: 0.82, blue: 1.0, alpha: 0.9)
+//        circularProgress.color = NSColor.init(red: 0.39, green: 0.82, blue: 1.0, alpha: 0.9)
+        circularProgress.color = .white
         let labelXPostion:CGFloat = 350
         let labelYPostion:CGFloat = 253
         let labelWidth:CGFloat = 60
@@ -177,7 +178,7 @@ class DetailVC: NSViewController {
             playPauseButton.image = NSImage(named: "pause")
         }else{
             scrollingTextView.speed = 0
-            scrollingTextView.setup(string: "\(podcastsTitle[currentSelectedPodcastIndex]) — \(episodeTitle ?? "")")
+            scrollingTextView.setup(string: "\(podcastsTitle[currentSelectedPodcastIndex]) — \(episodeTitles[playingIndex] ?? "")")
             playPauseButton.image = NSImage(named: "play")
         }
     }
