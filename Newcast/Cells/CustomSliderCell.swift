@@ -10,8 +10,26 @@ import Cocoa
 
 class CustomSliderCell: NSSliderCell {
     
+    override var knobThickness: CGFloat {
+        return knobWidth
+    }
+    
+    let knobWidth: CGFloat = 5.0
+    let knobHeight: CGFloat = 17.0
+    let knobRadius: CGFloat = 2.0
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    var percentage: CGFloat {
+        get {
+            if (self.maxValue - self.minValue) > 0 {
+                return CGFloat((self.doubleValue - self.minValue) / (self.maxValue - self.minValue))
+            } else {
+                return 0
+            }
+        }
     }
     
     override func drawBar(inside aRect: NSRect, flipped: Bool) {
@@ -30,32 +48,25 @@ class CustomSliderCell: NSSliderCell {
         active.fill()
     }
     
-    
-    override func drawKnob(_ rect: NSRect) {
-        let drawImage: NSImage? = .init(imageLiteralResourceName: "thumb")
+    override func drawKnob(_ knobRect: NSRect) {
+        NSColor.white.setFill()
+        NSColor.white.setStroke()
         
-        var drawRect = rect
-        drawRect = knobRect(flipped: controlView?.isFlipped ?? false)
-        
-        let fraction: CGFloat = 1.0
-        
-        drawImage?.draw(in: drawRect, from: NSRect.zero, operation: .sourceOver, fraction: fraction, respectFlipped: true, hints: nil)
+        let rect = NSMakeRect(round(knobRect.origin.x),
+                              knobRect.origin.y + 0.5 * (knobRect.height - knobHeight),
+                              knobRect.width,
+                              knobHeight)
+        let path = NSBezierPath(roundedRect: rect, xRadius: knobRadius, yRadius: knobRadius)
+        path.fill()
+        path.stroke()
     }
     
-    //    override func knobRect(flipped: Bool) -> NSRect {
-    //        let drawImage: NSImage? = .init(imageLiteralResourceName: "pause")
-    //
-    //        var drawRect: NSRect = super.knobRect(flipped: flipped)
-    //
-    //        drawRect.size = drawImage?.size ?? CGSize.zero
-    ////
-    ////        var bounds: NSRect? = controlView?.bounds
-    ////        bounds = bounds?.insetBy(dx: 0, dy: 0)
-    ////        var val = CGFloat(min(maxValue, max(minValue, doubleValue)))
-    ////        val = (val - CGFloat(minValue)) / CGFloat((maxValue - minValue))
-    ////        let x: CGFloat = val * bounds!.width + bounds!.minX
-    //
-    //        drawRect = NSOffsetRect(drawRect, -4, -2.5)
-    //        return drawRect
-    //    }
+    override func knobRect(flipped: Bool) -> NSRect {
+        let bounds = super.barRect(flipped: flipped)
+        let pos = min(percentage * bounds.width, bounds.width - 1);
+        let rect = super.knobRect(flipped: flipped)
+        let flippedMultiplier = flipped ? CGFloat(-1) : CGFloat(1)
+        return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, rect.height)
+    }
+
 }
