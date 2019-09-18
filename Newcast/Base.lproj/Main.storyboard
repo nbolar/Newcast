@@ -1260,7 +1260,7 @@ Gw
                                     <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AXX-HQ-sAY">
                                         <rect key="frame" x="27" y="104" width="246" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <sliderCell key="cell" controlSize="small" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="T66-LZ-94K" customClass="CustomSliderCell" customModule="Newcast" customModuleProvider="target"/>
+                                        <sliderCell key="cell" controlSize="small" state="on" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="T66-LZ-94K" customClass="MenuBarPlayerSliderCell" customModule="Newcast" customModuleProvider="target"/>
                                         <connections>
                                             <action selector="musicSliderPositionChanged:" target="sAj-L5-aN6" id="DPD-94-Sxn"/>
                                         </connections>
@@ -1285,7 +1285,7 @@ Gw
                                         <rect key="frame" x="18" y="87" width="61" height="17"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Label" id="Fk6-7h-kGy">
-                                            <font key="font" metaFont="system" size="11"/>
+                                            <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -1294,7 +1294,7 @@ Gw
                                         <rect key="frame" x="221" y="87" width="54" height="17"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="Label" id="4Cl-7p-P4j">
-                                            <font key="font" metaFont="system" size="11"/>
+                                            <font key="font" metaFont="smallSystem"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
