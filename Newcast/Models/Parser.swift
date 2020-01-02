@@ -65,7 +65,7 @@ class Parser {
         podcastDescription.removeAll()
         episodesURL.removeAll()
         let xml = SWXMLHash.parse(APIData)
-        podcastDescription = xml["rss"]["channel"]["itunes:summary"].element?.text ?? ""
+        podcastDescription = xml["rss"]["channel"]["itunes:summary"].element?.text ?? xml["rss"]["channel"]["itunes:subtitle"].element?.text ?? ""
         var episodes : [Episodes] = []
         for item in xml["rss"]["channel"]["item"].all{
             let episode = Episodes()

@@ -29,9 +29,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         invisibleWindow.backgroundColor = .clear
         invisibleWindow.alphaValue = 0
         
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        guard let vc =  storyboard.instantiateController(withIdentifier: "StatusBarVC") as? NSViewController else { return }
-        playerController?.contentViewController = vc
         playerController?.window?.isOpaque = false
         playerController?.window?.backgroundColor = .clear
         playerController?.window?.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.floatingWindow)))

@@ -34,6 +34,7 @@ class DetailVC: NSViewController {
     let popoverView = NSPopover()
     let circularProgress = CircularProgress(size: 60)
     var deleted: Bool!
+    var area : NSTrackingArea?
     
     
     
@@ -42,9 +43,11 @@ class DetailVC: NSViewController {
         // Do view setup here.
         
         collectionView.deselectAll(Any?.self)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(updateTitle), name: NSNotification.Name(rawValue: "updateTitle"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(updateEpisodes), name: NSNotification.Name(rawValue: "updateEpisodes"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "deletedPodcast"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deletedPodcast), name: NSNotification.Name(rawValue: "updateUI"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(clearPodcastEpisodes), name: NSNotification.Name(rawValue: "clearPodcastEpisodes"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(moveSlider), name: NSNotification.Name(rawValue: "moveSlider"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(playPausePass), name: NSNotification.Name(rawValue: "playPausePass"), object: nil)
@@ -60,6 +63,8 @@ class DetailVC: NSViewController {
     func setupUI(){
         
         view.insertVibrancyView(material: .hudWindow)
+        area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
+        podcastImageView.addTrackingArea(area!)
         networkIndicator.style = .spinning
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -178,7 +183,7 @@ class DetailVC: NSViewController {
             playPauseButton.image = NSImage(named: "pause")
         }else{
             scrollingTextView.speed = 0
-            scrollingTextView.setup(string: "\(podcastsTitle[currentSelectedPodcastIndex]) — \(episodeTitles[playingIndex] ?? "")")
+            scrollingTextView.setup(string: "\(podcastsTitle[currentSelectedPodcastIndex]) — \(episodeTitles[playingIndex] )")
             playPauseButton.image = NSImage(named: "play")
         }
     }
@@ -209,8 +214,7 @@ class DetailVC: NSViewController {
     }
     
     @objc func updateEpisodes(){
-        let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
-        podcastImageView.addTrackingArea(area)
+        
         collectionView.reloadData()
         //        networkIndicator.removeFromSuperview()
         circularProgress.removeFromSuperview()
@@ -223,8 +227,6 @@ class DetailVC: NSViewController {
             unhideUI()
         }
         
-        let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
-        podcastImageView.addTrackingArea(area)
         podcastTitleField.stringValue = "\(podcastsTitle[podcastSelecetedIndex])"
         podcastImageView.sd_setImage(with: URL(string: podcastsImageURL[podcastSelecetedIndex]), placeholderImage: NSImage(named: "placeholder"), options: .init(), context: nil)
         collectionView.reloadData()
@@ -234,8 +236,6 @@ class DetailVC: NSViewController {
     }
     
     @objc func deletedPodcast(){
-        let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
-        podcastImageView.removeTrackingArea(area)
         collectionView.deselectAll(Any?.self)
         podcastImageView.image = nil
         podcastTitleField.stringValue = ""
@@ -248,9 +248,8 @@ class DetailVC: NSViewController {
         collectionView.reloadData()
     }
     
+    
     @objc func clearPodcastEpisodes(){
-        let area = NSTrackingArea.init(rect: podcastImageView.bounds, options: [.mouseEnteredAndExited, .activeAlways], owner: self, userInfo: nil)
-        podcastImageView.removeTrackingArea(area)
         collectionView.deselectAll(Any?.self)
         episodes.removeAll()
         collectionView.reloadData()

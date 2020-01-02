@@ -43,7 +43,7 @@ class PodcastVC: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
-        
+
         UserDefaults.standard.removeObject(forKey: "playingIndex")
         UserDefaults.standard.removeObject(forKey: "currentSelectedPodcastIndex")
         
@@ -138,8 +138,20 @@ class PodcastVC: NSViewController {
     }
     
     @objc func updateUI(){
-        collectionView.deselectAll(Any?.self)
         collectionView.reloadData()
+        let items = collectionView.numberOfItems(inSection: 0)
+        let last = IndexPath(item: items - 1, section: 0)
+        DispatchQueue.main.async {
+            let ctx = NSAnimationContext.current
+            ctx.allowsImplicitAnimation = true
+            self.collectionView.animator().scrollToItems(at: [last as IndexPath], scrollPosition: .bottom)
+            let item = self.collectionView.item(at: last as IndexPath)
+            (item as! PodcastCellView).setSearchHighlight(selected: true)
+            self.count = items - 1
+            Timer.scheduledTimer(timeInterval: 1.5, target: self, selector: #selector(self.unhighlight), userInfo: nil, repeats: false)
+        }
+                
+            
     }
     
     /// This function is yet be completely implemented. This allows the user to add a custom Feed URL.
@@ -176,7 +188,7 @@ class PodcastVC: NSViewController {
     }
     
     @IBAction func addPodcastButtonClicked(_ sender: Any) {
-        collectionView.deselectAll(Any?.self)
+//        collectionView.deselectAll(Any?.self)
         let podcastsearch = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "PodcastSearchVC") as? NSViewController
         presentAsSheet(podcastsearch!)
     }
@@ -213,8 +225,7 @@ class PodcastVC: NSViewController {
         }
         collectionView.deselectAll(Any?.self)
         collectionView.deleteItems(at: selectionIndexPaths)
-        print("Check")
-        updateUI()
+        collectionView.reloadData()
         editTimeStamps()
     }
     

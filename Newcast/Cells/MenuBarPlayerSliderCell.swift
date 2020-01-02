@@ -62,9 +62,9 @@ class MenuBarPlayerSliderCell: NSSliderCell {
     
     override func knobRect(flipped: Bool) -> NSRect {
         let bounds = super.barRect(flipped: flipped)
-        let pos = min(percentage * bounds.width, bounds.width - 1);
+        let pos = percentage * (self.controlView!.frame.size.width - 8)
         let rect = super.knobRect(flipped: flipped)
         let flippedMultiplier = flipped ? CGFloat(-1) : CGFloat(1)
-        return NSMakeRect(pos - flippedMultiplier * 0.5 * knobWidth, rect.origin.y, knobWidth, rect.height)
+        return NSMakeRect(pos, rect.origin.y, knobWidth, rect.height)
     }
 }
